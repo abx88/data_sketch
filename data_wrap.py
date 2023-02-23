@@ -13,14 +13,11 @@ if uploaded_file is not None:
     st.write("delimiter is ", delimitatore)
     # Can be used wherever a "file-like" object is accepted:
     
+    nomi_colonne = st.input("nomi colonne",[])
+            
+    #new_column_names = st.input[c,b,a]
     
-    a = st.text_input("colonna1","a" )
-    b = st.text_input("colonna2","b" )
-    c = st.text_input("colonna3","c" )
-        
-    new_column_names = [c,b,a]
-    
-    df = pd.read_csv(uploaded_file, delimiter = (delimitatore), names=new_column_names)
+    df = pd.read_csv(uploaded_file, delimiter = (delimitatore), names=nomi_colonne)
     
 
     st.write(df)
