@@ -24,16 +24,20 @@ if uploaded_file is not None:
     df.columns = new_column_names
     st.write(df)
     
-    # Aggiungi l'elemento selectbox per selezionare la colonna da rinominare
-    colonna_da_rinominare = st.selectbox("Seleziona la colonna da rinominare", df.columns.tolist())
+    # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
+    colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", df.columns.tolist())
 
-    # Aggiungi l'elemento text_input per permettere all'utente di inserire il nuovo nome della colonna
-    nuovo_nome_colonna = st.text_input("Inserisci il nuovo nome della colonna", colonna_da_rinominare)
+    # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+    mapping_nomi_colonne = {}
+    for colonna in colonne_da_rinominare:
+        nuovo_nome_colonna = st.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+        mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
-    # Rinomina la colonna selezionata con il nuovo nome
-    df = df.rename(columns={colonna_da_rinominare: nuovo_nome_colonna})
-    
+    # Rinomina le colonne selezionate con i nuovi nomi
+    df = df.rename(columns=mapping_nomi_colonne)
+
     indice = st.checkbox("colonna indice")
+    
     if indice == True:
         # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
         colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", df.columns.tolist())
