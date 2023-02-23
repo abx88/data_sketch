@@ -33,11 +33,13 @@ if uploaded_file is not None:
     # Rinomina la colonna selezionata con il nuovo nome
     df = df.rename(columns={colonna_da_rinominare: nuovo_nome_colonna})
     
-    # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-    colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", df.columns.tolist())
+    indice = st.checkbox("colonna indice")
+    if indice == True:
+        # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+        colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", df.columns.tolist())
 
-    # Imposta la colonna selezionata come indice del DataFrame
-    df = df.set_index(colonna_indice)
+        # Imposta la colonna selezionata come indice del DataFrame
+        df = df.set_index(colonna_indice)
 
     @st.cache
     def convert_df(df):
