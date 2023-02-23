@@ -12,26 +12,23 @@ if uploaded_file is not None:
     delimitatore = st.text_input("delimitatore", "s")
     st.write("delimiter is ", delimitatore)
     
-    if delimitatore is not "":
-        df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
-        # Rinomina le colonne con numeri in ordine crescente
-        new_column_names = list(range(len(df.columns)))
-        df.columns = new_column_names
-        st.write(df)
+    df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
+    # Rinomina le colonne con numeri in ordine crescente
+    new_column_names = list(range(len(df.columns)))
+    df.columns = new_column_names
+    st.write(df)
 
-        @st.cache
-        def convert_df(df):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return df.to_csv().encode('utf-8')
+    @st.cache
+    def convert_df(df):
+        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+        return df.to_csv().encode('utf-8')
 
-        csv = convert_df(df)
+    csv = convert_df(df)
 
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
-            file_name='large_df.csv',
-            mime='text/csv')
-    else:
-        st.text("delimitatore non valido")
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='large_df.csv',
+        mime='text/csv')
 else:
     st.text("inserire file csv")
