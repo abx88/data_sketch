@@ -14,7 +14,7 @@ if uploaded_file is not None:
     delimiter_options = [',', '\t', '|', ';', ':']
 
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
-    delimitatore= st.checkbox("Seleziona il delimitatore", delimiter_options)
+    delimitatore= st.selectbox("Seleziona il delimitatore", delimiter_options)
 
     st.write("delimiter is ", delimitatore)
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
