@@ -9,7 +9,13 @@ from io import StringIO
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-    delimitatore = st.text_input("delimitatore", "s")
+    
+    # Definisci la lista di delimitatori supportati da Pandas
+    delimiter_options = [',', '\t', '|', ';', ':']
+
+    # Aggiungi l'elemento checkbox per selezionare il delimitatore
+    delimitatore= st.checkbox("Seleziona il delimitatore", delimiter_options)
+
     st.write("delimiter is ", delimitatore)
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
