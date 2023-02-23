@@ -12,13 +12,12 @@ if uploaded_file is not None:
     delimitatore = st.text_input("delimitatore", "s")
     st.write("delimiter is ", delimitatore)
     # Can be used wherever a "file-like" object is accepted:
-    
-    nomi_colonne = st.input("nomi colonne",[])
             
-    #new_column_names = st.input[c,b,a]
-    
     df = pd.read_csv(uploaded_file, delimiter = (delimitatore), names=nomi_colonne)
     
+    # Rinomina le colonne con numeri in ordine crescente
+    new_column_names = list(range(len(df.columns)))
+    df.columns = new_column_names
 
     st.write(df)
 
