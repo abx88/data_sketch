@@ -11,8 +11,8 @@ uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     delimitatore = st.text_input("delimitatore", "s")
     st.write("delimiter is ", delimitatore)
+    df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
-    df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
     # Rinomina le colonne con numeri in ordine crescente
     new_column_names = list(range(len(df.columns)))
     df.columns = new_column_names
