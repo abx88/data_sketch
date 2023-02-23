@@ -9,8 +9,6 @@ from io import StringIO
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.write(df)
     delimitatore = st.text_input("delimitatore", "s")
     st.write("delimiter is ", delimitatore)
     
@@ -34,6 +32,7 @@ if uploaded_file is not None:
             file_name='large_df.csv',
             mime='text/csv')
     else:
+        df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
         st.text("delimitatore non valido")
 else:
     st.text("inserire file csv")
