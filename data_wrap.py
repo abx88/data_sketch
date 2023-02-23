@@ -30,5 +30,7 @@ if uploaded_file is not None:
             data=csv,
             file_name='large_df.csv',
             mime='text/csv')
+    else:
+        st.text("delimitatore non valido")
 else:
     st.text("inserire file csv")
