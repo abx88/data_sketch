@@ -40,6 +40,8 @@ if uploaded_file is not None:
 
         # Imposta la colonna selezionata come indice del DataFrame
         df = df.set_index(colonna_indice)
+    
+    st.write(df)
 
     @st.cache
     def convert_df(df):
@@ -53,5 +55,6 @@ if uploaded_file is not None:
         data=csv,
         file_name='large_df.csv',
         mime='text/csv')
+    
 else:
     st.text("inserire file csv")
