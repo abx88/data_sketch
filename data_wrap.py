@@ -13,7 +13,7 @@ if uploaded_file is not None:
     st.write("delimiter is ", delimitatore)
     # Can be used wherever a "file-like" object is accepted:
             
-    df = pd.read_csv(uploaded_file, delimiter = (delimitatore), names=nomi_colonne)
+    df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
     
     # Rinomina le colonne con numeri in ordine crescente
     new_column_names = list(range(len(df.columns)))
