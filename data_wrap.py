@@ -32,7 +32,7 @@ if uploaded_file is not None:
             file_name='large_df.csv',
             mime='text/csv')
     else:
-        df = pd.read_csv(uploaded_file, delimiter = (delimitatore))
+        df = pd.read_csv(uploaded_file)
         st.text("delimitatore non valido")
 else:
     st.text("inserire file csv")
