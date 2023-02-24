@@ -78,7 +78,7 @@ if uploaded_file is not None:
         st.download_button(
             label="Download data as {}".format(file_type),
             data=csv,
-            file_name=f"{nome_file}'.{}'.format(file_type),
+            file_name=f"{nome_file}"'.{}'.format(file_type),
             mime='text/{}'.format(file_type),
         )
 
