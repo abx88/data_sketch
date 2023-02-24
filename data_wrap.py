@@ -18,7 +18,7 @@ if uploaded_file is not None:
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
 
-    st.subheader("dataset originale suddiviso")
+    st.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
     # Rinomina le colonne con numeri in ordine crescente
