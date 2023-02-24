@@ -63,25 +63,17 @@ if uploaded_file is not None:
     nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
     
     @st.cache
-    def convert_df(df, file_type):
+    def convert_df(df):
         # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        if file_type == 'csv(,)':
-            return df.to_csv().encode('utf-8')
-        elif file_type == 'csv(\t)':
-            return df.to_csv(sep='\t').encode('utf-8')
-        else:
-            raise ValueError("Invalid file type: {}".format(file_type))
+        return df.to_csv().encode('utf-8')
 
-    if st.button("Download data as CSV"):
-        file_type = st.selectbox("Select file type", options=["csv(,)", "csv(\t)"])
-        csv = convert_df(df, file_type)
-        st.download_button(
-            label="Download data as {}".format(file_type),
-            data=csv,
-            file_name=f"{nome_file}"'.{}'.format(file_type),
-            mime='text/{}'.format(file_type),
-        )
-
+    csv = convert_df(df)
+    
+    st.download_button(
+    label="Download dataset modificato",
+    data=csv,
+    file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
+    mime='text/csv'
     
 else:
     st.text("inserire file csv")
