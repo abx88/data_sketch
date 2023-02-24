@@ -8,6 +8,7 @@ import pandas as pd
 from io import StringIO
 
 st.header("Data Wrap")
+st.sidebar.header("Tool Modifica")
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
