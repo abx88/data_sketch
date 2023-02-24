@@ -73,7 +73,7 @@ if uploaded_file is not None:
     label="Download dataset modificato",
     data=csv,
     file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
-    mime='text/csv'
+    mime='text/csv')
     
 else:
     st.text("inserire file csv")
