@@ -7,6 +7,8 @@ import streamlit as st
 import pandas as pd
 from io import StringIO
 
+st.header("Data Wrap")
+
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     
@@ -16,7 +18,7 @@ if uploaded_file is not None:
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
 
-    st.write("delimiter is ", delimitatore)
+    st.subheader("dataset originale suddiviso")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
     # Rinomina le colonne con numeri in ordine crescente
@@ -55,6 +57,7 @@ if uploaded_file is not None:
         # Imposta la colonna selezionata come indice del DataFrame
         df = df.set_index(colonna_indice)
     
+    st.subheader("dataset rielaborato")
     st.write(df)
 
     @st.cache
