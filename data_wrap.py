@@ -42,7 +42,7 @@ if uploaded_file is not None:
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
         for colonna in colonne_da_rinominare:
-            nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            nuovo_nome_colonna = st.sidebar.text_input("Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
             mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
         # Rinomina le colonne selezionate con i nuovi nomi
@@ -59,19 +59,28 @@ if uploaded_file is not None:
     
     st.subheader("dataset rielaborato")
     st.write(df)
-
+    
+    nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
     @st.cache
-    def convert_df(df):
+    def convert_df(df, file_type):
         # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        return df.to_csv().encode('utf-8')
+        if file_type == 'csv':
+            return df.to_csv().encode('utf-8')
+        elif file_type == 'tsv':
+            return df.to_csv(sep='\t').encode('utf-8')
+        else:
+            raise ValueError("Invalid file type: {}".format(file_type))
 
-    csv = convert_df(df)
+    if st.button("Download data as CSV"):
+        file_type = st.selectbox("Select file type", options=["csv", "tsv"])
+        csv = convert_df(df, file_type)
+        st.download_button(
+            label="Download data as {}".format(file_type),
+            data=csv,
+            file_name=nome_file'.{}'.format(file_type),
+            mime='text/{}'.format(file_type),
+        )
 
-    st.download_button(
-        label="Download data as CSV",
-        data=csv,
-        file_name='large_df.csv',
-        mime='text/csv')
     
 else:
     st.text("inserire file csv")
