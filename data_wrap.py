@@ -8,11 +8,11 @@ import pandas as pd
 from io import StringIO
 
 st.header("Data Wrap")
-st.sidebar.header("Tool Modifica")
+
 
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
-    
+    st.sidebar.header("Tool Modifica")
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
