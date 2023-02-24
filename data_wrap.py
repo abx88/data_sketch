@@ -14,7 +14,7 @@ if uploaded_file is not None:
     delimiter_options = [',', '\t', '|', ';', ':']
 
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
-    delimitatore= st.radio("Seleziona il delimitatore", delimiter_options)
+    delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
 
     st.write("delimiter is ", delimitatore)
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
@@ -23,6 +23,12 @@ if uploaded_file is not None:
     new_column_names = list(range(len(df.columns)))
     df.columns = new_column_names
     st.write(df)
+    
+    # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
+    colonne_da_eliminate = st.sidebar.multiselect("Seleziona le colonne da eliminare", df.columns.tolist())
+
+    # Elimina le colonne selezionate
+    df = df.drop(columns=colonne_da_eliminate)
     
     # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
     colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", df.columns.tolist())
@@ -36,7 +42,7 @@ if uploaded_file is not None:
     # Rinomina le colonne selezionate con i nuovi nomi
     df = df.rename(columns=mapping_nomi_colonne)
 
-    indice = st.checkbox("colonna indice")
+    indice = st.sidebar.checkbox("colonna indice")
     
     if indice == True:
         # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
