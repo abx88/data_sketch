@@ -24,23 +24,27 @@ if uploaded_file is not None:
     df.columns = new_column_names
     st.write(df)
     
-    # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-    colonne_da_eliminate = st.sidebar.multiselect("Seleziona le colonne da eliminare", df.columns.tolist())
+    elimina_colonne = st.sidebar.checkbox("elimina colonne")
+    if elimina_colonne == True:
+        # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
+        colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", df.columns.tolist())
 
-    # Elimina le colonne selezionate
-    df = df.drop(columns=colonne_da_eliminate)
-    
-    # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-    colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", df.columns.tolist())
+        # Elimina le colonne selezionate
+        df = df.drop(columns=colonne_da_eliminare)
 
-    # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
-    mapping_nomi_colonne = {}
-    for colonna in colonne_da_rinominare:
-        nuovo_nome_colonna = st.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
-        mapping_nomi_colonne[colonna] = nuovo_nome_colonna
+    rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
+    if rinomina_colonne == True:
+        # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
+        colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", df.columns.tolist())
 
-    # Rinomina le colonne selezionate con i nuovi nomi
-    df = df.rename(columns=mapping_nomi_colonne)
+        # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+        mapping_nomi_colonne = {}
+        for colonna in colonne_da_rinominare:
+            nuovo_nome_colonna = st.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            mapping_nomi_colonne[colonna] = nuovo_nome_colonna
+
+        # Rinomina le colonne selezionate con i nuovi nomi
+        df = df.rename(columns=mapping_nomi_colonne)
 
     indice = st.sidebar.checkbox("colonna indice")
     
