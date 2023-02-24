@@ -42,7 +42,7 @@ if uploaded_file is not None:
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
         for colonna in colonne_da_rinominare:
-            nuovo_nome_colonna = st.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
             mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
         # Rinomina le colonne selezionate con i nuovi nomi
