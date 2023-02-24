@@ -42,7 +42,7 @@ if uploaded_file is not None:
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
         for colonna in colonne_da_rinominare:
-            nuovo_nome_colonna = st.sidebar.text_input("Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
             mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
         # Rinomina le colonne selezionate con i nuovi nomi
@@ -61,6 +61,7 @@ if uploaded_file is not None:
     st.write(df)
     
     nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
+    
     @st.cache
     def convert_df(df, file_type):
         # IMPORTANT: Cache the conversion to prevent computation on every rerun
@@ -77,7 +78,7 @@ if uploaded_file is not None:
         st.download_button(
             label="Download data as {}".format(file_type),
             data=csv,
-            file_name=nome_file'.{}'.format(file_type),
+            file_name=f"{nome_file}'.{}'.format(file_type),
             mime='text/{}'.format(file_type),
         )
 
