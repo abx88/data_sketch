@@ -39,7 +39,7 @@ if uploaded_file is not None:
     elimina_colonne = st.sidebar.checkbox("elimina colonne")
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", dnewdf.columns.tolist())
+        colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
