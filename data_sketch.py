@@ -76,19 +76,10 @@ if pagina == 'tool modifica':
             if indice_datetime ==True:
                 newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
 
-
-        col1, col2 = st.columns([2, 2])
+        
         col1.subheader("dataset rielaborato")
-        col1.write(newdf)
-        #visualizzazione variabile    
-        col2.subheader("visualizza variabile")
-        colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-        serie = newdf[colonna_da_visualizzare]
-        col2.line_chart(serie)
-
-
-
-
+        st.write(newdf)
+        
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
         @st.cache
@@ -106,3 +97,14 @@ if pagina == 'tool modifica':
 
     else:
         st.text("inserire file csv")
+
+else:
+    
+    col1, col2 = st.columns([2, 2])
+    col1.subheader("dataset rielaborato")
+    col1.write(newdf)
+    #visualizzazione variabile    
+    col2.subheader("visualizza variabile")
+    colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+    serie = newdf[colonna_da_visualizzare]
+    col2.line_chart(serie)
