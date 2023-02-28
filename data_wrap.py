@@ -22,10 +22,12 @@ if uploaded_file is not None:
     st.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
-    # Rinomina le colonne con numeri in ordine crescente
-    #new_column_names = list(range(len(df.columns)))
-    #df.columns = new_column_names
-    #st.write(df)
+    tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
+    if tabella_senza_intestazioni == True:
+        # Rinomina le colonne con numeri in ordine crescente
+        new_column_names = list(range(len(df.columns)))
+        df.columns = new_column_names
+        st.write(df)
     
     elimina_colonne = st.sidebar.checkbox("elimina colonne")
     if elimina_colonne == True:
