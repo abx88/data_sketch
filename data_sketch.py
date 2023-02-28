@@ -25,7 +25,7 @@ if uploaded_file is not None:
     newdf= df
     
     
-    col1, col2 = st.columns([2, 2])
+
     
     
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
@@ -71,10 +71,12 @@ if uploaded_file is not None:
         # Imposta la colonna selezionata come indice del DataFrame
         newdf = newdf.set_index(colonna_indice)
     
-    st.subheader("dataset rielaborato")
+    col1, col2 = st.columns([2, 2])
+    col1.subheader("dataset rielaborato")
     col1.write(newdf)
     #visualizzazione variabile    
-    colonna_da_visualizzare = col2.select("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+    col2.subheader("visualizza variabile")
+    colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
     col2.line_chart(colonna_da_visualizzare)
     
     
