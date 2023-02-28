@@ -72,10 +72,10 @@ if uploaded_file is not None:
         newdf = newdf.set_index(colonna_indice)
     
     st.subheader("dataset rielaborato")
-    st.col1.write(newdf)
+    col1.write(newdf)
     #visualizzazione variabile    
     colonna_da_visualizzare = st.col2.select("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-    st.col2.line_chart(colonna_da_visualizzare)
+    col2.line_chart(colonna_da_visualizzare)
     
     
     
