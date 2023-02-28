@@ -67,9 +67,12 @@ if uploaded_file is not None:
     if indice == True:
         # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
         colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
-
         # Imposta la colonna selezionata come indice del DataFrame
         newdf = newdf.set_index(colonna_indice)
+        indice_datetime = st.checkbox("indice date_time"
+        if indice_datetime ==True:
+            newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+    
     
     col1, col2 = st.columns([2, 2])
     col1.subheader("dataset rielaborato")
