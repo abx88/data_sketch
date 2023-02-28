@@ -7,7 +7,7 @@ import streamlit as st
 import pandas as pd
 from io import StringIO
 
-st.header("Data Wrap")
+st.header("Data Sketch")
 
 
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
