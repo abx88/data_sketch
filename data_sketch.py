@@ -31,7 +31,7 @@ if uploaded_file is not None:
         # Aggiungi una nuova riga con i nomi delle colonne
         df.loc[-1] = df.columns
         df.index = df.index + 1
-        df.sort_index(inplace=True)
+        df.sort_index(inplace=False)
         
         
         st.write(df)
