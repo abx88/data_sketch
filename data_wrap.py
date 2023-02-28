@@ -23,9 +23,9 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     
     # Rinomina le colonne con numeri in ordine crescente
-    new_column_names = list(range(len(df.columns)))
-    df.columns = new_column_names
-    st.write(df)
+    #new_column_names = list(range(len(df.columns)))
+    #df.columns = new_column_names
+    #st.write(df)
     
     elimina_colonne = st.sidebar.checkbox("elimina colonne")
     if elimina_colonne == True:
