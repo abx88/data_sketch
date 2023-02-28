@@ -24,6 +24,10 @@ if uploaded_file is not None:
     st.write(df)
     newdf= df
     
+    
+    col1, col2 = st.columns([2, 2])
+    
+    
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
     if tabella_senza_intestazioni == True:
         # Rinomina le colonne con numeri in ordine crescente
@@ -68,7 +72,12 @@ if uploaded_file is not None:
         newdf = newdf.set_index(colonna_indice)
     
     st.subheader("dataset rielaborato")
-    st.write(newdf)
+    st.col1.write(newdf)
+    #visualizzazione variabile    
+    colonna_da_visualizzare = st.col2.select("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+    st.col2.line_chart(colonna_da_visualizzare)
+    
+    
     
     nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
     
