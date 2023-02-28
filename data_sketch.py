@@ -100,6 +100,8 @@ if uploaded_file is not None:
         col2.subheader("visualizza variabile")
         if tabella_senza_intestazioni == True:
             colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist(), index = 2)
+        else:
+            colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         serie = newdf[colonna_da_visualizzare]
         col2.line_chart(serie)
     
