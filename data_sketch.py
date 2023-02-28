@@ -9,7 +9,7 @@ from io import StringIO
 
 st.header("Data Sketch")
 
-st.sidebar.radio("pagina",'tool pulizia','tool visualizzazione')
+pagina = st.sidebar.radio("pagina",'tool pulizia','tool visualizzazione')
 
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
