@@ -28,6 +28,8 @@ if uploaded_file is not None:
         new_column_names = list(range(len(df.columns)))
         df.columns = new_column_names
         st.write(df)
+    else:
+        st.write(df)
     
     elimina_colonne = st.sidebar.checkbox("elimina colonne")
     if elimina_colonne == True:
