@@ -30,9 +30,7 @@ if uploaded_file is not None:
         df.columns = new_column_names
         df.index = df.index + 1
         df.sort_index(inplace=True)
-        
-        
-        st.write(df)
+        #st.write(df)
     else:
         st.write(df)
     
