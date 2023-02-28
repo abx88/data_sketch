@@ -74,7 +74,7 @@ if uploaded_file is not None:
     st.subheader("dataset rielaborato")
     col1.write(newdf)
     #visualizzazione variabile    
-    colonna_da_visualizzare = st.col2.select("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+    colonna_da_visualizzare = col2.select("Seleziona le colonne da visualizzare", newdf.columns.tolist())
     col2.line_chart(colonna_da_visualizzare)
     
     
