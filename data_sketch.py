@@ -60,7 +60,7 @@ if uploaded_file is not None:
             mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
         # Rinomina le colonne selezionate con i nuovi nomi
-        newdf = newdf.rename(columns=mapping_nomi_colonne)
+        newdf =  newdf.rename(columns=mapping_nomi_colonne)
 
     indice = st.sidebar.checkbox("colonna indice")
     
@@ -69,7 +69,7 @@ if uploaded_file is not None:
         colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
         # Imposta la colonna selezionata come indice del DataFrame
         newdf = newdf.set_index(colonna_indice)
-        indice_datetime = st.checkbox("indice date_time"
+        indice_datetime = st.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
     
