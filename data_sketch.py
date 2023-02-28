@@ -26,12 +26,10 @@ if uploaded_file is not None:
     if tabella_senza_intestazioni == True:
         # Rinomina le colonne con numeri in ordine crescente
         new_column_names = list(range(len(df.columns)))
-        df.columns = new_column_names
-        
-        # Aggiungi una nuova riga con i nomi delle colonne
         df.loc[-1] = df.columns
+        df.columns = new_column_names
         df.index = df.index + 1
-        df.sort_index(inplace=False)
+        df.sort_index(inplace=True)
         
         
         st.write(df)
