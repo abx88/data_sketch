@@ -25,57 +25,56 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     newdf= df
     
+
+    st.write(df)
+
+    tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
+    if tabella_senza_intestazioni == True:
+        # Rinomina le colonne con numeri in ordine crescente
+        new_column_names = list(range(len(df.columns)))
+        newdf.loc[-1] = newdf.columns
+        newdf.columns = new_column_names
+        newdf.index = newdf.index + 1
+        newdf.sort_index(inplace=True)
+        #st.write(df)
+    #else:
+     #   st.write(df)
+
+    elimina_colonne = st.sidebar.checkbox("elimina colonne")
+    if elimina_colonne == True:
+        # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
+        colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+
+        # Elimina le colonne selezionate
+        newdf = newdf.drop(columns=colonne_da_eliminare)
+
+    rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
+    if rinomina_colonne == True:
+        # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
+        colonne_da_rinominare = st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+
+        # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+        mapping_nomi_colonne = {}
+        for colonna in colonne_da_rinominare:
+            nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            mapping_nomi_colonne[colonna] = nuovo_nome_colonna
+
+        # Rinomina le colonne selezionate con i nuovi nomi
+        newdf =  newdf.rename(columns=mapping_nomi_colonne)
+
+    indice = st.sidebar.checkbox("colonna indice")
+
+    if indice == True:
+        # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+        colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+        # Imposta la colonna selezionata come indice del DataFrame
+        newdf = newdf.set_index(colonna_indice)
+        indice_datetime = st.checkbox("indice date_time")
+        if indice_datetime ==True:
+            newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+
     if pagina == 'tool modifica':
-
-        st.write(df)
-
-        tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
-        if tabella_senza_intestazioni == True:
-            # Rinomina le colonne con numeri in ordine crescente
-            new_column_names = list(range(len(df.columns)))
-            newdf.loc[-1] = newdf.columns
-            newdf.columns = new_column_names
-            newdf.index = newdf.index + 1
-            newdf.sort_index(inplace=True)
-            #st.write(df)
-        #else:
-         #   st.write(df)
-
-        elimina_colonne = st.sidebar.checkbox("elimina colonne")
-        if elimina_colonne == True:
-            # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-            colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
-
-            # Elimina le colonne selezionate
-            newdf = newdf.drop(columns=colonne_da_eliminare)
-
-        rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
-        if rinomina_colonne == True:
-            # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-            colonne_da_rinominare = st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
-
-            # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
-            mapping_nomi_colonne = {}
-            for colonna in colonne_da_rinominare:
-                nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
-                mapping_nomi_colonne[colonna] = nuovo_nome_colonna
-
-            # Rinomina le colonne selezionate con i nuovi nomi
-            newdf =  newdf.rename(columns=mapping_nomi_colonne)
-
-        indice = st.sidebar.checkbox("colonna indice")
-
-        if indice == True:
-            # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-            colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
-            # Imposta la colonna selezionata come indice del DataFrame
-            newdf = newdf.set_index(colonna_indice)
-            indice_datetime = st.checkbox("indice date_time")
-            if indice_datetime ==True:
-                newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-
-
-        col1.subheader("dataset rielaborato")
+        st.subheader("dataset rielaborato")
         st.write(newdf)
 
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
@@ -92,10 +91,8 @@ if uploaded_file is not None:
         data=csv,
         file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
         mime='text/csv')
-
    
     else:
-
         col1, col2 = st.columns([2, 2])
         col1.subheader("dataset rielaborato")
         col1.write(newdf)
