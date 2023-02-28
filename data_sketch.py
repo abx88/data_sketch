@@ -81,7 +81,7 @@ if uploaded_file is not None:
     col2.subheader("visualizza variabile")
     colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
     #col2.line_chart(int(colonna_da_visualizzare))
-    col2.line_chart(newdf.colonna_da_visualizzare)
+    col2.line_chart(colonna_da_visualizzare)
 
     
     
