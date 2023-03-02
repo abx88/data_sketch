@@ -97,11 +97,31 @@ if uploaded_file is not None:
         col1.subheader("dataset rielaborato")
         col1.write(newdf)
         #visualizzazione variabile    
+    
         col2.subheader("visualizza variabile")
-        colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-        serie = newdf[colonna_da_visualizzare]
-        st.write(serie)
-        col2.line_chart(serie)
+        
+        equity = go.Figure()
+        
+        equity.add_trace(go.Scatter(
+            mode = "lines",
+            y = newdf[colonna_da_visualizzare],
+            x = newdf.index,
+            name="variabile",
+            connectgaps=True))
+        
+        equity.update_xaxes(
+            title_text = "variabile",
+            title_font = {"size": 15},
+            title_standoff = 10)
+        st.plotly_chart(equity,use_container_width=False )
+        
+        
+        
+        
+        #colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+        #serie = newdf[colonna_da_visualizzare]
+        #st.write(serie)
+        #col2.line_chart(serie)
     
 else:
     st.text("inserire file csv")
