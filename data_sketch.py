@@ -102,23 +102,43 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
+        col3, col4 = st.columns([2, 2])
+        
         #visualizzazione variabile    
         colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-        variabile = go.Figure()
-        
-        variabile.add_trace(go.Scatter(
-            mode = "lines",
-            y = newdf[colonna_da_visualizzare],
-            x = newdf.index,
-            name="variabile",
-            connectgaps=True))
-        
-        variabile.update_xaxes(
-            title_text = "variabile",
-            title_font = {"size": 15},
-            title_standoff = 10)
-        st.plotly_chart(variabile,use_container_width=False )
-        
+       
+        with col3:
+            variabile = go.Figure()
+
+            variabile.add_trace(go.Scatter(
+                mode = "lines",
+                y = newdf[colonna_da_visualizzare],
+                x = newdf.index,
+                name="variabile",
+                connectgaps=True))
+
+            variabile.update_xaxes(
+                title_text = "variabile",
+                title_font = {"size": 15},
+                title_standoff = 10)
+            st.plotly_chart(variabile,use_container_width=False )
+            
+        with col3:
+            variabile2 = go.Figure()
+
+            variabile2.add_trace(go.Scatter(
+                mode = "lines",
+                y = newdf[colonna_da_visualizzare],
+                x = newdf.index,
+                name="variabile",
+                connectgaps=False))
+
+            variabile2.update_xaxes(
+                title_text = "variabile2",
+                title_font = {"size": 15},
+                title_standoff = 10)
+            st.plotly_chart(variabile,use_container_width=False )
+
     
 else:
     st.text("inserire file csv")
