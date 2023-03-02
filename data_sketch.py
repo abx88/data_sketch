@@ -108,7 +108,7 @@ if uploaded_file is not None:
         with col3:
             #visualizzazione variabile    
             col3.subheader("visualizza variabile")
-            colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+            colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdf.columns.tolist())
             variabile = go.Figure()
 
             variabile.add_trace(go.Scatter(
@@ -125,7 +125,7 @@ if uploaded_file is not None:
             st.plotly_chart(variabile,use_container_width=False )
             
         with col4:
-            colonna_da_visualizzare2 = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+            colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdf.columns.tolist())
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
