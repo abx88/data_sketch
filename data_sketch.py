@@ -103,7 +103,7 @@ if uploaded_file is not None:
    
     else:
         #visualizzazione variabile    
-        colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+        colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         variabile = go.Figure()
         
         variabile.add_trace(go.Scatter(
