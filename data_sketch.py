@@ -103,6 +103,7 @@ if uploaded_file is not None:
         else:
             colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         serie = newdf[colonna_da_visualizzare]
+        st.write(serie)
         col2.line_chart(serie)
     
 else:
