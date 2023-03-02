@@ -6,6 +6,7 @@
 import streamlit as st
 import pandas as pd
 from io import StringIO
+import plotly.graph_objects as go
 
 st.header("Data Sketch")
 
