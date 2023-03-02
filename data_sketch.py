@@ -130,7 +130,7 @@ if uploaded_file is not None:
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
-                mode = "lines",
+                mode = "markers",
                 y = newdf[colonna_da_visualizzare2],
                 x = newdf.index,
                 name="variabile2",
