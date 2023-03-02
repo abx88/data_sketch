@@ -124,8 +124,8 @@ if uploaded_file is not None:
             st.plotly_chart(variabile,use_container_width=False )
             
         with col4:
-            colonna_confrontoY = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-            colonna_confrontoX = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+            colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
       
             variabile2 = go.Figure()
 
