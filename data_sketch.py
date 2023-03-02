@@ -81,11 +81,13 @@ if uploaded_file is not None:
         indice_datetime = st.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+    
+    st.subheader("dataset rielaborato")
+    st.write(newdf)
 
+    
+    
     if pagina == 'modifica ed esporta':
-        st.subheader("dataset rielaborato")
-        st.write(newdf)
-
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
         @st.cache
