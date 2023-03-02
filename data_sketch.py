@@ -133,7 +133,7 @@ if uploaded_file is not None:
                 mode = "lines",
                 y = newdf[colonna_confrontoY],
                 x = newdf[colonna_confrontoX],
-                trendline="ols",
+                #trendline="ols",
                 name="variabile2"))
 
             variabile2.update_xaxes(
