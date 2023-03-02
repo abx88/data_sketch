@@ -142,7 +142,7 @@ if uploaded_file is not None:
                 title_text = "confronto variabili",
                 title_font = {"size": 15},
                 title_standoff = 10)
-            st.plotly_chart(variabile,use_container_width=False )
+            st.plotly_chart(variabile2,use_container_width=False )
             
             
 
