@@ -126,7 +126,7 @@ if uploaded_file is not None:
             
         with col4:
             colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
-            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist(),newdf.index)
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
       
             variabile2 = go.Figure()
 
