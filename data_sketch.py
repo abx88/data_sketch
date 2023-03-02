@@ -74,7 +74,7 @@ if uploaded_file is not None:
 
     if indice == True:
         # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-        colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+        colonna_indice = st.sidebar.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
         # Imposta la colonna selezionata come indice del DataFrame
         newdf = newdf.set_index(colonna_indice)
         
@@ -125,7 +125,7 @@ if uploaded_file is not None:
             
         with col4:
             colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
-            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
+            
       
             variabile2 = go.Figure()
 
@@ -141,6 +141,8 @@ if uploaded_file is not None:
                 title_font = {"size": 15},
                 title_standoff = 10)
             st.plotly_chart(variabile,use_container_width=False )
+            
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist(),newdf.index)
 
     
 else:
