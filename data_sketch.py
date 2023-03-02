@@ -83,14 +83,14 @@ if uploaded_file is not None:
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
     
-    righe_da_eliminare = st.sidebar.checkbox("righe da elimianre")
+    righe_da_eliminare = st.sidebar.checkbox("righe da eliminare")
 
     if righe_da_eliminare ==True:
         #lista colonne presenti in df
         scegli_colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
         # crea una lista di valori presenti nella colonna 'valore'
         if scegli_colonna_valori is not None:
-            valori = newdf[colonna_valori].unique().tolist()
+            valori = newdf[scegli_colonna_valori].unique().tolist()
 
             # chiede all'utente di selezionare il valore da eliminare
             valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
