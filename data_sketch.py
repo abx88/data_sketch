@@ -26,11 +26,11 @@ if uploaded_file is not None:
     col1, col2 = st.columns([2, 2])
     col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    st.write(df)
+    col1.write(df)
     
     col2.subheader("dataset modificato")
     newdf= df
-    st.write(newdf)
+    col2.write(newdf)
     
     #verifica se è necessario inserire delle intestazioni
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
