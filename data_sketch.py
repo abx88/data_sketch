@@ -123,11 +123,11 @@ if uploaded_file is not None:
                 title_standoff = 10)
             st.plotly_chart(variabile,use_container_width=False )
             
-        with col3:
+        with col4:
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
-                mode = "lines",
+                mode = "markers",
                 y = newdf[colonna_da_visualizzare],
                 x = newdf.index,
                 name="variabile",
