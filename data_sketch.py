@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 
 st.header("Data Sketch")
 
-pagina = st.radio("Pagina",('tool modifica','tool visualizzazione'))
+pagina = st.radio("Pagina",('modifica ed esporta','visualizzazione'))
 
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
@@ -82,7 +82,7 @@ if uploaded_file is not None:
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
 
-    if pagina == 'tool modifica ed esporta':
+    if pagina == 'modifica ed esporta':
         st.subheader("dataset rielaborato")
         st.write(newdf)
 
