@@ -30,6 +30,7 @@ if uploaded_file is not None:
     
     col2.subheader("dataset modificato")
     newdf= df
+    st.write(newdf)
     
     #verifica se è necessario inserire delle intestazioni
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
