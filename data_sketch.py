@@ -99,7 +99,7 @@ if uploaded_file is not None:
         #visualizzazione variabile    
         col2.subheader("visualizza variabile")
         if tabella_senza_intestazioni == True:
-            colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist(), index = 2)
+            colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         else:
             colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         serie = newdf[colonna_da_visualizzare]
