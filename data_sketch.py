@@ -86,6 +86,7 @@ if uploaded_file is not None:
     col2.write(newdf)
     
     if pagina == 'modifica ed esporta':
+        st.subheader("esporta dataframe in csv")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
         @st.cache
@@ -102,12 +103,12 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
+        st.subheader("visualizza dati")
         col3, col4 = st.columns([2, 2])
         
       
         with col3:
             #visualizzazione variabile    
-            col3.subheader("visualizza variabile")
             colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdf.columns.tolist())
             variabile = go.Figure()
 
