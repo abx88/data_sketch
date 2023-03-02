@@ -107,6 +107,7 @@ if uploaded_file is not None:
       
         with col3:
             #visualizzazione variabile    
+            col3.subheader("visualizza variabile")
             colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
             variabile = go.Figure()
 
@@ -125,7 +126,7 @@ if uploaded_file is not None:
             
         with col4:
             colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
-            colonna_confrontoX = newdf.index.name
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist(),newdf.index)
       
             variabile2 = go.Figure()
 
@@ -133,7 +134,7 @@ if uploaded_file is not None:
                 mode = "lines",
                 y = newdf[colonna_confrontoY],
                 x = newdf[colonna_confrontoX],
-                #trendline="ols",
+                trendline="ols",
                 name="variabile2"))
 
             variabile2.update_xaxes(
@@ -142,7 +143,7 @@ if uploaded_file is not None:
                 title_standoff = 10)
             st.plotly_chart(variabile,use_container_width=False )
             
-            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist(),newdf.index)
+            
 
     
 else:
