@@ -104,10 +104,10 @@ if uploaded_file is not None:
     else:
         col3, col4 = st.columns([2, 2])
         
-        #visualizzazione variabile    
-        colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-       
+      
         with col3:
+            #visualizzazione variabile    
+            colonna_da_visualizzare = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
             variabile = go.Figure()
 
             variabile.add_trace(go.Scatter(
@@ -115,7 +115,7 @@ if uploaded_file is not None:
                 y = newdf[colonna_da_visualizzare],
                 x = newdf.index,
                 name="variabile",
-                connectgaps=True))
+                connectgaps=False))
 
             variabile.update_xaxes(
                 title_text = "variabile",
@@ -124,17 +124,20 @@ if uploaded_file is not None:
             st.plotly_chart(variabile,use_container_width=False )
             
         with col4:
+            colonna_confrontoY = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+            colonna_confrontoX = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+      
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
                 mode = "markers",
-                y = newdf[colonna_da_visualizzare],
-                x = newdf.index,
-                name="variabile",
-                connectgaps=False))
+                y = newdf[colonna_confrontoY],
+                x = newdf[colonna_confrontoX],
+                trendline="ols",
+                name="variabile2"))
 
             variabile2.update_xaxes(
-                title_text = "variabile2",
+                title_text = "confronto variabili",
                 title_font = {"size": 15},
                 title_standoff = 10)
             st.plotly_chart(variabile,use_container_width=False )
