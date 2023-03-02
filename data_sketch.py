@@ -30,7 +30,7 @@ if uploaded_file is not None:
     
     col2.subheader("dataset modificato")
     newdf= df
-    col2.write(newdf)
+   
     
     #verifica se è necessario inserire delle intestazioni
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
@@ -83,6 +83,7 @@ if uploaded_file is not None:
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
     
+    col2.write(newdf)
     
     if pagina == 'modifica ed esporta':
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
