@@ -79,7 +79,7 @@ if uploaded_file is not None:
         newdf = newdf.set_index(colonna_indice)
         
         # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-        indice_datetime = st.checkbox("indice date_time")
+        indice_datetime = st.sidebar.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
     
