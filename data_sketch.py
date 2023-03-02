@@ -100,7 +100,7 @@ if uploaded_file is not None:
         #visualizzazione variabile    
     
         col2.subheader("visualizza variabile")
-        
+        colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
         equity = go.Figure()
         
         equity.add_trace(go.Scatter(
@@ -119,7 +119,7 @@ if uploaded_file is not None:
         
         
         
-        #colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
+        
         #serie = newdf[colonna_da_visualizzare]
         #st.write(serie)
         #col2.line_chart(serie)
