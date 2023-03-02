@@ -125,12 +125,32 @@ if uploaded_file is not None:
             st.plotly_chart(variabile,use_container_width=False )
             
         with col4:
-            colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
-            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
-      
+            colonna_da_visualizzare2 = st.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
+                mode = "lines",
+                y = newdf[colonna_da_visualizzare2],
+                x = newdf.index,
+                name="variabile2",
+                connectgaps=False))
+
+            variabile2.update_xaxes(
+                title_text = "variabile",
+                title_font = {"size": 15},
+                title_standoff = 10)
+            st.plotly_chart(variabile2,use_container_width=False )
+            
+            
+            
+        scatter_correlazione= st.sidebar.checkbox("scatter correlazione variabili")
+        if scatter_correlazione == True:
+            colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
+
+            scatter = go.Figure()
+
+            scatter.add_trace(go.Scatter(
                 mode = "markers",
                 y = newdf[colonna_confrontoY],
                 x = newdf[colonna_confrontoX],
@@ -138,12 +158,12 @@ if uploaded_file is not None:
                 name="variabile2",
                 connectgaps=False))
 
-            variabile2.update_xaxes(
+            scatter.update_xaxes(
                 title_text = "confronto variabili",
                 title_font = {"size": 15},
                 title_standoff = 10)
-            st.plotly_chart(variabile2,use_container_width=False )
-            
+            st.plotly_chart(scatter,use_container_width=False )
+
             
 
     
