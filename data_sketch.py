@@ -130,7 +130,7 @@ if uploaded_file is not None:
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
-                mode = "markers",
+                mode = "lines",
                 y = newdf[colonna_confrontoY],
                 x = newdf[colonna_confrontoX],
                 trendline="ols",
