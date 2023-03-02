@@ -68,21 +68,7 @@ if uploaded_file is not None:
         # Rinomina le colonne selezionate con i nuovi nomi
         newdf =  newdf.rename(columns=mapping_nomi_colonne)
         
-    righe_da_eliminare = st.sidebar.checkbox("righe da elimianre")
-    if righe_da_eliminare ==True:
-        #lista colonne presenti in df
-        colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
-        # crea una lista di valori presenti nella colonna 'valore'
-        valori = newdf[colonna_valori].unique().tolist()
-
-        # chiede all'utente di selezionare il valore da eliminare
-        valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
-
-        # elimina le righe che contengono il valore selezionato
-        newdf = df[~df[colonna_valori].isin([valore_da_elim])]
-
-
-
+    
     #verifica la necessità di una colonna indice    
     indice = st.sidebar.checkbox("colonna indice")
 
@@ -96,6 +82,22 @@ if uploaded_file is not None:
         indice_datetime = st.sidebar.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+    
+    righe_da_eliminare = st.sidebar.checkbox("righe da elimianre")
+
+    if righe_da_eliminare ==True:
+        #lista colonne presenti in df
+        colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+        # crea una lista di valori presenti nella colonna 'valore'
+        if colonna_valore is not None:
+            valori = newdf[colonna_valori].unique().tolist()
+
+            # chiede all'utente di selezionare il valore da eliminare
+            valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
+
+            # elimina le righe che contengono il valore selezionato
+            newdf = df[~df[colonna_valori].isin([valore_da_elim])]
+
     
     col2.write(newdf)
     
