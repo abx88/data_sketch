@@ -19,17 +19,21 @@ if uploaded_file is not None:
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
+
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
-
-    st.subheader("dataset originale")
+    
+    col1, col2 = st.columns([2, 2])
+    col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
+    st.write(df)
+    
+    col2.subheader("dataset modificato")
     newdf= df
     
-
-    st.write(df)
-
+    #verifica se è necessario inserire delle intestazioni
     tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
+    
     if tabella_senza_intestazioni == True:
         # Rinomina le colonne con numeri in ordine crescente
         new_column_names = list(range(len(df.columns)))
@@ -37,18 +41,18 @@ if uploaded_file is not None:
         newdf.columns = new_column_names
         newdf.index = newdf.index + 1
         newdf.sort_index(inplace=True)
-        #st.write(df)
-    #else:
-     #   st.write(df)
-
+    
+    #verifica se ci sono colonne da elimianre
     elimina_colonne = st.sidebar.checkbox("elimina colonne")
+    
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
         colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
-
+        
+    #verifica se ci sono colonne da rinominare
     rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
     if rinomina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
@@ -63,6 +67,8 @@ if uploaded_file is not None:
         # Rinomina le colonne selezionate con i nuovi nomi
         newdf =  newdf.rename(columns=mapping_nomi_colonne)
 
+
+    #verifica la necessità di una colonna indice    
     indice = st.sidebar.checkbox("colonna indice")
 
     if indice == True:
@@ -70,11 +76,13 @@ if uploaded_file is not None:
         colonna_indice = st.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
         # Imposta la colonna selezionata come indice del DataFrame
         newdf = newdf.set_index(colonna_indice)
+        
+        # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
         indice_datetime = st.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
 
-    if pagina == 'tool modifica':
+    if pagina == 'tool modifica ed esporta':
         st.subheader("dataset rielaborato")
         st.write(newdf)
 
@@ -94,35 +102,23 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
-        col1, col2 = st.columns([2, 2])
-        col1.subheader("dataset rielaborato")
-        col1.write(newdf)
         #visualizzazione variabile    
-    
-        col2.subheader("visualizza variabile")
         colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-        equity = go.Figure()
+        variabile = go.Figure()
         
-        equity.add_trace(go.Scatter(
+        variabile.add_trace(go.Scatter(
             mode = "lines",
             y = newdf[colonna_da_visualizzare],
             x = newdf.index,
             name="variabile",
             connectgaps=True))
         
-        equity.update_xaxes(
+        variabile.update_xaxes(
             title_text = "variabile",
             title_font = {"size": 15},
             title_standoff = 10)
-        st.plotly_chart(equity,use_container_width=False )
+        st.plotly_chart(variabile,use_container_width=False )
         
-        
-        
-        
-        
-        #serie = newdf[colonna_da_visualizzare]
-        #st.write(serie)
-        #col2.line_chart(serie)
     
 else:
     st.text("inserire file csv")
