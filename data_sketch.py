@@ -135,7 +135,8 @@ if uploaded_file is not None:
                 y = newdf[colonna_confrontoY],
                 x = newdf[colonna_confrontoX],
                 trendline="ols",
-                name="variabile2"))
+                name="variabile2",
+                connectgaps=False))
 
             variabile2.update_xaxes(
                 title_text = "confronto variabili",
