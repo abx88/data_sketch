@@ -101,7 +101,7 @@ if uploaded_file is not None:
     
         col2.subheader("visualizza variabile")
         colonna_da_visualizzare = col2.selectbox("Seleziona le colonne da visualizzare", newdf.columns.tolist())
-        col2.equity = go.Figure()
+        equity = col2.go.Figure()
         
         equity.add_trace(go.Scatter(
             mode = "lines",
