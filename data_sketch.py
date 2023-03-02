@@ -90,7 +90,7 @@ if uploaded_file is not None:
         scegli_colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
         # crea una lista di valori presenti nella colonna 'valore'
         if scegli_colonna_valori is not None:
-            valori = newdf[scegli_colonna_valori].unique().tolist()
+            valori = newdf[scegli_colonna_valori].tolist()
 
             # chiede all'utente di selezionare il valore da eliminare
             valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
