@@ -131,11 +131,11 @@ if uploaded_file is not None:
                 mime='text/csv')
         else:
             #dataframe senza intestazioni
-            newdf2 = newdf.rename(columns={newdf.columns[0]: ''}, index={0: ''})
-            csv = convert_df(newdf2)
+            newdf2 = newdf.rename(columns=None, index={0: ''})
+            csv_noHead = convert_df(newdf2)
             st.download_button(
                     label="Download dataset modificato",
-                    data=csv,
+                    data=csv_noHead,
                     file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
                     mime='text/csv')
    
