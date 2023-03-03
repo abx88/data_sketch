@@ -134,7 +134,7 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
-        col2.write(newdf)
+        col2.write(newdfvisual)
         st.subheader("visualizza dati")
         col3, col4 = st.columns([2, 2])
         
