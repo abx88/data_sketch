@@ -101,14 +101,6 @@ if uploaded_file is not None:
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
     
-    #if tipo_dati == 'non modificabile':
-     #   #visualizza dati come dataframe
-      #  newdf=newdf
-       # col2.write(newdf)
-    #else:
-     #   newdf=newdf
-      #  newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
-    #st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
     col2.write(newdf)       
     newdfvisual=newdf
 
@@ -132,7 +124,6 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
-        #col2.write(newdfvisual)
         st.subheader("visualizza dati")
         col3, col4 = st.columns([2, 2])
         
