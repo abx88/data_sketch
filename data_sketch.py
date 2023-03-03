@@ -87,15 +87,13 @@ if uploaded_file is not None:
 
     if righe_da_eliminare ==True:
         #lista colonne presenti in df
-        scegli_colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+        scegli_colonna_valori=st.sidebar.selectbox("Seleziona le colonne", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
-            lista = newdf[scegli_colonna_valori].tolist()
-            serie_valori= pd.Series(lista)
-            valori = serie_valori.unique().tolist()
+            valori = df[scegli_colonna_valori].unique().tolist()
 
             # chiede all'utente di selezionare il valore da eliminare
-            valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
+            valore_da_elim = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
 
             # elimina le righe che contengono il valore selezionato
             newdf = df[~df[scegli_colonna_valori].isin([valore_da_elim])]
