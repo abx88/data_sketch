@@ -114,7 +114,7 @@ if uploaded_file is not None:
     
     if pagina == 'modifica ed esporta':
         newdfedit = col2.experimental_data_editor(newdf, num_rows="dynamic")
-        if st.button("aggiorna dati per visualizzazione")
+        if st.button("aggiorna dati per visualizzazione"):
             newdfvisual=newdfedit
             
         st.subheader("esporta dataframe in csv")
