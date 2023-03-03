@@ -109,8 +109,7 @@ if uploaded_file is not None:
      #   newdf=newdf
       #  newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
     #st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
-    #col2.write(newdf2)       
-    
+    col2.write(newdf)       
     newdfvisual=newdf
 
     
