@@ -122,9 +122,9 @@ if uploaded_file is not None:
         if rimuovi_intestazioni == False:
              @st.cache
             def convert_df(newdf):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return newdf.to_csv().encode('utf-8')
-            
+                # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                return newdf.to_csv().encode('utf-8')
+
             csv = convert_df(newdf)
             st.download_button(
                 label="Download dataset modificato",
@@ -134,8 +134,8 @@ if uploaded_file is not None:
         else:
              @st.cache
             def convert_df(newdf):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return newdf.to_csv().encode('utf-8')
+                # IMPORTANT: Cache the conversion to prevent computation on every rerun
+                return newdf.to_csv().encode('utf-8')
             
             #dataframe senza intestazioni
             newdf2 = newdf.rename(columns=None, index={0: ''})
