@@ -96,9 +96,9 @@ if uploaded_file is not None:
             valore_da_elim = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
 
             # elimina le righe che contengono il valore selezionato
-            righe_da_elim = newdf.loc[newdf[scegli_colonna_valori] == valore_da_elim]
-            newdf = newdf.drop(righe_da_elim)
-            #newdf = newdf[~newdf[scegli_colonna_valori].isin([valore_da_elim])]
+            #righe_da_elim = newdf.loc[newdf[scegli_colonna_valori] == valore_da_elim]
+            #newdf = newdf.drop(righe_da_elim)
+            newdf = newdf[~newdf[scegli_colonna_valori].isin([valore_da_elim])]
 
     
     col2.write(newdf)
