@@ -8,6 +8,11 @@ import pandas as pd
 from io import StringIO
 import plotly.graph_objects as go
 
+st.set_page_config(
+    page_title="DataSketch",
+    layout="wide")
+
+
 st.header("Data Sketch")
 
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
