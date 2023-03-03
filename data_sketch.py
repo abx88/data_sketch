@@ -87,7 +87,7 @@ if uploaded_file is not None:
 
     if righe_da_eliminare ==True:
         #lista colonne presenti in df
-        scegli_colonna_valori=st.sidebar.selectbox("Seleziona le colonne", newdf.columns.tolist())
+        scegli_colonna_valori=st.sidebar.selectbox("Seleziona la colonna", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
             valori = newdf[scegli_colonna_valori].unique().tolist()
@@ -99,7 +99,7 @@ if uploaded_file is not None:
             newdf = newdf[~newdf[scegli_colonna_valori].isin([valore_da_elim])]
 
     
-        col2.write(newdf)
+    col2.write(newdf)
     
     if pagina == 'modifica ed esporta':
         st.subheader("esporta dataframe in csv")
