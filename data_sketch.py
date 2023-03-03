@@ -98,9 +98,9 @@ if uploaded_file is not None:
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
 
-    newdf = st.experimental_data_editor(newdf, num_rows="dynamic")        
-    st.experimental_data_editor(newdf, key="data_editor") #  Set a key
-    col2.write(newdf)       
+    newdf2 = st.experimental_data_editor(newdf, num_rows="dynamic")        
+    st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
+    col2.write(newdf2)       
     #col2.write(newdf)
 
     
