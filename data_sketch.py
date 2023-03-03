@@ -17,7 +17,7 @@ uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
     #scegli come visualizzare i dati se ts o no
-    tipo_dati = st.sidebar.radio("selezionare come trattare i dati",('df modificabile', 'df non modificabile'))
+    tipo_dati = st.sidebar.radio("selezionare tipologia dataset visualizzato",('modificabile', 'non modificabile'))
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
@@ -100,7 +100,7 @@ if uploaded_file is not None:
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
     
-    if tipo_dati == 'df modificabile':
+    if tipo_dati == 'non modificabile':
         #visualizza dati come dataframe
         col2.write(newdf)
     else:
