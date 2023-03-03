@@ -114,8 +114,7 @@ if uploaded_file is not None:
     
     if pagina == 'modifica ed esporta':
         newdfedit = col2.experimental_data_editor(newdf, num_rows="dynamic")
-        if st.button("aggiorna dati per visualizzazione"):
-            newdfvisual=newdfedit
+        newdfvisual=newdfedit
             
         st.subheader("esporta dataframe in csv")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
