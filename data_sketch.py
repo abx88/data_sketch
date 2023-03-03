@@ -10,13 +10,14 @@ import plotly.graph_objects as go
 
 st.header("Data Sketch")
 
-tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'scatter'))
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
 
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
+    #scegli come visualizzare i dati se ts o no
+    tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'dati non strutturati'))
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
