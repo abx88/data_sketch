@@ -114,14 +114,21 @@ if uploaded_file is not None:
     if pagina == 'modifica ed esporta':
 
         st.subheader("esporta dataframe in csv")
+        rimuovi_intestazioni = st.checkbox("rimuovere nome colonne")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
         @st.cache
         def convert_df(newdf):
             # IMPORTANT: Cache the conversion to prevent computation on every rerun
             return newdf.to_csv().encode('utf-8')
+        
+        if rimuovi_intestazioni == False:
+            csv = convert_df(newdf)
+        else:
+            #dataframe senza intestazioni
+            newdf2 = newdf.rename(columns=None)
+            csv = convert_df(newdf2)
 
-        csv = convert_df(newdf)
 
         st.download_button(
         label="Download dataset modificato",
@@ -195,11 +202,10 @@ if uploaded_file is not None:
                 #dal df scelgo una variabile per confrontare la sua distribuzione 
                 colonna_distribuzione = st.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
                 # calcola la media e la deviazione standard della variabile di interesse
-                media = newdfvisual[colonna_distribuzione].mean()
-                dev_std = newdfvisual[colonna_distribuzione].std()
                 colonna_distribuzione_perc = st.checkbox("distribuzione della variazione percentuale")
                 if colonna_distribuzione_perc == False:
-                    
+                    media = newdfvisual[colonna_distribuzione].mean()
+                    dev_std = newdfvisual[colonna_distribuzione].std()    
                     # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
                     distribuzione = go.Figure()
 
@@ -236,6 +242,8 @@ if uploaded_file is not None:
                 else:
                     #creazione del df delle variazioni percentuali
                     newdfvisual_perc = newdfvisual.copy().pct_change().dropna() * 100
+                    media_perc = newdfvisual_perc[colonna_distribuzione].mean()
+                    dev_std_perc = newdfvisual_perc[colonna_distribuzione].std()    
                      
                     # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
                     distribuzione_perc = go.Figure()
@@ -248,7 +256,7 @@ if uploaded_file is not None:
 
                     # traccia 2: distribuzione normale
                     x = np.linspace(newdfvisual[colonna_distribuzione].min(), newdfvisual_perc[colonna_distribuzione].max(), 100)
-                    pdf = stats.norm.pdf(x, media, dev_std)
+                    pdf = stats.norm.pdf(x, media_perc, dev_std_perc)
                     distribuzione_perc.add_trace(go.Scatter(
                         x=x, 
                         y=pdf, 
