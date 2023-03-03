@@ -28,10 +28,11 @@ if uploaded_file is not None:
     col1, col2 = st.columns([2, 2])
     col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    col1.write(df)
+    dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
+    #col1.write(df)
     
     col2.subheader("dataset modificato")
-    newdf= df
+    newdf= dfedit
    
     
     #verifica se è necessario inserire delle intestazioni
@@ -109,8 +110,8 @@ if uploaded_file is not None:
       #  newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
     #st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
     #col2.write(newdf2)       
-    newdfedit = col2.experimental_data_editor(newdf, num_rows="dynamic")
-    newdfvisual=newdfedit
+    
+    newdfvisual=newdf
 
     
     if pagina == 'modifica ed esporta':
@@ -132,7 +133,7 @@ if uploaded_file is not None:
         mime='text/csv')
    
     else:
-        col2.write(newdfvisual)
+        #col2.write(newdfvisual)
         st.subheader("visualizza dati")
         col3, col4 = st.columns([2, 2])
         
