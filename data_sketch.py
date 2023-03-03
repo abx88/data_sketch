@@ -113,7 +113,10 @@ if uploaded_file is not None:
 
     
     if pagina == 'modifica ed esporta':
-        newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")
+        newdfedit = col2.experimental_data_editor(newdf, num_rows="dynamic")
+        if st.button("aggiorna dati per visualizzazione")
+            newdfvisual=newdfedit
+            
         st.subheader("esporta dataframe in csv")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
@@ -138,13 +141,13 @@ if uploaded_file is not None:
       
         with col3:
             #visualizzazione variabile    
-            colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdf.columns.tolist())
+            colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdfvisual.columns.tolist())
             variabile = go.Figure()
 
             variabile.add_trace(go.Scatter(
                 mode = "lines",
-                y = newdf[colonna_da_visualizzare],
-                x = newdf.index,
+                y = newdfvisual[colonna_da_visualizzare],
+                x = newdfvisual.index,
                 name="variabile",
                 connectgaps=False))
 
@@ -155,13 +158,13 @@ if uploaded_file is not None:
             st.plotly_chart(variabile,use_container_width=False )
             
         with col4:
-            colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdf.columns.tolist())
+            colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdfvisual.columns.tolist())
             variabile2 = go.Figure()
 
             variabile2.add_trace(go.Scatter(
                 mode = "markers",
-                y = newdf[colonna_da_visualizzare2],
-                x = newdf.index,
+                y = newdfvisual[colonna_da_visualizzare2],
+                x = newdfvisual.index,
                 name="variabile2",
                 connectgaps=False))
 
@@ -175,15 +178,15 @@ if uploaded_file is not None:
             
         scatter_correlazione= st.sidebar.checkbox("scatter correlazione variabili")
         if scatter_correlazione == True:
-            colonna_confrontoY = st.selectbox("Seleziona asse Y", newdf.columns.tolist())
-            colonna_confrontoX = st.selectbox("Seleziona asse X", newdf.columns.tolist())
+            colonna_confrontoY = st.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
+            colonna_confrontoX = st.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
 
             scatter = go.Figure()
 
             scatter.add_trace(go.Scatter(
                 mode = "markers",
-                y = newdf[colonna_confrontoY],
-                x = newdf[colonna_confrontoX],
+                y = newdfvisual[colonna_confrontoY],
+                x = newdfvisual[colonna_confrontoX],
                 #trendline="ols",
                 name="variabile2",
                 connectgaps=False))
