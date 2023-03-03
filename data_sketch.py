@@ -17,7 +17,7 @@ uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
     #scegli come visualizzare i dati se ts o no
-    tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'dati non strutturati'))
+    tipo_dati = st.sidebar.radio("selezionare come trattare i dati",('time series', 'dati non strutturati'))
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
