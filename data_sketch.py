@@ -91,10 +91,10 @@ if uploaded_file is not None:
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
             serie_valori= newdf[scegli_colonna_valori]
-            valori = serie_valori.unique().tolist()
+            #valori = serie_valori.unique().tolist()
 
             # chiede all'utente di selezionare il valore da eliminare
-            valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', valori)
+            valore_da_elim = st.sidebar.selectbox('Seleziona il valore da eliminare:', serie_valori)
 
             # elimina le righe che contengono il valore selezionato
             newdf = df[~df[scegli_colonna_valori].isin([valore_da_elim])]
