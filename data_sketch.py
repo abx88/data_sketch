@@ -102,8 +102,10 @@ if uploaded_file is not None:
     
     if tipo_dati == 'non modificabile':
         #visualizza dati come dataframe
+        newdf=newdf
         col2.write(newdf)
     else:
+        newdf=newdf
         newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
     #st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
     #col2.write(newdf2)       
