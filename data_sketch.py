@@ -99,7 +99,7 @@ if uploaded_file is not None:
             newdf = df[~df[scegli_colonna_valori].isin([valore_da_elim])]
 
     
-    col2.write(newdf)
+        col2.write(newdf)
     
     if pagina == 'modifica ed esporta':
         st.subheader("esporta dataframe in csv")
