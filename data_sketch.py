@@ -126,7 +126,7 @@ if uploaded_file is not None:
             csv = convert_df(newdf)
         else:
             #dataframe senza intestazioni
-            newdf2 = newdf.rename(columns=None)
+            newdf2 = newdf.rename(columns=None, index={0: ''})
             csv = convert_df(newdf2)
 
 
