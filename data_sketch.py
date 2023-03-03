@@ -90,7 +90,8 @@ if uploaded_file is not None:
         scegli_colonna_valori=st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
-            serie_valori= pd.Series(newdf[scegli_colonna_valori])
+            lista = newdf[scegli_colonna_valori].tolist()
+            serie_valori= pd.Series(lista)
             valori = serie_valori.unique().tolist()
 
             # chiede all'utente di selezionare il valore da eliminare
