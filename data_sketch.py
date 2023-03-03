@@ -10,7 +10,8 @@ import plotly.graph_objects as go
 
 st.header("Data Sketch")
 
-pagina = st.radio("Pagina",('modifica ed esporta','visualizzazione'))
+tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'scatter')
+pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
 
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
@@ -97,11 +98,15 @@ if uploaded_file is not None:
 
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
-
-    newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
+    
+    if tipo_dati == 'time series':
+        #visualizza dati come dataframe
+        col2.write(newdf)
+    else:
+        newdf = col2.experimental_data_editor(newdf, num_rows="dynamic")        
     #st.experimental_data_editor(newdf2, key="data_editor") #  Set a key
     #col2.write(newdf2)       
-    #col2.write(newdf)
+    
 
     
     if pagina == 'modifica ed esporta':
