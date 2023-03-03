@@ -117,12 +117,14 @@ if uploaded_file is not None:
         rimuovi_intestazioni = st.checkbox("rimuovere nome colonne")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 
-        @st.cache
-        def convert_df(newdf):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return newdf.to_csv().encode('utf-8')
+       
         
         if rimuovi_intestazioni == False:
+             @st.cache
+            def convert_df(newdf):
+            # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return newdf.to_csv().encode('utf-8')
+            
             csv = convert_df(newdf)
             st.download_button(
                 label="Download dataset modificato",
@@ -130,6 +132,11 @@ if uploaded_file is not None:
                 file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
                 mime='text/csv')
         else:
+             @st.cache
+            def convert_df(newdf):
+            # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return newdf.to_csv().encode('utf-8')
+            
             #dataframe senza intestazioni
             newdf2 = newdf.rename(columns=None, index={0: ''})
             csv_noHead = convert_df(newdf2)
