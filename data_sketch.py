@@ -124,17 +124,20 @@ if uploaded_file is not None:
         
         if rimuovi_intestazioni == False:
             csv = convert_df(newdf)
+            st.download_button(
+                label="Download dataset modificato",
+                data=csv,
+                file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
+                mime='text/csv')
         else:
             #dataframe senza intestazioni
             newdf2 = newdf.rename(columns=None, index={0: ''})
             csv = convert_df(newdf2)
-
-
-        st.download_button(
-        label="Download dataset modificato",
-        data=csv,
-        file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
-        mime='text/csv')
+            st.download_button(
+                    label="Download dataset modificato",
+                    data=csv,
+                    file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
+                    mime='text/csv')
    
     else:
         st.subheader("visualizza dati")
