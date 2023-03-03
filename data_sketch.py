@@ -97,7 +97,7 @@ if uploaded_file is not None:
 
             # elimina le righe che contengono il valore selezionato
             righe_da_elim = newdf.loc[newdf[scegli_colonna_valori] == valore_da_elim]
-            newdf = newdf.drop(righe_da_elim.index)
+            newdf = newdf.drop(righe_da_elim)
             #newdf = newdf[~newdf[scegli_colonna_valori].isin([valore_da_elim])]
 
     
