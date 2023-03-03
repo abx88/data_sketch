@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 
 st.header("Data Sketch")
 
-tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'scatter')
+tipo_dati = st.sidebar.radio("selezionare tipo di dati dataset originale",('time series', 'scatter'))
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
 
     
