@@ -191,4 +191,3 @@ if uploaded_file is not None:
     
 else:
     st.text("inserire file csv")
-
