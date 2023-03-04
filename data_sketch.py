@@ -150,9 +150,8 @@ if uploaded_file is not None:
 
                 variabile.update_layout(
                     xaxis_title_text="data",
-                    yaxis_title_text=colonna_da_visualizzare,
                     title={
-                        'text': "andamento variabile",
+                        'text': colonna_da_visualizzare,
                         'y':0.9,
                         'x':0.5,
                         'xanchor': 'center',
@@ -172,9 +171,8 @@ if uploaded_file is not None:
 
                 variabile2.update_layout(
                     xaxis_title_text="data",
-                    yaxis_title_text=colonna_da_visualizzare2,
                     title={
-                        'text': "andamento variabile",
+                        'text': colonna_da_visualizzare2,
                         'y':0.9,
                         'x':0.5,
                         'xanchor': 'center',
