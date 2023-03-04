@@ -114,7 +114,6 @@ if uploaded_file is not None:
     if pagina == 'modifica ed esporta':
 
         st.subheader("esporta dataframe in csv")
-        rimuovi_intestazioni = st.checkbox("rimuovere nome colonne")
         nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
         
         @st.cache
@@ -122,26 +121,13 @@ if uploaded_file is not None:
             # IMPORTANT: Cache the conversion to prevent computation on every rerun
             return newdf.to_csv().encode('utf-8')
 
-       
-        
-        if rimuovi_intestazioni == False:
-            csv = convert_df(newdf)
-            st.download_button(
-                label="Download dataset modificato",
-                data=csv,
-                file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
-                mime='text/csv')
-        else:
-            #dataframe senza intestazioni
-            newdf2 = newdf.rename(columns=None, index=newdf.index)
-            csv_noHead = convert_df(newdf2)
-            st.download_button(
-                    label="Download dataset modificato",
-                    data=csv_noHead,
-                    file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
-                    mime='text/csv')
-            st.write(newdf2)
-   
+        csv = convert_df(newdf)
+        st.download_button(
+            label="Download dataset modificato",
+            data=csv,
+            file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
+            mime='text/csv')
+    
     else:
         st.subheader("visualizza dati")
         tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
