@@ -194,10 +194,11 @@ if uploaded_file is not None:
                 st.plotly_chart(scatter,use_container_width=False )
             
             with col4:
+                col7,col8 = st.columns([2, 2])
                 #dal df scelgo una variabile per confrontare la sua distribuzione 
-                colonna_distribuzione = st.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
+                colonna_distribuzione = col7.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
                 # calcola la media e la deviazione standard della variabile di interesse
-                colonna_distribuzione_perc = st.checkbox("distribuzione della variazione percentuale")
+                colonna_distribuzione_perc = col8.checkbox("distribuzione della variazione percentuale")
                 if colonna_distribuzione_perc == False:
                     newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
                     media = newdfvisual[colonna_distribuzione].mean()
