@@ -236,22 +236,22 @@ if uploaded_file is not None:
                    
                 else:
                     #creazione del df delle variazioni percentuali
-                    newdfvisual_num = pd.to_numeric(newdfvisual, errors='coerce')
-                    newdfvisual_perc = newdfvisual_num.copy().pct_change()
-                    media_perc = newdfvisual_perc[colonna_distribuzione].mean()
-                    dev_std_perc = newdfvisual_perc[colonna_distribuzione].std()    
+                    newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
+                    serie_perc = newdfvisual[colonna_distribuzione].pct_change()
+                    media_perc = serie_perc.mean()
+                    dev_std_perc = serie_perc.std()    
                      
                     # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
                     distribuzione_perc = go.Figure()
 
                     # traccia 1: distribuzione dei dati
                     distribuzione_perc.add_trace(go.Histogram(
-                        x=newdfvisual_perc[colonna_distribuzione],
+                        x=serie_perc,
                         histnorm='probability',
                         name="distribuzione variabile"))
 
                     # traccia 2: distribuzione normale
-                    x = np.linspace(newdfvisual[colonna_distribuzione].min(), newdfvisual_perc[colonna_distribuzione].max(), 100)
+                    x = np.linspace(serie_perc.min(), serie_perc.max(), 100)
                     pdf = stats.norm.pdf(x, media_perc, dev_std_perc)
                     distribuzione_perc.add_trace(go.Scatter(
                         x=x, 
