@@ -5,9 +5,11 @@
 
 import streamlit as st
 import pandas as pd
+import numpy as np
 from io import StringIO
 import plotly.graph_objects as go
 import scipy.stats as stats
+
 
 st.set_page_config(
     page_title="DataSketch",
