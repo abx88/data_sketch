@@ -187,10 +187,22 @@ if uploaded_file is not None:
                     name="variabile2",
                     connectgaps=False))
 
-                scatter.update_xaxes(
-                    title_text = "confronto variabili",
-                    title_font = {"size": 15},
-                    title_standoff = 10)
+                scatter.update_layout(
+                    xaxis_title_text=colonna_confrontoX,
+                    yaxis_title_text=colonna_confrontoY,
+                    title={
+                        'text': "confronto variabili",
+                        'y':0.9,
+                        'x':0.5,
+                        'xanchor': 'center',
+                        'yanchor': 'top'})
+                
+                
+                
+               # update_xaxes(
+                #    title_text = "confronto variabili",
+                 #   title_font = {"size": 15},
+                  #  title_standoff = 10)
                 st.plotly_chart(scatter,use_container_width=False )
             
             with col4:
