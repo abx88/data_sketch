@@ -148,10 +148,15 @@ if uploaded_file is not None:
                     name="variabile",
                     connectgaps=False))
 
-                variabile.update_xaxes(
-                    title_text = "variabile",
-                    title_font = {"size": 15},
-                    title_standoff = 10)
+                variabile.update_layout(
+                    xaxis_title_text="data",
+                    yaxis_title_text=colonna_da_visualizzare,
+                    title={
+                        'text': "andamento variabile",
+                        'y':0.9,
+                        'x':0.5,
+                        'xanchor': 'center',
+                        'yanchor': 'top'})
                 st.plotly_chart(variabile,use_container_width=False )
 
             with col4:
@@ -201,13 +206,6 @@ if uploaded_file is not None:
                         'x':0.5,
                         'xanchor': 'center',
                         'yanchor': 'top'})
-                
-                
-                
-               # update_xaxes(
-                #    title_text = "confronto variabili",
-                 #   title_font = {"size": 15},
-                  #  title_standoff = 10)
                 st.plotly_chart(scatter,use_container_width=False )
             
             with col4:
@@ -288,8 +286,6 @@ if uploaded_file is not None:
                             'x':0.5,
                             'xanchor': 'center',
                             'yanchor': 'top'})
-
-                    # visualizza la figura
                     st.plotly_chart(distribuzione_perc, use_container_width=False)
                    
                     
