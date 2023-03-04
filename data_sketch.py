@@ -166,8 +166,8 @@ if uploaded_file is not None:
                     connectgaps=False))
 
                 variabile2.update_layout(
-                    xaxis_title_text=colonna_da_visualizzare2,
-                    yaxis_title_text=newdfvisual.index,
+                    xaxis_title_text="data",
+                    yaxis_title_text=colonna_da_visualizzare2,
                     title={
                         'text': "andamento variabile",
                         'y':0.9,
