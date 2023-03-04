@@ -165,10 +165,15 @@ if uploaded_file is not None:
                     name="variabile2",
                     connectgaps=False))
 
-                variabile2.update_xaxes(
-                    title_text = "variabile",
-                    title_font = {"size": 15},
-                    title_standoff = 10)
+                variabile2.update_layout(
+                    xaxis_title_text=colonna_da_visualizzare2,
+                    yaxis_title_text=newdfvisual.index,
+                    title={
+                        'text': "andamento variabile",
+                        'y':0.9,
+                        'x':0.5,
+                        'xanchor': 'center',
+                        'yanchor': 'top'})
                 st.plotly_chart(variabile2,use_container_width=False )
             
         else:
@@ -184,7 +189,7 @@ if uploaded_file is not None:
                     y = newdfvisual[colonna_confrontoY],
                     x = newdfvisual[colonna_confrontoX],
                     #trendline="ols",
-                    name="variabile2",
+                    name="scatter",
                     connectgaps=False))
 
                 scatter.update_layout(
