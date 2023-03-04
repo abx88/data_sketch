@@ -235,7 +235,7 @@ if uploaded_file is not None:
                    
                 else:
                     #creazione del df delle variazioni percentuali
-                    newdfvisual_perc = newdfvisual.copy().pct_change().dropna()
+                    newdfvisual_perc = newdfvisual.copy().pct_change()
                     media_perc = newdfvisual_perc[colonna_distribuzione].mean()
                     dev_std_perc = newdfvisual_perc[colonna_distribuzione].std()    
                      
