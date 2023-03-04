@@ -198,6 +198,7 @@ if uploaded_file is not None:
                 # calcola la media e la deviazione standard della variabile di interesse
                 colonna_distribuzione_perc = st.checkbox("distribuzione della variazione percentuale")
                 if colonna_distribuzione_perc == False:
+                    newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
                     media = newdfvisual[colonna_distribuzione].mean()
                     dev_std = newdfvisual[colonna_distribuzione].std()    
                     # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
@@ -235,7 +236,8 @@ if uploaded_file is not None:
                    
                 else:
                     #creazione del df delle variazioni percentuali
-                    newdfvisual_perc = newdfvisual.copy().pct_change()
+                    newdfvisual_num = pd.to_numeric(newdfvisual, errors='coerce')
+                    newdfvisual_perc = newdfvisual_num.copy().pct_change()
                     media_perc = newdfvisual_perc[colonna_distribuzione].mean()
                     dev_std_perc = newdfvisual_perc[colonna_distribuzione].std()    
                      
