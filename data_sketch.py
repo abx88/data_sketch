@@ -232,12 +232,14 @@ if uploaded_file is not None:
                         x=x, 
                         y=pdf, 
                         mode='lines', 
-                        name='distribuzione normale'))
+                        name='distribuzione normale',
+                        yaxis='y2'))
 
                     # aggiungi i titoli degli assi e il titolo della figura
                     distribuzione.update_layout(
                         xaxis_title_text=colonna_distribuzione,
                         yaxis_title_text='densità di probabilità',
+                        yaxis2=dict(overlaying='y',side='right'),
                         title={
                             'text': "Distribuzione dei dati e distribuzione normale",
                             'y':0.9,
