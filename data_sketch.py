@@ -12,17 +12,19 @@ import scipy.stats as stats
 import requests
 
 #https://github.com/abx88/data_sketch
+#https://github.com/abx88/data_sketch/blob/main/gbpusd.csv
+#https://github.com/abx88/data_sketch/blob/main/data_sketch.py
 
 url = "https://raw.githubusercontent.com/{username}/{repository}/{branch}/{path}/{filename}"
 username = "abx88"
 repository = "data_sketch"
-branch = "main"  # o il nome del ramo contenente il file
-path = "https://github.com/abx88/data_sketch"
-filename = "file_prova.csv"
+branch = "blob"  # o il nome del ramo contenente il file
+path = "main"
+filename = "gbpusd.csv"
 url = url.format(username=username, repository=repository, branch=branch, path=path, filename=filename)
 
 response = requests.get(url)
-df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
+#df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
 
 
 
