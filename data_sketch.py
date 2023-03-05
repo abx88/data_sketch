@@ -278,7 +278,7 @@ if uploaded_file is not None:
                     distribuzione_perc.update_layout(
                         xaxis_title_text=colonna_distribuzione,
                         yaxis_title_text='densità di probabilità',
-                        yaxis2=dict(overlaying='y',side='right'),
+                        yaxis2=dict(overlaying='x',side='right'),
                         title={
                             'text': "Distribuzione dei dati e distribuzione normale",
                             'y':0.9,
