@@ -191,7 +191,8 @@ if uploaded_file is not None:
 
                 # valuto la retta sui valori di x_fit
                 y_fit = np.polyval(coeffs, x_fit)
-                
+                #estraggo la stringa con l'espressione della retta
+                eq = f"y = {m:.2f}x + {q:.2f}"
 
                 scatter = go.Figure()
 
@@ -218,6 +219,8 @@ if uploaded_file is not None:
                         'x':0.5,
                         'xanchor': 'center',
                         'yanchor': 'top'})
+                
+                scatter.add_annotation(x=0.05, y=0.95, xref="paper", yref="paper", text=eq, showarrow=False, font=dict(size=16))
                 st.plotly_chart(scatter,use_container_width=False )
             
             with col4:
