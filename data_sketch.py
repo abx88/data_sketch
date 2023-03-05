@@ -42,6 +42,7 @@ st.header("Data Sketch")
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
 
 # Aggiungi l'elemento radio per selezionare il delimitatore
+delimiter_options = [',', '\t', '|', ';', ':']
 delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
@@ -51,7 +52,7 @@ if uploaded_file is not None:
 else:    
     df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
 # Definisci la lista di delimitatori supportati da Pandas
-delimiter_options = [',', '\t', '|', ';', ':']
+
 
 
 
