@@ -182,6 +182,16 @@ if uploaded_file is not None:
                 col5,col6 = st.columns([2, 2])
                 colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
+                
+                # calcolo i coefficienti della retta di regressione
+                coeffs = np.polyfit(colonna_confrontoX, colonna_confrontoY, 1)
+
+                # creo un array di valori x su cui valutare la retta
+                x_fit = np.linspace(min(colonna_confrontoX), max(colonna_confrontoX), 100)
+
+                # valuto la retta sui valori di x_fit
+                y_fit = np.polyval(coeffs, x_fit)
+                
 
                 scatter = go.Figure()
 
@@ -189,9 +199,15 @@ if uploaded_file is not None:
                     mode = "markers",
                     y = newdfvisual[colonna_confrontoY],
                     x = newdfvisual[colonna_confrontoX],
-                    trendline="ols",
                     name="scatter",
                     connectgaps=False))
+                
+                scatter.add_trace(go.Scatter(
+                    mode = "lines",
+                    y = y_fit,
+                    x = x_fit,
+                    name="retta di regressione",
+                    connectgaps=True))
 
                 scatter.update_layout(
                     xaxis_title_text=colonna_confrontoX,
