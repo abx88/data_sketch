@@ -273,7 +273,7 @@ if uploaded_file is not None:
                         y=pdf, 
                         mode='lines', 
                         name='distribuzione normale',
-                        yaxis='y2))
+                        yaxis='y2'))
 
                     # aggiungi i titoli degli assi e il titolo della figura
                     distribuzione_perc.update_layout(
