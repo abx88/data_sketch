@@ -21,16 +21,6 @@ repository = "data_sketch"
 branch = "blob"  # o il nome del ramo contenente il file
 path = "main"
 filename = "gbpusd.csv"
-url = url.format(username=username, repository=repository, branch=branch, path=path, filename=filename)
-
-response = requests.get(url)
-#df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
-
-
-
-
-
-
 
 st.set_page_config(
     page_title="DataSketch",
@@ -50,6 +40,8 @@ if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:    
+    url = url.format(username=username, repository=repository, branch=branch, path=path, filename=filename)
+    response = requests.get(url)
     df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
 # Definisci la lista di delimitatori supportati da Pandas
 
