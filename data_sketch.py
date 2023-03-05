@@ -16,11 +16,10 @@ import io
 #https://github.com/abx88/data_sketch/blob/main/gbpusd.csv
 #https://github.com/abx88/data_sketch/blob/main/data_sketch.py
 
-url = "https://raw.githubusercontent.com/{username}/{repository}/{branch}/{path}/{filename}"
+url = "https://raw.githubusercontent.com/{username}/{repository}/{branch}/{filename}"
 username = "abx88"
 repository = "data_sketch"
 branch = "main"  # o il nome del ramo contenente il file
-path = ""
 filename = "gbpusd.csv"
 
 st.set_page_config(
