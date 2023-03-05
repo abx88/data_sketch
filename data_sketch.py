@@ -25,9 +25,7 @@ uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:
-    df = pd.DataFrame(
-    np.random.randn(10, 5),
-    columns=('col %d' % i for i in range(20)))
+    df = pd.DataFrame(np.random.randn(10, 5))
 
 
 st.sidebar.header("Tool Modifica")
