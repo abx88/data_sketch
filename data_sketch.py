@@ -19,8 +19,8 @@ import io
 url = "https://raw.githubusercontent.com/{username}/{repository}/{branch}/{path}/{filename}"
 username = "abx88"
 repository = "data_sketch"
-branch = "blob"  # o il nome del ramo contenente il file
-path = "main"
+branch = "main"  # o il nome del ramo contenente il file
+path = ""
 filename = "gbpusd.csv"
 
 st.set_page_config(
