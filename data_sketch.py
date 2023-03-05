@@ -25,7 +25,8 @@ uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:
-    df = pd.DataFrame()
+    arrayiniziale = np.array([1, 2, 3, 4])
+    df = pd.DataFrame(arrayiniziale)
 
 st.sidebar.header("Tool Modifica")
 #scegli come visualizzare i dati se ts o no
