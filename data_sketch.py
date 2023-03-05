@@ -27,7 +27,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:
     df = pd.DataFrame(np.random.randn(10, 5))
-    dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
+    df = st.experimental_data_editor(df, num_rows="dynamic")
 
 
 st.sidebar.header("Tool Modifica")
