@@ -29,7 +29,7 @@ else:
 
 st.sidebar.header("Tool Modifica")
 #scegli come visualizzare i dati se ts o no
-tipo_dati = st.sidebar.radio("selezionare tipologia dataset visualizzato",('modificabile', 'non modificabile'))
+                #tipo_dati = st.sidebar.radio("selezionare tipologia dataset visualizzato",('modificabile', 'non modificabile'))
 # Definisci la lista di delimitatori supportati da Pandas
 delimiter_options = [',', '\t', '|', ';', ':']
 
@@ -39,7 +39,7 @@ delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
 
 col1, col2 = st.columns([2, 2])
 col1.subheader("dataset originale")
-#df = pd.read_csv(uploaded_file, delimiter = delimitatore)
+                #df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
 #col1.write(df)
 
