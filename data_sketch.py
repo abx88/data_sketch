@@ -24,8 +24,6 @@ pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazio
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
-    #scegli come visualizzare i dati se ts o no
-    tipo_dati = st.sidebar.radio("selezionare tipologia dataset visualizzato",('modificabile', 'non modificabile'))
     # Definisci la lista di delimitatori supportati da Pandas
     delimiter_options = [',', '\t', '|', ';', ':']
 
@@ -191,7 +189,7 @@ if uploaded_file is not None:
                     mode = "markers",
                     y = newdfvisual[colonna_confrontoY],
                     x = newdfvisual[colonna_confrontoX],
-                    #trendline="ols",
+                    trendline="ols",
                     name="scatter",
                     connectgaps=False))
 
@@ -291,10 +289,7 @@ if uploaded_file is not None:
                     st.plotly_chart(distribuzione_perc, use_container_width=False)
                    
                     
-
-
-            
-
+          
     
 else:
     st.text("inserire file csv")
