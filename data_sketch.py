@@ -184,10 +184,10 @@ if uploaded_file is not None:
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
                 
                 # calcolo i coefficienti della retta di regressione
-                coeffs = np.polyfit(colonna_confrontoX, colonna_confrontoY, 1)
+                coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
 
                 # creo un array di valori x su cui valutare la retta
-                x_fit = np.linspace(min(colonna_confrontoX), max(colonna_confrontoX), 100)
+                x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
 
                 # valuto la retta sui valori di x_fit
                 y_fit = np.polyval(coeffs, x_fit)
