@@ -193,7 +193,7 @@ if uploaded_file is not None:
                 y_fit = np.polyval(coeffs, x_fit)
                 #estraggo la stringa con l'espressione della retta
                 m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-                eq = f"newdfvisual[colonna_confrontoY] = {m:.2f}newdfvisual[colonna_confrontoX] + {q:.2f}"
+                eq = f"y = {m:.2f}x + {q:.2f}"
                 
 
                 scatter = go.Figure()
@@ -222,7 +222,7 @@ if uploaded_file is not None:
                         'xanchor': 'center',
                         'yanchor': 'top'})
                 
-                scatter.add_annotation(x=0.05, y=0.95, xref="paper", yref="paper", text=eq, showarrow=False, font=dict(size=16))
+                
                 st.plotly_chart(scatter,use_container_width=False )
                 st.text(eq)
             
