@@ -5,3 +5,4 @@ plotly
 seaborn
 ffn
 scipy
+requests
