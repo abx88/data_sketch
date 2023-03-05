@@ -192,7 +192,7 @@ if uploaded_file is not None:
                 # valuto la retta sui valori di x_fit
                 y_fit = np.polyval(coeffs, x_fit)
                 #estraggo la stringa con l'espressione della retta
-                eq = f"newdfvisual[colonna_confrontoY] = {m:.2f}newdfvisual[colonna_confrontoX] + {q:.2f}"
+                eq = f"newdfvisual[colonna_confrontoY] = {coeffs:.2f}newdfvisual[colonna_confrontoX] + {coeffs:.2f}"
 
                 scatter = go.Figure()
 
