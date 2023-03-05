@@ -224,7 +224,7 @@ if uploaded_file is not None:
                 
                 scatter.add_annotation(x=0.05, y=0.95, xref="paper", yref="paper", text=eq, showarrow=False, font=dict(size=16))
                 st.plotly_chart(scatter,use_container_width=False )
-                st.write(eq)
+                st.text(eq)
             
             with col4:
                 col7,col8 = st.columns([2, 2])
