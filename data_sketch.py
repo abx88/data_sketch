@@ -10,6 +10,7 @@ from io import StringIO
 import plotly.graph_objects as go
 import scipy.stats as stats
 import requests
+import io
 
 #https://github.com/abx88/data_sketch
 #https://github.com/abx88/data_sketch/blob/main/gbpusd.csv
