@@ -25,7 +25,7 @@ uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:
-    arrayiniziale = ['1,1,1,1']
+    arrayiniziale = ['1'\t'1,1,1']
     df = pd.DataFrame(arrayiniziale)
 
 st.sidebar.header("Tool Modifica")
