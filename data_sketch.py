@@ -40,7 +40,7 @@ if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:    
-    url = url.format(username=username, repository=repository, branch=branch, path=path, filename=filename)
+    url = url.format(username=username, repository=repository, branch=branch, filename=filename)
     response = requests.get(url)
     df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
 # Definisci la lista di delimitatori supportati da Pandas
