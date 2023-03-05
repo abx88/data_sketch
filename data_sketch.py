@@ -27,7 +27,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
 else:
     df = pd.DataFrame(np.random.randn(10, 5))
-    df = st.experimental_data_editor(df, num_rows="dynamic")
+    #df = st.experimental_data_editor(df, num_rows="dynamic")
 
 
 st.sidebar.header("Tool Modifica")
@@ -43,7 +43,7 @@ delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
 
 col1.subheader("dataset originale")
                 #df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-                #dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
+dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
 #col1.write(df)
 
 col2.subheader("dataset modificato")
