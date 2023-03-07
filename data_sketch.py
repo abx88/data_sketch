@@ -184,52 +184,74 @@ if uploaded_file is not None:
             
         else:
             with col3:
-                col5,col6 = st.columns([2, 2])
+                col5,col6,col9= st.columns([3, 3])
                 colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
-                newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
-                # calcolo i coefficienti della retta di regressione
-                coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
+                somma_valori = col9.checkbox("raggruppa valori Y per x")
+                #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
+                if somma_valori == False:
+                    # calcolo i coefficienti della retta di regressione
+                    coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
 
-                # creo un array di valori x su cui valutare la retta
-                x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
+                    # creo un array di valori x su cui valutare la retta
+                    x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
 
-                # valuto la retta sui valori di x_fit
-                y_fit = np.polyval(coeffs, x_fit)
-                #estraggo la stringa con l'espressione della retta
-                m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-                eq = f"y = {m:.2f}x + {q:.2f}"
-                
+                    # valuto la retta sui valori di x_fit
+                    y_fit = np.polyval(coeffs, x_fit)
+                    #estraggo la stringa con l'espressione della retta
+                    m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
+                    eq = f"y = {m:.2f}x + {q:.2f}"
 
-                scatter = go.Figure()
 
-                scatter.add_trace(go.Scatter(
-                    mode = "markers",
-                    y = newdfvisual[colonna_confrontoY].sum(),
-                    x = newdfvisual[colonna_confrontoX],
-                    name="scatter",
-                    connectgaps=False))
-                
-                scatter.add_trace(go.Scatter(
-                    mode = "lines",
-                    y = y_fit,
-                    x = x_fit,
-                    name="retta di regressione",
-                    connectgaps=True))
+                    scatter = go.Figure()
 
-                scatter.update_layout(
-                    xaxis_title_text=colonna_confrontoX,
-                    yaxis_title_text=colonna_confrontoY,
-                    title={
-                        'text': "confronto variabili",
-                        'y':0.9,
-                        'x':0.5,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
-                
-                
-                st.plotly_chart(scatter,use_container_width=False )
-                st.text(eq)
+                    scatter.add_trace(go.Scatter(
+                        mode = "markers",
+                        y = newdfvisual[colonna_confrontoY],
+                        x = newdfvisual[colonna_confrontoX],
+                        name="scatter",
+                        connectgaps=False))
+
+                    scatter.add_trace(go.Scatter(
+                        mode = "lines",
+                        y = y_fit,
+                        x = x_fit,
+                        name="retta di regressione",
+                        connectgaps=True))
+
+                    scatter.update_layout(
+                        xaxis_title_text=colonna_confrontoX,
+                        yaxis_title_text=colonna_confrontoY,
+                        title={
+                            'text': "confronto variabili",
+                            'y':0.9,
+                            'x':0.5,
+                            'xanchor': 'center',
+                            'yanchor': 'top'})
+
+
+                    st.plotly_chart(scatter,use_container_width=False )
+                    st.text(eq)
+                else:
+                    pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoX, index=colonna_confrontoY, aggfunc=np.sum)
+                    graficoBarre = go.Figure()
+
+                    graficoBarre.add_trace(go.bar(
+                        y = newdfvisual[colonna_confrontoY],
+                        x = newdfvisual[colonna_confrontoX],
+                        name="grafico a barre",
+                        connectgaps=False))
+
+                    graficoBarre.update_layout(
+                        xaxis_title_text=colonna_confrontoX,
+                        yaxis_title_text=colonna_confrontoY,
+                        title={
+                            'text': "confronto variabili",
+                            'y':0.9,
+                            'x':0.5,
+                            'xanchor': 'center',
+                            'yanchor': 'top'})
+                    st.plotly_chart(graficoBarre,use_container_width=False )
             
             with col4:
                 col7,col8 = st.columns([2, 2])
