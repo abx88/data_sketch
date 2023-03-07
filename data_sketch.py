@@ -91,7 +91,12 @@ if uploaded_file is not None:
         indice_datetime = st.sidebar.checkbox("indice date_time")
         if indice_datetime ==True:
             newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-    
+            scomponi_data = st.sidebar.checkbox("estrai giorno, mese, anno") 
+            if scomponi_data ==True:
+                newdf['giorno_W'] = df.index.dayofweek()
+                newdf['mese'] = df.index.month()
+                newdf['anno'] = df.index.year()
+                
     righe_da_eliminare = st.sidebar.checkbox("righe da eliminare")
 
     if righe_da_eliminare:
