@@ -247,7 +247,7 @@ if uploaded_file is not None:
                         xaxis_title_text=colonna_confrontoX,
                         yaxis_title_text=colonna_confrontoY,
                         title={
-                            'text': "confronto variabili",
+                            'text': "raggruppamento Y per X",
                             'y':0.9,
                             'x':0.5,
                             'xanchor': 'center',
