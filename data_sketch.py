@@ -184,7 +184,7 @@ if uploaded_file is not None:
             
         else:
             with col3:
-                col5,col6,col9= st.columns([3, 3])
+                col5,col6,col9= st.columns(3)
                 colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
                 somma_valori = col9.checkbox("raggruppa valori Y per x")
