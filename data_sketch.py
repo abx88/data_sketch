@@ -236,7 +236,7 @@ if uploaded_file is not None:
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoX, index=colonna_confrontoY, aggfunc=np.sum)
                     graficoBarre = go.Figure()
 
-                    graficoBarre.add_trace(go.bar(
+                    graficoBarre.add_trace(go.Bar(
                         y = newdfvisual[colonna_confrontoY],
                         x = newdfvisual[colonna_confrontoX],
                         name="grafico a barre",
