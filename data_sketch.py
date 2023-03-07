@@ -234,6 +234,7 @@ if uploaded_file is not None:
                     st.text(eq)
                 else:
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
+                    st.write(pivotVariabile)
                     graficoBarre = go.Figure()
 
                     graficoBarre.add_trace(go.Bar(
