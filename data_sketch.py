@@ -189,22 +189,22 @@ if uploaded_file is not None:
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
                 somma_valori = col9.checkbox("raggruppa valori Y per x")
                 #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
+                
+                # calcolo i coefficienti della retta di regressione
+                coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
+
+                # creo un array di valori x su cui valutare la retta
+                x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
+
+                # valuto la retta sui valori di x_fit
+                y_fit = np.polyval(coeffs, x_fit)
+                #estraggo la stringa con l'espressione della retta
+                m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
+                eq = f"y = {m:.2f}x + {q:.2f}"
+                
                 if somma_valori == False:
-                    # calcolo i coefficienti della retta di regressione
-                    coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-
-                    # creo un array di valori x su cui valutare la retta
-                    x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
-
-                    # valuto la retta sui valori di x_fit
-                    y_fit = np.polyval(coeffs, x_fit)
-                    #estraggo la stringa con l'espressione della retta
-                    m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-                    eq = f"y = {m:.2f}x + {q:.2f}"
-
-
                     scatter = go.Figure()
-
+                    
                     scatter.add_trace(go.Scatter(
                         mode = "markers",
                         y = newdfvisual[colonna_confrontoY],
