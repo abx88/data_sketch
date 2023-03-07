@@ -187,7 +187,7 @@ if uploaded_file is not None:
                 col5,col6 = st.columns([2, 2])
                 colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
-                newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
+                newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
                 # calcolo i coefficienti della retta di regressione
                 coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
 
