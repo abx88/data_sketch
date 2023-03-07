@@ -233,7 +233,7 @@ if uploaded_file is not None:
                     st.plotly_chart(scatter,use_container_width=False )
                     st.text(eq)
                 else:
-                    pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoX, index=colonna_confrontoY, aggfunc=np.sum)
+                    pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
                     graficoBarre = go.Figure()
 
                     graficoBarre.add_trace(go.Bar(
