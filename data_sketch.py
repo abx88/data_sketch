@@ -237,8 +237,8 @@ if uploaded_file is not None:
                     graficoBarre = go.Figure()
 
                     graficoBarre.add_trace(go.Bar(
-                        y = newdfvisual[colonna_confrontoY],
-                        x = newdfvisual[colonna_confrontoX],
+                        y = pivotVariabile.colonna_confrontoY,
+                        x = pivotVariabile.index,
                         name="grafico a barre",
                         connectgaps=False))
 
