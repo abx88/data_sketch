@@ -187,7 +187,7 @@ if uploaded_file is not None:
                 col5,col6 = st.columns([2, 2])
                 colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
-                
+                newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
                 # calcolo i coefficienti della retta di regressione
                 coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
 
@@ -205,7 +205,7 @@ if uploaded_file is not None:
 
                 scatter.add_trace(go.Scatter(
                     mode = "markers",
-                    y = newdfvisual[colonna_confrontoY],
+                    y = newdfvisual[colonna_confrontoY].sum(),
                     x = newdfvisual[colonna_confrontoX],
                     name="scatter",
                     connectgaps=False))
@@ -218,7 +218,7 @@ if uploaded_file is not None:
                     connectgaps=True))
 
                 scatter.update_layout(
-                    xaxis_title_text=colonna_confrontoX.sum(),
+                    xaxis_title_text=colonna_confrontoX,
                     yaxis_title_text=colonna_confrontoY,
                     title={
                         'text': "confronto variabili",
