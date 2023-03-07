@@ -240,7 +240,7 @@ if uploaded_file is not None:
 
                     graficoBarre.add_trace(go.Bar(
                         y = pivotVariabile[colonna_confrontoY],
-                        x = pivotVariabile[colonna_confrontoX],
+                        x = pivotVariabile.index,
                         name="grafico a barre"))
 
                     graficoBarre.update_layout(
