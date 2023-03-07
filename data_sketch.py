@@ -218,7 +218,7 @@ if uploaded_file is not None:
                     connectgaps=True))
 
                 scatter.update_layout(
-                    xaxis_title_text=colonna_confrontoX,
+                    xaxis_title_text=colonna_confrontoX.sum(),
                     yaxis_title_text=colonna_confrontoY,
                     title={
                         'text': "confronto variabili",
