@@ -237,6 +237,15 @@ if uploaded_file is not None:
                             'xanchor': 'center',
                             'yanchor': 'top'})
                     st.plotly_chart(graficoBarre,use_container_width=False )
+                    filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
+                    if filtroAggiuntivo ==True:
+                        colonna_filtro = col5.selectbox("Seleziona colonna filtro", newdfvisual.columns.tolist())
+                        valori = newdfvisual[colonna_filtro].unique().tolist()
+                        valori_filt = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
+                        newdfvisual = newdf.loc[newdfvisual[colonna_filtro].isin(valori_filt)]
+
+            # elimina le righe che contengono i valori selezionati
+            newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
                     st.write(pivotVariabile)
             
             with col4:
