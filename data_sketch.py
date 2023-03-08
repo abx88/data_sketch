@@ -244,8 +244,7 @@ if uploaded_file is not None:
                         valori_filt = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
                         newdfvisual = newdf.loc[newdfvisual[colonna_filtro].isin(valori_filt)]
 
-            # elimina le righe che contengono i valori selezionati
-            newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
+    
                     st.write(pivotVariabile)
             
             with col4:
