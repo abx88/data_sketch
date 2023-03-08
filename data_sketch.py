@@ -191,18 +191,7 @@ if uploaded_file is not None:
                 #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
                 #newdfvisual[colonna_confrontoX] = pd.to_numeric(newdfvisual[colonna_confrontoX], errors='coerce')
                 st.write(newdfvisual)
-                # calcolo i coefficienti della retta di regressione
-                #coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-
-                # creo un array di valori x su cui valutare la retta
-                x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
-
-                # valuto la retta sui valori di x_fit
-                y_fit = np.polyval(coeffs, x_fit)
-                #estraggo la stringa con l'espressione della retta
-                m, q = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
-                eq = f"y = {m:.2f}x + {q:.2f}"
-                
+               
                 if somma_valori == False:
                     scatter = go.Figure()
                     
@@ -213,13 +202,7 @@ if uploaded_file is not None:
                         name="scatter",
                         connectgaps=False))
 
-                    scatter.add_trace(go.Scatter(
-                        mode = "lines",
-                        y = y_fit,
-                        x = x_fit,
-                        name="retta di regressione",
-                        connectgaps=True))
-
+                   
                     scatter.update_layout(
                         xaxis_title_text=colonna_confrontoX,
                         yaxis_title_text=colonna_confrontoY,
