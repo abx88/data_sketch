@@ -223,10 +223,10 @@ if uploaded_file is not None:
                     filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
                     
                     if filtroAggiuntivo ==True:
-                        #colonna_filtro = col5.selectbox("Seleziona colonna filtro", .columns.tolist())
-                        valori = pivotVariabile[colonna_confrontoX].unique().tolist()
+                        #colonna_filtro = newdfvisual[colonna_confrontoX]
+                        valori = newdfvisual[colonna_confrontoX].unique().tolist()
                         valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
-                        pivotVariabile = pivotVariabile.loc[pivotVariabile[colonna_confrontoX].isin(valori_filt)]
+                        pivotVariabile = pivotVariabile.loc[valori_filt]
                     else:
                         pivotVariabile = pivotVariabile
                     
