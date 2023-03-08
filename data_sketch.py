@@ -242,7 +242,7 @@ if uploaded_file is not None:
                         colonna_filtro = col5.selectbox("Seleziona colonna filtro", pivotVariabile.columns.tolist())
                         valori = pivotVariabile[colonna_filtro].unique().tolist()
                         valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
-                        variabilePivot = pivotVariabile.loc[pivotVariabile[colonna_filtro].isin(valori_filt)]
+                        pivotVariabile = pivotVariabile.loc[pivotVariabile[colonna_filtro].isin(valori_filt)]
 
     
                     st.write(pivotVariabile)
