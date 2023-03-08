@@ -215,7 +215,7 @@ if uploaded_file is not None:
 
 
                     st.plotly_chart(scatter,use_container_width=False )
-                    st.text(eq)
+                    
                 else:
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
