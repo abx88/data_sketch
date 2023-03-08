@@ -192,7 +192,7 @@ if uploaded_file is not None:
                 #newdfvisual[colonna_confrontoX] = pd.to_numeric(newdfvisual[colonna_confrontoX], errors='coerce')
                 st.write(newdfvisual)
                 # calcolo i coefficienti della retta di regressione
-                coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
+                #coeffs = np.polyfit(newdfvisual[colonna_confrontoX], newdfvisual[colonna_confrontoY], 1)
 
                 # creo un array di valori x su cui valutare la retta
                 x_fit = np.linspace(min(newdfvisual[colonna_confrontoY]), max(newdfvisual[colonna_confrontoX]), 100)
