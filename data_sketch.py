@@ -190,7 +190,7 @@ if uploaded_file is not None:
                 somma_valori = col9.checkbox("raggruppa valori Y per x")
                 #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
                 #newdfvisual[colonna_confrontoX] = pd.to_numeric(newdfvisual[colonna_confrontoX], errors='coerce')
-                st.write(newdfvisual)
+                #st.write(newdfvisual)
                
                 if somma_valori == False:
                     scatter = go.Figure()
