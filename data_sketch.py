@@ -219,7 +219,7 @@ if uploaded_file is not None:
                 else:
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
-               
+                   
                     graficoBarre = go.Figure()
 
                     graficoBarre.add_trace(go.Bar(
@@ -237,6 +237,7 @@ if uploaded_file is not None:
                             'xanchor': 'center',
                             'yanchor': 'top'})
                     st.plotly_chart(graficoBarre,use_container_width=False )
+                    st.write(pivotVariabile)
             
             with col4:
                 col7,col8 = st.columns([2, 2])
