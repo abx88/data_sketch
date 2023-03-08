@@ -239,10 +239,10 @@ if uploaded_file is not None:
                     st.plotly_chart(graficoBarre,use_container_width=False )
                     filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
                     if filtroAggiuntivo ==True:
-                        colonna_filtro = col5.selectbox("Seleziona colonna filtro", newdfvisual.columns.tolist())
-                        valori = newdfvisual[colonna_filtro].unique().tolist()
+                        colonna_filtro = col5.selectbox("Seleziona colonna filtro", variabilePivot.columns.tolist())
+                        valori = variabilePivot[colonna_filtro].unique().tolist()
                         valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
-                        pivotVariabile = pivotVariabile.loc[newdfvisual[colonna_filtro].isin(valori_filt)]
+                        variabilePivot = variabilePivot.loc[variabilePivot[colonna_filtro].isin(valori_filt)]
 
     
                     st.write(pivotVariabile)
