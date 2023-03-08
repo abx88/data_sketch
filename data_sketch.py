@@ -241,8 +241,8 @@ if uploaded_file is not None:
                     if filtroAggiuntivo ==True:
                         colonna_filtro = col5.selectbox("Seleziona colonna filtro", newdfvisual.columns.tolist())
                         valori = newdfvisual[colonna_filtro].unique().tolist()
-                        valori_filt = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
-                        newdfvisual = newdf.loc[newdfvisual[colonna_filtro].isin(valori_filt)]
+                        valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
+                        newdfvisual = newdf.loc[newdfvisual[colonna_filtro].(valori_filt)]
 
     
                     st.write(pivotVariabile)
