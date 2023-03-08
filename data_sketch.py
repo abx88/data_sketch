@@ -220,7 +220,8 @@ if uploaded_file is not None:
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
                     
-                    filtro_aggiuntivo = False
+                    filtroAggiuntivo = False
+                    
                     if filtroAggiuntivo ==True:
                         colonna_filtro = col5.selectbox("Seleziona colonna filtro", pivotVariabile.columns.tolist())
                         valori = pivotVariabile[colonna_filtro].unique().tolist()
