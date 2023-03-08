@@ -220,7 +220,7 @@ if uploaded_file is not None:
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
                     pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
                     
-                    filtroAggiuntivo = False
+                    filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
                     
                     if filtroAggiuntivo ==True:
                         colonna_filtro = col5.selectbox("Seleziona colonna filtro", pivotVariabile.columns.tolist())
@@ -247,7 +247,7 @@ if uploaded_file is not None:
                             'xanchor': 'center',
                             'yanchor': 'top'})
                     st.plotly_chart(graficoBarre,use_container_width=False )
-                    filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
+                    
                     
 
     
