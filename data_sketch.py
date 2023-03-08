@@ -242,7 +242,7 @@ if uploaded_file is not None:
                         colonna_filtro = col5.selectbox("Seleziona colonna filtro", newdfvisual.columns.tolist())
                         valori = newdfvisual[colonna_filtro].unique().tolist()
                         valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
-                        newdfvisual = newdf.loc[newdfvisual[colonna_filtro].(valori_filt)]
+                        newdfvisual = newdf.loc[newdfvisual[colonna_filtro].isin(valori_filt)]
 
     
                     st.write(pivotVariabile)
