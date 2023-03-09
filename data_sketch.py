@@ -18,9 +18,10 @@ st.set_page_config(
 #dfprova = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
 a = (1,2,4,6,7)
 b = ("f","f","f","h","h")
+c = (3,4,4,6,8)
 dates = pd.date_range("20230101", periods=5)
 
-dfprova = pd.DataFrame((a,b), index = dates, columns = list("AB"))
+dfprova = pd.DataFrame((a,b), index = dates, columns = list("ABCDE"))
 
 st.header("Data Sketch")
 
