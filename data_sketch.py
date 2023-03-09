@@ -19,7 +19,7 @@ st.set_page_config(
 a = (1,2,4,6,7)
 b = ("f","f","f","h","h")
 c = (3,4,4,6,8)
-dates = pd.date_range("20230101", periods=5)
+dates = pd.date_range("20230101", periods=3)
 
 dfprova = pd.DataFrame((a,b,c), index = dates)
 
