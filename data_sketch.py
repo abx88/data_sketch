@@ -130,7 +130,7 @@ if uploaded_file is not None:
             newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
     
     
-    expander_csv.col2..write(newdf)       
+    expander_csv.col2.write(newdf)       
     newdfvisual=newdf
 
     
