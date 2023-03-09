@@ -225,7 +225,7 @@ if uploaded_file is not None:
                                                     index=colonna_confrontoX, 
                                                     aggfunc=np.sum)
                     
-                    filtroAggiuntivo = st.checkbox("scegli valori")
+                    filtroAggiuntivo = st.checkbox("Aggiungi filtro indice")
                     if filtroAggiuntivo ==True:
                         #colonna_filtro = newdfvisual[colonna_confrontoX]
                         valori = newdfvisual[colonna_confrontoX].unique().tolist()
