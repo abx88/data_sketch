@@ -361,6 +361,53 @@ else:
                         'xanchor': 'center',
                         'yanchor': 'top'})
                 st.plotly_chart(distribuzione_perc, use_container_width=False)
+                
+                #creazione grafico distribuzione raggruppata
+                #creazione del df delle variazioni percentuali
+                colonna_raggruppamento = col7.selectbox("Seleziona colonna per per la quale raggruppare Y", newdfvisual.columns.tolist())
+                newdfvisual[colonna_raggruppamento] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
+                
+                pivotDistribuzione = pd.pivot_table(newdfvisual, 
+                                                values=colonna_distribuzione, 
+                                                index=colonna_raggruppamento, 
+                                                aggfunc=np.sum)
+                
+                
+                serie_percD = pivotDistribuzione[colonna_distribuzione].pct_change()
+                media_percD = serie_perc.mean()
+                dev_std_percD = serie_perc.std()    
+
+                # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
+                distribuzione_percD = go.Figure()
+
+                # traccia 1: distribuzione dei dati
+                distribuzione_percD.add_trace(go.Histogram(
+                    x=serie_percD,
+                    histnorm='probability',
+                    name="distribuzione variabile"))
+
+                # traccia 2: distribuzione normale
+                x = np.linspace(serie_percD.min(), serie_percD.max(), 100)
+                pdf = stats.norm.pdf(x, media_percD, dev_std_percD)
+                distribuzione_percD.add_trace(go.Scatter(
+                    x=x, 
+                    y=pdf, 
+                    mode='lines', 
+                    name='distribuzione normale',
+                    yaxis='y2'))
+
+                # aggiungi i titoli degli assi e il titolo della figura
+                distribuzione_percD.update_layout(
+                    xaxis_title_text=colonna_distribuzione,
+                    yaxis_title_text='densità di probabilità',
+                    yaxis2=dict(overlaying='y',side='right'),
+                    title={
+                        'text': "Distribuzione dei dati e distribuzione normale",
+                        'y':0.9,
+                        'x':0.5,
+                        'xanchor': 'center',
+                        'yanchor': 'top'})
+                st.plotly_chart(distribuzione_percD, use_container_width=False)
 
                     
           
