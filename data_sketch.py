@@ -22,10 +22,12 @@ pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazio
 col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
-expander_csv = st.expander("dati")
+expander_csvOriginale = col1.expander("dati csv originali")
+expander_csvModifica = col2.expander("dati csv modificati")
 expander_modificheCol.write("modifiche effettuate su colonne")    
 expander_modificheRighe.write("modifiche effettuate su righe")
-expander_csv.write("dati")
+expander_csvOriginale.write("file csv originale")
+expander_csvModifica.write("file csv modificato")
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
     st.sidebar.header("Tool Modifica")
@@ -36,10 +38,10 @@ if uploaded_file is not None:
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
     # Aggiungi nomi colonne dataset
-    col1.subheader("dataset originale")
+    expander_csvOriginale.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
-    col2.subheader("dataset modificato")
+    dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
+    expander_csvModifica.subheader("dataset modificato")
     newdf= dfedit
    
     
@@ -130,7 +132,7 @@ if uploaded_file is not None:
             newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
     
     
-    col2.write(newdf)       
+    expander_csvModifica.write(newdf)       
     newdfvisual=newdf
 
     
