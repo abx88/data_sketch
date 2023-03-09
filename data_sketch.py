@@ -262,7 +262,7 @@ if uploaded_file is not None:
                 #dal df scelgo una variabile per confrontare la sua distribuzione 
                 colonna_distribuzione = col7.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
                 # calcola la media e la deviazione standard della variabile di interesse
-                colonna_distribuzione_perc = col8.checkbox("distribuzione della variazione percentuale")
+                colonna_distribuzione_perc = col7.checkbox("distribuzione della variazione percentuale")
                 if colonna_distribuzione_perc == False:
                     newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
                     media = newdfvisual[colonna_distribuzione].mean()
