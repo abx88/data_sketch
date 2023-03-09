@@ -42,22 +42,20 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
 else:
-    df = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
+    df = pd.DataFrame(
+    {
+        "A": 1.0,
+        "B": pd.Timestamp("20130102"),
+        "C": pd.Series(1, index=list(range(4)), dtype="float32"),
+        "D": np.array([3] * 4, dtype="int32"),
+        "E": pd.Categorical(["test", "train", "test", "train"]),
+        "F": "foo",
+    }
+    )
+    
+    #df = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
     dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
-'''
-if uploaded_file is not None:
-    st.sidebar.header("Tool Modifica")
-    # Definisci la lista di delimitatori supportati da Pandas
-    delimiter_options = [',', '\t', '|', ';', ':']
-    # Aggiungi l'elemento checkbox per selezionare il delimitatore
-    delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
-    # Aggiungi nomi colonne dataset
-    expander_csvOriginale.subheader("dataset originale")
-    df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
-    expander_csvModifica.subheader("dataset modificato")
-    newdf= dfedit
-'''   
+
 newdf= dfedit
 
 #verifica se è necessario inserire delle intestazioni
