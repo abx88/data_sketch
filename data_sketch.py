@@ -15,7 +15,7 @@ st.set_page_config(
     page_title="DataSketch",
     layout="wide")
 
-dfProva = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
+dfprova = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
 
 st.header("Data Sketch")
 
