@@ -252,10 +252,7 @@ if uploaded_file is not None:
                             'yanchor': 'top'})
                     st.plotly_chart(graficoBarre,use_container_width=False )
                     
-                    
-
-    
-                    st.write(pivotVariabile)
+                 
             
             with col4:
                 col7,col8 = st.columns([2, 2])
