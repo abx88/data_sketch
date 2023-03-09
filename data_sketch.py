@@ -38,7 +38,9 @@ if uploaded_file is not None:
     dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
     #col1.write(df)
     
-    expander_modifiche = st.expander("filtri/modifiche applicate")
+    expander_modificheCol = col1.expander("filtra/modifica colonne")
+    expander_modificheRighe = col2.expander("filta/modifica righe")
+    
     
     col2.subheader("dataset modificato")
     newdf= dfedit
@@ -60,7 +62,7 @@ if uploaded_file is not None:
     
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = expander_modifiche.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+        colonne_da_eliminare = expander_modificheCol.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
@@ -69,12 +71,12 @@ if uploaded_file is not None:
     rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
     if rinomina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-        colonne_da_rinominare = expander_modifiche.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+        colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
 
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
         for colonna in colonne_da_rinominare:
-            nuovo_nome_colonna = st.sidebar.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+            nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
             mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
         # Rinomina le colonne selezionate con i nuovi nomi
@@ -104,13 +106,13 @@ if uploaded_file is not None:
 
     if righe_da_eliminare:
         #lista colonne presenti in df
-        scegli_colonna_valori = st.sidebar.selectbox("Seleziona la colonna", newdf.columns.tolist())
+        scegli_colonna_valori = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
             valori = newdf[scegli_colonna_valori].unique().tolist()
 
             # chiede all'utente di selezionare i valori da eliminare
-            valori_da_elim = st.sidebar.multiselect('Seleziona i valori da eliminare:', valori)
+            valori_da_elim = expander_modificheRighe.multiselect('Seleziona i valori da eliminare:', valori)
 
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
@@ -119,13 +121,13 @@ if uploaded_file is not None:
 
     if righe_da_filtrare:
         #lista colonne presenti in df
-        scegli_colonna_valori_filtro = st.sidebar.selectbox("Seleziona la colonna", newdf.columns.tolist())
+        scegli_colonna_valori_filtro = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori_filtro is not None:
             valori_filt = newdf[scegli_colonna_valori_filtro].unique().tolist()
 
             # chiede all'utente di selezionare i valori da eliminare
-            valori_da_filtrare = st.sidebar.multiselect('Seleziona i valori da filtrare:', valori_filt)
+            valori_da_filtrare = expander_modificheRighe.multiselect('Seleziona i valori da filtrare:', valori_filt)
 
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
