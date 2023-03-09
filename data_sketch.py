@@ -36,7 +36,7 @@ if uploaded_file is not None:
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
     # Aggiungi nomi colonne dataset
-    expander_csv.col1.subheader("dataset originale")
+    col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
     col2.subheader("dataset modificato")
