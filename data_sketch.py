@@ -222,7 +222,7 @@ if uploaded_file is not None:
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
                     pivotVariabile = pd.pivot_table(newdfvisual, 
                                                     values=colonna_confrontoY, 
-                                                    columns = colonna_categorica 
+                                                    columns = colonna_categorica,
                                                     index=colonna_confrontoX, 
                                                     aggfunc=np.sum)
                     
