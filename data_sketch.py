@@ -58,7 +58,8 @@ if uploaded_file is not None:
     expander_csvModifica.subheader("dataset modificato")
     newdf= dfedit
 '''   
-    
+newdf= dfedit
+
 #verifica se è necessario inserire delle intestazioni
 tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
