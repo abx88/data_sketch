@@ -38,8 +38,8 @@ if uploaded_file is not None:
     # Aggiungi nomi colonne dataset
     expander_csv.col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    dfedit = expander_csv.col1.experimental_data_editor(df, num_rows="dynamic")
-    expander_csv.col2.subheader("dataset modificato")
+    dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
+    col2.subheader("dataset modificato")
     newdf= dfedit
    
     
@@ -130,7 +130,7 @@ if uploaded_file is not None:
             newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
     
     
-    expander_csv.col2.write(newdf)       
+    col2.write(newdf)       
     newdfvisual=newdf
 
     
