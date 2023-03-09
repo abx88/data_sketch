@@ -57,7 +57,7 @@ if uploaded_file is not None:
     
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = st.sidebar.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+        colonne_da_eliminare = st.sidebar.expander.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
@@ -101,7 +101,7 @@ if uploaded_file is not None:
 
     if righe_da_eliminare:
         #lista colonne presenti in df
-        scegli_colonna_valori = st.sidebar.expander.selectbox("Seleziona la colonna", newdf.columns.tolist())
+        scegli_colonna_valori = st.sidebar.selectbox("Seleziona la colonna", newdf.columns.tolist())
         # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
         if scegli_colonna_valori is not None:
             valori = newdf[scegli_colonna_valori].unique().tolist()
