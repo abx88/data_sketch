@@ -229,7 +229,7 @@ if uploaded_file is not None:
                     if filtroAggiuntivo ==True:
                         #colonna_filtro = newdfvisual[colonna_confrontoX]
                         valori = newdfvisual[colonna_confrontoX].unique().tolist()
-                        valori_filt = col6.multiselect('Seleziona i valori da filtrare:', valori)
+                        valori_filt = col6.multiselect('Seleziona valori:', valori)
                         pivotVariabile = pivotVariabile.loc[valori_filt]
                     else:
                         pivotVariabile = pivotVariabile
