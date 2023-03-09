@@ -21,7 +21,7 @@ b = ("f","f","f","h","h")
 c = (3,4,4,6,8)
 dates = pd.date_range("20230101", periods=5)
 
-dfprova = pd.DataFrame((a,b), index = dates, columns = list("ABCDE"))
+dfprova = pd.DataFrame((a,b,c), index = dates)
 
 st.header("Data Sketch")
 
