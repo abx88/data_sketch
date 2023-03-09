@@ -240,7 +240,7 @@ if uploaded_file is not None:
                     graficoBarre.add_trace(go.Bar(
                         y = pivotVariabile[colonna_confrontoY],
                         x = pivotVariabile.index,
-                        color=newdfvisual[colonna_categorica]
+                        color=newdfvisual[colonna_categorica],
                         name="grafico a barre"))
 
                     graficoBarre.update_layout(
