@@ -15,6 +15,7 @@ st.set_page_config(
     page_title="DataSketch",
     layout="wide")
 
+dfProva = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
 
 st.header("Data Sketch")
 
@@ -42,18 +43,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
 else:
-    df = pd.DataFrame(
-    {
-        "A": 1.0,
-        "B": pd.Timestamp("20130102"),
-        "C": pd.Series(1, index=list(range(4)), dtype="float32"),
-        "D": np.array([3] * 4, dtype="int32"),
-        "E": pd.Categorical(["test", "train", "test", "train"]),
-        "F": "foo",
-    }
-    )
-    
-    #df = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
+    df = dfprova
     dfedit = expander_csvOriginale.experimental_data_editor(df, num_rows="dynamic")
 
 newdf= dfedit
