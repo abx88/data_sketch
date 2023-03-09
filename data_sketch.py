@@ -57,7 +57,7 @@ if uploaded_file is not None:
     
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = st.sidebar.expander.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+        colonne_da_eliminare = st.expander.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
