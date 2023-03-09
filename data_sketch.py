@@ -19,8 +19,9 @@ st.set_page_config(
 st.header("Data Sketch")
 
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
-
-
+col1, col2 = st.columns([2, 2])
+expander_modificheCol = col1.expander("filtra/modifica colonne")
+expander_modificheRighe = col2.expander("filta/modifica righe")
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
@@ -31,17 +32,10 @@ if uploaded_file is not None:
 
     # Aggiungi l'elemento checkbox per selezionare il delimitatore
     delimitatore= st.sidebar.radio("Seleziona il delimitatore", delimiter_options)
-    
-    col1, col2 = st.columns([2, 2])
+    # Aggiungi nomi colonne dataset
     col1.subheader("dataset originale")
     df = pd.read_csv(uploaded_file, delimiter = delimitatore)
     dfedit = col1.experimental_data_editor(df, num_rows="dynamic")
-    #col1.write(df)
-    
-    expander_modificheCol = col1.expander("filtra/modifica colonne")
-    expander_modificheRighe = col2.expander("filta/modifica righe")
-    
-    
     col2.subheader("dataset modificato")
     newdf= dfedit
    
