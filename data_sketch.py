@@ -112,6 +112,22 @@ if uploaded_file is not None:
             # elimina le righe che contengono i valori selezionati
             newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
     
+    righe_da_filtrare = st.sidebar.checkbox("righe da selezionare")
+
+    if righe_da_filtrare:
+        #lista colonne presenti in df
+        scegli_colonna_valori_filtro = st.sidebar.selectbox("Seleziona la colonna", newdf.columns.tolist())
+        # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
+        if scegli_colonna_valori_filtro is not None:
+            valori_filt = newdf[scegli_colonna_valori_filtro].unique().tolist()
+
+            # chiede all'utente di selezionare i valori da eliminare
+            valori_da_filtrare = st.sidebar.multiselect('Seleziona i valori da filtrare:', valori_filt)
+
+            # elimina le righe che contengono i valori selezionati
+            newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
+    
+    
     col2.write(newdf)       
     newdfvisual=newdf
 
