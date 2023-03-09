@@ -184,9 +184,10 @@ if uploaded_file is not None:
             
         else:
             with col3:
-                col5,col6,col9= st.columns([2,2,1])
-                colonna_confrontoY = col5.selectbox("Seleziona asse Y (variabile dipendente)", newdfvisual.columns.tolist())
+                col5,col6,col9= st.columns([2,2,2])
+                colonna_confrontoY = col5.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
                 colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
+                
                 somma_valori = col9.checkbox("raggruppa valori Y per x")
                 #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
                 #newdfvisual[colonna_confrontoX] = pd.to_numeric(newdfvisual[colonna_confrontoX], errors='coerce')
@@ -217,11 +218,15 @@ if uploaded_file is not None:
                     st.plotly_chart(scatter,use_container_width=False )
                     
                 else:
+                    colonna_categorica = col9.selectbox("Seleziona variabile categorica", newdfvisual.columns.tolist())
                     #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
-                    pivotVariabile = pd.pivot_table(newdfvisual, values=colonna_confrontoY, index=colonna_confrontoX, aggfunc=np.sum)
+                    pivotVariabile = pd.pivot_table(newdfvisual, 
+                                                    values=colonna_confrontoY, 
+                                                    columns = colonna_categorica 
+                                                    index=colonna_confrontoX, 
+                                                    aggfunc=np.sum)
                     
                     filtroAggiuntivo = st.checkbox("aggiungi filtro dati")
-                    
                     if filtroAggiuntivo ==True:
                         #colonna_filtro = newdfvisual[colonna_confrontoX]
                         valori = newdfvisual[colonna_confrontoX].unique().tolist()
