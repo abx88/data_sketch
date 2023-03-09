@@ -20,6 +20,7 @@ st.header("Data Sketch")
 
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
 
+expander = st.expander("filtri/modifiche applicate")
     
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
@@ -57,7 +58,7 @@ if uploaded_file is not None:
     
     if elimina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = st.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+        colonne_da_eliminare = expander.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
         # Elimina le colonne selezionate
         newdf = newdf.drop(columns=colonne_da_eliminare)
@@ -66,7 +67,7 @@ if uploaded_file is not None:
     rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
     if rinomina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-        colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+        colonne_da_rinominare = expander.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
 
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
