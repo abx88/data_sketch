@@ -23,7 +23,7 @@ col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filta/modifica righe")
 expander_modificheCol.write("modifiche effettuate su colonne")    
-expander_modificheCol.write("modifiche effettuate su righe")
+expander_modificheRighe.write("modifiche effettuate su righe")
 
 uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 if uploaded_file is not None:
