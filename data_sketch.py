@@ -66,7 +66,7 @@ if uploaded_file is not None:
     rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
     if rinomina_colonne == True:
         # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-        colonne_da_rinominare = st.sidebar.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+        colonne_da_rinominare = st.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
 
         # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
         mapping_nomi_colonne = {}
