@@ -140,6 +140,7 @@ if righe_da_filtrare:
 aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
     expander_colonne = st.expander("aggiunta guidata colonne")
+    expander_colonne.write("seleziona modalità aggiunta colonne")    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
