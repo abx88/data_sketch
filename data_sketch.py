@@ -135,6 +135,21 @@ if righe_da_filtrare:
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
+pivot_df = st.sidebar.checkbox("raggruppa dati")
+if pivot_df == True:
+    expander_pivot = st.sidebar.expander("inserire input raggruppamento")
+    valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+    indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+    colonne = expander_pivot.selectbox("colonne", newdf.columns.tolist())
+    fuzione = expander_pivot.text_input('funzione', 'np.mean')
+    newdf = pd.pivot_table(newdf,
+                           values=valori, 
+                           index=indice, 
+                           columns= colonne, 
+                           aggfunc=funzione,
+                           dropna = True)
+
+
 trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
