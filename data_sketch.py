@@ -137,7 +137,7 @@ if righe_da_filtrare:
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
 
-aggiungi_colonne = st.sidebar.checbox("aggiungi colonne")
+aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
     expander_colonne = st.expander("aggiunta guidata colonne")
         
