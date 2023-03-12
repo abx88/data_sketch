@@ -135,6 +135,10 @@ if righe_da_filtrare:
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
+trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
+if trasponi_df == True:
+    newdf = newdf.transpose()
+        
 
 expander_csvModifica.write(newdf)       
 newdfvisual=newdf
