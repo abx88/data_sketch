@@ -100,7 +100,7 @@ if indice == True:
     indice_datetime = expander_indice.checkbox("indice date_time")
     if indice_datetime ==True:
         newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-        scomponi_data = st.sidebar.checkbox("estrai giorno, mese, anno") 
+        scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
         if scomponi_data ==True:
             newdf['giorno_W'] = newdf.index.dayofweek
             newdf['mese'] = newdf.index.month
