@@ -141,7 +141,7 @@ if pivot_df == True:
     valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
     indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
     colonne = expander_pivot.selectbox("colonne", newdf.columns.tolist())
-    fuzione = expander_pivot.text_input('funzione', 'np.mean')
+    funzione = expander_pivot.text_input('funzione', 'np.mean')
     newdf = pd.pivot_table(newdf,
                            values=valori, 
                            index=indice, 
