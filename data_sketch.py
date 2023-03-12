@@ -144,7 +144,8 @@ if pivot_df == True:
     colonne = expander_pivot.selectbox("colonne", newdf.columns.tolist())
     funzione = expander_pivot.text_input('funzione', 'mean')
     newdf = pd.pivot_table(newdf,
-                           values=valori, 
+                           values=valori,
+                           index=indice, 
                            aggfunc=funzione,
                            dropna = True)
 
