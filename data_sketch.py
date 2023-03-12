@@ -148,7 +148,7 @@ if pivot_df == True:
         # valori di default diversi fra loro
         if indice == valori:
             indice = newdf.columns.tolist()[0]
-        colonna = newdf.columns.tolist()[-1]
+            colonna = newdf.columns.tolist()[-1]
         
         newdf = pd.pivot_table(newdf,
                                values=valori,
