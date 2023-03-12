@@ -97,7 +97,7 @@ if indice == True:
     newdf = newdf.set_index(colonna_indice)
 
     # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-    indice_datetime = st.sidebar.checkbox("indice date_time")
+    indice_datetime = expander_indice.checkbox("indice date_time")
     if indice_datetime ==True:
         newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
         scomponi_data = st.sidebar.checkbox("estrai giorno, mese, anno") 
