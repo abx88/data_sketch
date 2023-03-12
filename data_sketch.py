@@ -90,8 +90,9 @@ if rinomina_colonne == True:
 indice = st.sidebar.checkbox("colonna indice")
 
 if indice == True:
+    expander_indice = st.sidebar.expander("scegli colonna indice")
     # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-    colonna_indice = st.sidebar.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+    colonna_indice = expander_inndice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
     # Imposta la colonna selezionata come indice del DataFrame
     newdf = newdf.set_index(colonna_indice)
 
