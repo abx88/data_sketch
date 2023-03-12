@@ -61,7 +61,7 @@ if tabella_senza_intestazioni == True:
     newdf.sort_index(inplace=True)
 
 #verifica se ci sono colonne da elimianre
-elimina_colonne = st.sidebar.checkbox("elimina colonne")
+elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
 if elimina_colonne == True:
     # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
@@ -71,7 +71,7 @@ if elimina_colonne == True:
     newdf = newdf.drop(columns=colonne_da_eliminare)
 
 #verifica se ci sono colonne da rinominare
-rinomina_colonne = st.sidebar.checkbox("colonne da rinominare")
+rinomina_colonne = expander_modificheCol.checkbox("colonne da rinominare")
 if rinomina_colonne == True:
     # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
     colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
@@ -121,7 +121,7 @@ if righe_da_eliminare:
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
 
-righe_da_filtrare = st.sidebar.checkbox("righe da selezionare")
+righe_da_filtrare = expander_modificheRighe.checkbox("righe da selezionare")
 
 if righe_da_filtrare:
     #lista colonne presenti in df
