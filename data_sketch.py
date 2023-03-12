@@ -106,7 +106,7 @@ if indice == True:
             newdf['mese'] = newdf.index.month
             newdf['anno'] = newdf.index.year
 
-righe_da_eliminare = st.sidebar.checkbox("righe da eliminare")
+righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
 
 if righe_da_eliminare:
     #lista colonne presenti in df
