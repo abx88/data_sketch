@@ -141,8 +141,8 @@ if pivot_df == True:
     expander_pivot = st.sidebar.expander("inserire input raggruppamento")
     colonne = expander_pivot.checkbox("pivot con colonne")
     if colonne == False:
-        valori = expander_pivot.selectbox("valori", newdf.columns.tolist()[0])
-        indice = expander_pivot.selectbox("indice", newdf.columns.tolist()[-1])
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
         funzione = expander_pivot.text_input('funzione', 'mean')
         
         newdf = pd.pivot_table(newdf,
@@ -151,9 +151,9 @@ if pivot_df == True:
                                aggfunc=funzione,
                                dropna = True)
     else:
-        valori = expander_pivot.selectbox("valori", newdf.columns.tolist()[0])
-        indice = expander_pivot.selectbox("indice", newdf.columns.tolist()[-1])
-        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist()[1])
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
         funzione = expander_pivot.text_input('funzione', 'mean')
        
         newdf = pd.pivot_table(newdf,
