@@ -141,14 +141,9 @@ if pivot_df == True:
     expander_pivot = st.sidebar.expander("inserire input raggruppamento")
     colonne = expander_pivot.checkbox("pivot con colonne")
     if colonne == False:
-        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
-        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist()[0])
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist()[-1])
         funzione = expander_pivot.text_input('funzione', 'mean')
-        
-        # valori di default diversi fra loro
-        if indice == valori:
-            indice = newdf.columns.tolist()[0]
-            colonna = newdf.columns.tolist()[-1]
         
         newdf = pd.pivot_table(newdf,
                                values=valori,
@@ -156,19 +151,11 @@ if pivot_df == True:
                                aggfunc=funzione,
                                dropna = True)
     else:
-        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
-        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
-        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist()[0])
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist()[-1])
+        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist()[1])
         funzione = expander_pivot.text_input('funzione', 'mean')
-        
-        # valori di default diversi fra loro
-        if indice == valori or indice == colonna:
-            indice = newdf.columns.tolist()[0]
-        if valori == colonna or valori == indice:
-            valori = newdf.columns.tolist()[-1]
-        if colonna == indice or colonna == valori:
-            colonna = newdf.columns.tolist()[1]
-        
+       
         newdf = pd.pivot_table(newdf,
                                values=valori,
                                index=indice, 
