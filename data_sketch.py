@@ -156,6 +156,12 @@ if pivot_df == True:
         indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
         colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
         funzione = expander_pivot.text_input('funzione', 'mean')
+        if indice == valori or indice == colonna:
+            indice = newdf.columns[0]
+        if valori == colonna or valori == indice:
+            valori = newdf.columns[-1]
+        if colonna == indice or colonna == valori:
+            colonna = newdf.columns[1]
        
         newdf = pd.pivot_table(newdf,
                                values=valori,
