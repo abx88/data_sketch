@@ -139,16 +139,42 @@ if righe_da_filtrare:
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
     expander_pivot = st.sidebar.expander("inserire input raggruppamento")
-    valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
-    indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
-    colonne = expander_pivot.selectbox("colonne", newdf.columns.tolist())
-    funzione = expander_pivot.text_input('funzione', 'mean')
-    newdf = pd.pivot_table(newdf,
-                           values=valori,
-                           index=indice, 
-                           aggfunc=funzione,
-                           dropna = True)
-
+    colonne = expander_pivot.checkbox("pivot con colonne")
+    if colonne == False:
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        funzione = expander_pivot.text_input('funzione', 'mean')
+        
+        # valori di default diversi fra loro
+        if indice == valori:
+            indice = newdf.columns.tolist()[0]
+        colonna = newdf.columns.tolist()[-1]
+        
+        newdf = pd.pivot_table(newdf,
+                               values=valori,
+                               index=indice, 
+                               aggfunc=funzione,
+                               dropna = True)
+    else:
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
+        funzione = expander_pivot.text_input('funzione', 'mean')
+        
+        # valori di default diversi fra loro
+        if indice == valori or indice == colonna:
+            indice = newdf.columns.tolist()[0]
+        if valori == colonna or valori == indice:
+            valori = newdf.columns.tolist()[-1]
+        if colonna == indice or colonna == valori:
+            colonna = newdf.columns.tolist()[1]
+        
+        newdf = pd.pivot_table(newdf,
+                               values=valori,
+                               index=indice, 
+                               columns=colonna,
+                               aggfunc=funzione,
+                               dropna = True)
 
 trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
