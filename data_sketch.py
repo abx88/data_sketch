@@ -24,6 +24,7 @@ pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazio
 col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
+expander_colonne = st.expander("aggiunta guidata colonne")
 expander_csvOriginale = col1.expander("dati csv originali")
 expander_csvModifica = col2.expander("dati csv modificati")
 expander_modificheCol.write("modifiche effettuate su colonne")    
@@ -139,7 +140,6 @@ if righe_da_filtrare:
 
 aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
-    expander_colonne = st.expander("aggiunta guidata colonne")
     expander_colonne.write("seleziona modalità aggiunta colonne")    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
