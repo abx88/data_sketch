@@ -138,7 +138,7 @@ if righe_da_filtrare:
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
-st.expander_colonne.write("aggiunta guidata colonne")
+expander_colonne.write("aggiunta guidata colonne")
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
