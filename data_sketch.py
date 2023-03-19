@@ -140,6 +140,7 @@ if righe_da_filtrare:
         
 #aggiunta colonne
 expander_colonne.write("aggiunta guidata colonne")
+
 def create_max_column(df):
     expander_colonne.write('Seleziona la colonna:')
     column = expander_colonne.selectbox('', options=df.columns)
@@ -147,9 +148,10 @@ def create_max_column(df):
     max_values = df[column].max()
     df[new_col_name] = max_values
     expander_colonne.write('Colonna creata con successo!')
+    return df
     
-if expander_colonne.checkbox('Crea nuova colonna max'):
-    create_max_column(newdf)
+if expander_colonne.button('Crea nuova colonna'):
+    newdf = create_max_column(newdf)
    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
