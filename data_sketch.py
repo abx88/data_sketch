@@ -191,8 +191,8 @@ if st.button("Esegui"):
         st.error("Si è verificato un errore durante l'esecuzione del codice:")
         st.error(str(e))
         
-        
-expander_csvModifica.write(newdf)       
+expander_csvOriginale.write(df)        
+expander_csvModifica.write(newdf) 
 newdfvisual=newdf
 
 
