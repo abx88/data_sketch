@@ -16,6 +16,7 @@ st.set_page_config(
     page_title="DataSketch",
     layout="wide")
 
+
 np.random.seed(123)
 dfprova = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
 newdf_mod= dfprova
@@ -51,17 +52,7 @@ else:
 
 newdf= dfedit
 
-def load_data(df):
-    # Carica i dati in df
-    pass
 
-def modify_data(df):
-    # Modifica i dati in df
-    pass
-
-# Utilizza il dataframe newdf come parametro per le funzioni load_data e modify_data
-load_data(newdf)
-modify_data(newdf)
 
 
 #verifica se è necessario inserire delle intestazioni
@@ -192,18 +183,20 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
         
-st.header("Esegui codice")
 
-code = st.text_area("Inserisci del codice Python da eseguire:")
+if st.sidebar.checkbox("modifica df con codice"):
+    st.header("Esegui codice")
 
-if st.button("Esegui"):
-    try:
-        # Esegui il codice Python all'interno della funzione exec
-        exec(code, {'df': newdf})
-       
-    except Exception as e:
-        st.error("Si è verificato un errore durante l'esecuzione del codice:")
-        st.error(str(e))
+    code = st.text_area("Inserisci del codice Python da eseguire:")
+
+    if st.button("Esegui"):
+        try:
+            # Esegui il codice Python all'interno della funzione exec
+            exec(code, {'df': newdf})
+
+        except Exception as e:
+            st.error("Si è verificato un errore durante l'esecuzione del codice:")
+            st.error(str(e))
         
 expander_csvModifica.write(newdf) 
 newdfvisual=newdf
