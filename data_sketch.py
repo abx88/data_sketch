@@ -186,7 +186,7 @@ code = st.text_area("Inserisci del codice Python da eseguire:")
 if st.button("Esegui"):
     try:
         # Esegui il codice Python all'interno della funzione exec
-        exec(code, {'df': newdf})
+        exec(code, {'df': df})
     except Exception as e:
         st.error("Si è verificato un errore durante l'esecuzione del codice:")
         st.error(str(e))
