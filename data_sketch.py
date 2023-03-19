@@ -139,7 +139,7 @@ if righe_da_filtrare:
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
 expander_colonne.write("aggiunta guidata colonne")
-def create_new_column(df):
+def create_max_column(df):
     expander_colonne.write('Seleziona la colonna:')
     column = expander_colonne.selectbox('', options=df.columns)
     new_col_name = expander_colonne.text_input('Inserisci il nome della nuova colonna:')
