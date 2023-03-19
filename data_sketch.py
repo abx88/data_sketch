@@ -67,8 +67,16 @@ if aggiungi_colonne == True:
     expander_colonne.write("seleziona modalità aggiunta colonne") 
     if aggiungi_colonne:
         colonna_max = expander_modificheCol.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
-        nome_colonna = expander_modificheCol.text_input("Inserisci il nome della nuova colonna")
-        newdf[nome_colonna] = newdf[colonna_max].max(axis=0)
+        # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+        mapping_nomi_colonne = {}
+        for colonna in colonna_max:
+            newdf[nome_colonna] = newdf[colonna_max].max(axis=0)
+            nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nome per la colonna '{colonna}'", colonna)
+            mapping_nomi_colonne[colonna] = nuovo_nome_colonna
+
+        # Rinomina le colonne selezionate con i nuovi nomi
+        newdf =  newdf.rename(columns=mapping_nomi_colonne)
+            
         
     
 #verifica se ci sono colonne da elimianre
