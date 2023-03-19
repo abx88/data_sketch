@@ -144,12 +144,11 @@ def create_max_column(df):
     column = expander_colonne.selectbox('', options=df.columns)
     new_col_name = expander_colonne.text_input('Inserisci il nome della nuova colonna:')
     max_values = df[column].max()
-    newdf = df.copy()
-    newdf[new_col_name] = max_values
+    df[new_col_name] = max_values
     expander_colonne.write('Colonna creata con successo!')
-    return newdf
+    return df
 
-if st.button('Crea nuova colonna max'):
+if expander_colonne.checkbox('Crea nuova colonna max'):
     newdf = create_max_column(newdf)
 
     
