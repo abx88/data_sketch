@@ -61,6 +61,20 @@ if tabella_senza_intestazioni == True:
     newdf.index = newdf.index + 1
     newdf.sort_index(inplace=True)
 
+#verifica se ci sono colonne da aggiungere    
+aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
+if aggiungi_colonne == True:
+    expander_colonne.write("seleziona modalità aggiunta colonne") 
+    if expander_colonne.button("aggiungi colonna", on_click=True):
+        colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
+        nome_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna")
+        if nome_colonna:
+            newdf[nome_colonna] = newdf[colonna_max].max(axis=1)
+            expander_colonne.write(f"La colonna {nome_colonna} è stata aggiunta al dataframe")
+        else:
+            expander_colonne.write("Inserisci un nome valido per la nuova colonna")
+    
+    
 #verifica se ci sono colonne da elimianre
 elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
@@ -138,20 +152,6 @@ if righe_da_filtrare:
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
 
-aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
-if aggiungi_colonne == True:
-    expander_colonne.write("seleziona modalità aggiunta colonne") 
-    if expander_colonne.button("aggiungi colonna", on_click=True):
-        colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
-        nome_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna")
-        if nome_colonna:
-            newdf[nome_colonna] = newdf[colonna_max].max(axis=1)
-            expander_colonne.write(f"La colonna {nome_colonna} è stata aggiunta al dataframe")
-        else:
-            expander_colonne.write("Inserisci un nome valido per la nuova colonna")
-
-
-    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
