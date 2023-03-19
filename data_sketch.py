@@ -202,7 +202,7 @@ if expander_colonne.button('Crea nuove colonne'):
     expander_colonne.write('Colonnes create con successo!')
     newdf_mod=newdf
 
-expander_modifiche.write(newdf_mod)
+expander_modifica.write(newdf_mod)
 
 
 
