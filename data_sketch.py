@@ -178,8 +178,21 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
         
+# crea il DataFrame df
+df = newdf
 
+# crea l'elemento text_area
+code = st.text_area('Inserisci qui il codice Python', height=200)
 
+# esegui il codice solo sulla variabile df
+try:
+    sandbox = st.experimental_sandbox(hash_funcs={pd.DataFrame: id})
+    sandbox.run(code, {"df": df})
+except Exception as e:
+    st.error(f"Si è verificato un errore: {e}")
+        
+        
+        
 expander_csvModifica.write(newdf)       
 newdfvisual=newdf
 
