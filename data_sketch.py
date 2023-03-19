@@ -142,8 +142,8 @@ aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
     expander_colonne.write("seleziona modalità aggiunta colonne") 
     if expander_colonne.button("colonna max"):
-    colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
-    newdf["max_colonna"] = newdf[colonna_max].max(axis=1)
+        colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
+        newdf["max_colonna"] = newdf[colonna_max].max(axis=1)
         
     
     
