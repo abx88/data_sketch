@@ -148,9 +148,9 @@ def create_max_column(df):
     df[new_col_name] = max_values
     expander_colonne.write('Colonna creata con successo!')
     
-if expander_colonne.button('Crea nuova colonna max'):
-    create_max_column(newdf)
-    expander_csvModifica.write(newdf)     
+expander_colonne.button('Crea nuova colonna max', on_click=create_max_column, args=(newdf))
+#    create_max_column(newdf)
+ #   expander_csvModifica.write(newdf)     
 
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
