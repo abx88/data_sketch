@@ -149,7 +149,7 @@ def create_new_column(df):
         expander_colonne.write('Colonna creata con successo!')
     return df
 if expander_colonne.button('Crea nuova colonna'):
-    create_max_column(df, 'Nome Colonna')
+    create_max_column(newdf)
     
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
