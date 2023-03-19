@@ -55,150 +55,149 @@ newdf= dfedit
 
 
 
-if pagina1=='usa predefinite':
-    #verifica se è necessario inserire delle intestazioni
-    tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
-    if tabella_senza_intestazioni == True:
-        # Rinomina le colonne con numeri in ordine crescente
-        new_column_names = list(range(len(df.columns)))
-        newdf.loc[-1] = newdf.columns
-        newdf.columns = new_column_names
-        newdf.index = newdf.index + 1
-        newdf.sort_index(inplace=True)
+#verifica se è necessario inserire delle intestazioni
+tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
-
-
-    #verifica se ci sono colonne da elimianre
-    elimina_colonne = st.sidebar.checkbox("elimina colonne")
-
-    if elimina_colonne == True:
-        # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-        colonne_da_eliminare = expander_modificheCol.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
-
-        # Elimina le colonne selezionate
-        newdf = newdf.drop(columns=colonne_da_eliminare)
-
-    #verifica se ci sono colonne da rinominare
-    rinomina_colonne = expander_modificheCol.checkbox("colonne da rinominare")
-    if rinomina_colonne == True:
-        # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-        colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
-
-        # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
-        mapping_nomi_colonne = {}
-        for colonna in colonne_da_rinominare:
-            nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
-            mapping_nomi_colonne[colonna] = nuovo_nome_colonna
-
-        # Rinomina le colonne selezionate con i nuovi nomi
-        newdf =  newdf.rename(columns=mapping_nomi_colonne)
+if tabella_senza_intestazioni == True:
+    # Rinomina le colonne con numeri in ordine crescente
+    new_column_names = list(range(len(df.columns)))
+    newdf.loc[-1] = newdf.columns
+    newdf.columns = new_column_names
+    newdf.index = newdf.index + 1
+    newdf.sort_index(inplace=True)
 
 
-    #verifica la necessità di una colonna indice    
-    indice = st.sidebar.checkbox("colonna indice")
 
-    if indice == True:
-        expander_indice = st.sidebar.expander("scegli colonna indice")
-        # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-        colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
-        # Imposta la colonna selezionata come indice del DataFrame
-        newdf = newdf.set_index(colonna_indice)
+#verifica se ci sono colonne da elimianre
+elimina_colonne = st.sidebar.checkbox("elimina colonne")
 
-        # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-        indice_datetime = expander_indice.checkbox("indice date_time")
-        if indice_datetime ==True:
-            newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-            scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
-            if scomponi_data ==True:
-                newdf['giorno_W'] = newdf.index.dayofweek
-                newdf['mese'] = newdf.index.month
-                newdf['anno'] = newdf.index.year
+if elimina_colonne == True:
+    # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
+    colonne_da_eliminare = expander_modificheCol.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
 
-    righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
+    # Elimina le colonne selezionate
+    newdf = newdf.drop(columns=colonne_da_eliminare)
 
-    if righe_da_eliminare:
-        #lista colonne presenti in df
-        scegli_colonna_valori = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
-        # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
-        if scegli_colonna_valori is not None:
-            valori = newdf[scegli_colonna_valori].unique().tolist()
+#verifica se ci sono colonne da rinominare
+rinomina_colonne = expander_modificheCol.checkbox("colonne da rinominare")
+if rinomina_colonne == True:
+    # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
+    colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
 
-            # chiede all'utente di selezionare i valori da eliminare
-            valori_da_elim = expander_modificheRighe.multiselect('Seleziona i valori da eliminare:', valori)
+    # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+    mapping_nomi_colonne = {}
+    for colonna in colonne_da_rinominare:
+        nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+        mapping_nomi_colonne[colonna] = nuovo_nome_colonna
 
-            # elimina le righe che contengono i valori selezionati
-            newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
-
-    righe_da_filtrare = expander_modificheRighe.checkbox("righe da selezionare")
-
-    if righe_da_filtrare:
-        #lista colonne presenti in df
-        scegli_colonna_valori_filtro = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
-        # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
-        if scegli_colonna_valori_filtro is not None:
-            valori_filt = newdf[scegli_colonna_valori_filtro].unique().tolist()
-
-            # chiede all'utente di selezionare i valori da eliminare
-            valori_da_filtrare = expander_modificheRighe.multiselect('Seleziona i valori da filtrare:', valori_filt)
-
-            # elimina le righe che contengono i valori selezionati
-            newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
+    # Rinomina le colonne selezionate con i nuovi nomi
+    newdf =  newdf.rename(columns=mapping_nomi_colonne)
 
 
-    pivot_df = st.sidebar.checkbox("raggruppa dati")
-    if pivot_df == True:
-        expander_pivot = st.sidebar.expander("inserire input raggruppamento")
-        colonne = expander_pivot.checkbox("pivot con colonne")
-        if colonne == False:
-            valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
-            indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
-            funzione = expander_pivot.text_input('funzione', 'mean')
-            if indice == valori:
-                indice = newdf.columns[1]
-            newdf = pd.pivot_table(newdf,
-                                   values=valori,
-                                   index=indice, 
-                                   aggfunc=funzione,
-                                   dropna = True)
-        else:
-            valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
-            indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
-            colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
-            funzione = expander_pivot.text_input('funzione', 'mean')
-            if indice == valori or indice == colonna:
-                indice = newdf.columns[0]
-            if valori == colonna or valori == indice:
-                valori = newdf.columns[-1]
-            if colonna == indice or colonna == valori:
-                colonna = newdf.columns[1]
+#verifica la necessità di una colonna indice    
+indice = st.sidebar.checkbox("colonna indice")
 
-            newdf = pd.pivot_table(newdf,
-                                   values=valori,
-                                   index=indice, 
-                                   columns=colonna,
-                                   aggfunc=funzione,
-                                   dropna = True)
+if indice == True:
+    expander_indice = st.sidebar.expander("scegli colonna indice")
+    # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+    colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+    # Imposta la colonna selezionata come indice del DataFrame
+    newdf = newdf.set_index(colonna_indice)
+
+    # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
+    indice_datetime = expander_indice.checkbox("indice date_time")
+    if indice_datetime ==True:
+        newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+        scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
+        if scomponi_data ==True:
+            newdf['giorno_W'] = newdf.index.dayofweek
+            newdf['mese'] = newdf.index.month
+            newdf['anno'] = newdf.index.year
+
+righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
+
+if righe_da_eliminare:
+    #lista colonne presenti in df
+    scegli_colonna_valori = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
+    # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
+    if scegli_colonna_valori is not None:
+        valori = newdf[scegli_colonna_valori].unique().tolist()
+
+        # chiede all'utente di selezionare i valori da eliminare
+        valori_da_elim = expander_modificheRighe.multiselect('Seleziona i valori da eliminare:', valori)
+
+        # elimina le righe che contengono i valori selezionati
+        newdf = newdf.loc[~newdf[scegli_colonna_valori].isin(valori_da_elim)]
+
+righe_da_filtrare = expander_modificheRighe.checkbox("righe da selezionare")
+
+if righe_da_filtrare:
+    #lista colonne presenti in df
+    scegli_colonna_valori_filtro = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
+    # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
+    if scegli_colonna_valori_filtro is not None:
+        valori_filt = newdf[scegli_colonna_valori_filtro].unique().tolist()
+
+        # chiede all'utente di selezionare i valori da eliminare
+        valori_da_filtrare = expander_modificheRighe.multiselect('Seleziona i valori da filtrare:', valori_filt)
+
+        # elimina le righe che contengono i valori selezionati
+        newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
 
-    trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
-    if trasponi_df == True:
-        newdf = newdf.transpose()
+pivot_df = st.sidebar.checkbox("raggruppa dati")
+if pivot_df == True:
+    expander_pivot = st.sidebar.expander("inserire input raggruppamento")
+    colonne = expander_pivot.checkbox("pivot con colonne")
+    if colonne == False:
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        funzione = expander_pivot.text_input('funzione', 'mean')
+        if indice == valori:
+            indice = newdf.columns[1]
+        newdf = pd.pivot_table(newdf,
+                               values=valori,
+                               index=indice, 
+                               aggfunc=funzione,
+                               dropna = True)
+    else:
+        valori = expander_pivot.selectbox("valori", newdf.columns.tolist())
+        indice = expander_pivot.selectbox("indice", newdf.columns.tolist())
+        colonna = expander_pivot.selectbox("colonne", newdf.columns.tolist())
+        funzione = expander_pivot.text_input('funzione', 'mean')
+        if indice == valori or indice == colonna:
+            indice = newdf.columns[0]
+        if valori == colonna or valori == indice:
+            valori = newdf.columns[-1]
+        if colonna == indice or colonna == valori:
+            colonna = newdf.columns[1]
 
-else:
-    if st.sidebar.checkbox("modifica df con codice"):
-        st.header("Esegui codice")
+        newdf = pd.pivot_table(newdf,
+                               values=valori,
+                               index=indice, 
+                               columns=colonna,
+                               aggfunc=funzione,
+                               dropna = True)
 
-        code = st.text_area("Inserisci del codice Python da eseguire:")
 
-        if st.button("Esegui"):
-            try:
-                # Esegui il codice Python all'interno della funzione exec
-                exec(code, {'df': newdf})
+trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
+if trasponi_df == True:
+    newdf = newdf.transpose()
 
-            except Exception as e:
-                st.error("Si è verificato un errore durante l'esecuzione del codice:")
-                st.error(str(e))   
+if st.sidebar.checkbox("modifica df con codice"):
+    st.header("Esegui codice")
+
+    code = st.text_area("Inserisci del codice Python da eseguire:")
+
+    if st.button("Esegui"):
+        try:
+            # Esegui il codice Python all'interno della funzione exec
+            exec(code, {'df': newdf})
+
+        except Exception as e:
+            st.error("Si è verificato un errore durante l'esecuzione del codice:")
+            st.error(str(e))   
 
         
 
