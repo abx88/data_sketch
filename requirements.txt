@@ -6,4 +6,3 @@ seaborn
 ffn
 scipy
 requests
-secure-sandbox==0.0.3
