@@ -140,9 +140,9 @@ if righe_da_filtrare:
 
 expander_colonne.write("aggiunta guidata colonne")
 def crea_colonna_massimo(dataframe):
-    colonna_selezionata = st.selectbox("Seleziona una colonna", dataframe.columns.tolist())
+    colonna_selezionata = expander_colonne.selectbox("Seleziona una colonna", dataframe.columns.tolist())
     nuova_colonna = dataframe[colonna_selezionata].max()
-    nome_nuova_colonna = st.text_input("Inserisci il nome della nuova colonna", colonna_selezionata + "_max")
+    nome_nuova_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna", colonna_selezionata + "_max")
     dataframe[nome_nuova_colonna] = nuova_colonna
     #st.write(dataframe)
 
