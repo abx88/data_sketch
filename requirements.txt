@@ -6,4 +6,4 @@ seaborn
 ffn
 scipy
 requests
-SecureSandbox
+secure_sandbox
