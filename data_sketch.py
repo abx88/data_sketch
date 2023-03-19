@@ -141,10 +141,16 @@ if righe_da_filtrare:
 aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
     expander_colonne.write("seleziona modalità aggiunta colonne") 
-    if expander_colonne.button("colonna max", on_click=True):
+    if expander_colonne.button("aggiungi colonna", on_click=True):
         colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
-        newdf["max_colonna"] = newdf[colonna_max].max(axis=1)
-        
+        nome_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna")
+        if nome_colonna:
+            newdf[nome_colonna] = newdf[colonna_max].max(axis=1)
+            expander_colonne.write(f"La colonna {nome_colonna} è stata aggiunta al dataframe")
+        else:
+            expander_colonne.write("Inserisci un nome valido per la nuova colonna")
+
+
     
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
