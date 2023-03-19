@@ -24,7 +24,7 @@ newdf_mod= dfprova
 st.header("Data Sketch")
 
 pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazione'))
-pagina1 = st.sidebar.radio("modifica df,('usa predefinite','modifica con codice'))
+pagina1 = st.sidebar.radio("modifica df",('usa predefinite','modifica con codice'))
 col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
