@@ -140,17 +140,20 @@ if righe_da_filtrare:
         
 #aggiunta colonne
 expander_colonne.write("aggiunta guidata colonne")
-def create_max_column(df):
+def create_max_column(df, col_list):
     expander_colonne.write('Seleziona la colonna:')
     column = expander_colonne.selectbox('', options=df.columns)
     new_col_name = expander_colonne.text_input('Inserisci il nome della nuova colonna:')
     max_values = df[column].max()
     df[new_col_name] = max_values
     expander_colonne.write('Colonna creata con successo!')
-    return df
-    
-if expander_colonne.checkbox('Crea nuova colonna max'):
-    newdf = create_max_column(newdf)
+    col_list.append(new_col_name)
+    return df, col_list
+
+colonne_max = []
+if expander_colonne.button('Crea nuova colonna max'):
+    newdf, colonne_max = create_max_column(newdf, colonne_max)
+
 
     
         
