@@ -185,7 +185,7 @@ if trasponi_df == True:
         
 
 if st.sidebar.checkbox("modifica df con codice"):
-    elimina_colonne = st.sidebar.checkbox("elimina colonne", disabled=True)
+    st.sidebar.checkbox("elimina colonne", disabled=True)
     st.header("Esegui codice")
 
     code = st.text_area("Inserisci del codice Python da eseguire:")
