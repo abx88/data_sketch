@@ -9,6 +9,7 @@ import numpy as np
 #from io import StringIO
 import plotly.graph_objects as go
 import scipy.stats as stats
+from secure_sandbox import SecureSandbox
 
 
 st.set_page_config(
@@ -186,11 +187,10 @@ code = st.text_area('Inserisci qui il codice Python', height=200)
 
 # esegui il codice solo sulla variabile df
 try:
-    sandbox = st.experimental_sandbox(hash_funcs={pd.DataFrame: id})
-    sandbox.run(code, {"df": df})
+    sb = SecureSandbox()
+    sb.execute(code, {"df": df})
 except Exception as e:
     st.error(f"Si è verificato un errore: {e}")
-        
         
         
 expander_csvModifica.write(newdf)       
