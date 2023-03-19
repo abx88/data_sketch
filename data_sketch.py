@@ -179,18 +179,17 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
         
-# crea il DataFrame df
-df = newdf
+st.header("Esegui codice")
 
-# crea l'elemento text_area
-code = st.text_area('Inserisci qui il codice Python', height=200)
+code = st.text_area("Inserisci del codice Python da eseguire:")
 
-# esegui il codice solo sulla variabile df
-try:
-    sb = SecureSandbox()
-    sb.execute(code, {"df": df})
-except Exception as e:
-    st.error(f"Si è verificato un errore: {e}")
+if st.button("Esegui"):
+    try:
+        # Esegui il codice Python all'interno della funzione exec
+        exec(code, {'df': newdf})
+    except Exception as e:
+        st.error("Si è verificato un errore durante l'esecuzione del codice:")
+        st.error(str(e))
         
         
 expander_csvModifica.write(newdf)       
