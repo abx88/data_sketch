@@ -150,7 +150,7 @@ def create_max_column(df):
     return df
 if expander_colonne.button('Crea nuova colonna', on_click=True):
     create_max_column(newdf_mod)
-newdf=newdf_mod
+    newdf=newdf_mod
     
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
