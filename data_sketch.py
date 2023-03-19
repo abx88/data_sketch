@@ -150,7 +150,7 @@ def create_max_column(df):
     expander_colonne.write('Colonna creata con successo!')
     return df
     
-if expander_colonne.button('Crea nuova colonna', on_click=True):
+if expander_colonne.button('Crea nuova colonna', on_click=False):
     newdf = create_max_column(newdf)
    
         
