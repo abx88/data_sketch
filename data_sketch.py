@@ -146,7 +146,7 @@ def crea_colonna_massimo(dataframe):
     dataframe[nome_nuova_colonna] = nuova_colonna
     #st.write(dataframe)
 
-if st.button("Crea colonna massimo"):
+if expander_colonne.button("Crea colonna massimo"):
     dataframe = newdf
     crea_colonna_massimo(dataframe)
         
