@@ -144,7 +144,7 @@ if aggiungi_colonne == True:
     if expander_colonne.button("colonna max"):
         colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
         newdf["max_colonna"] = newdf[colonna_max].max(axis=1)
-        
+        newdf=newdf
     
     
         
