@@ -139,16 +139,15 @@ if righe_da_filtrare:
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
 
 expander_colonne.write("aggiunta guidata colonne")
-def crea_colonna_massimo(dataframe):
-    colonna_selezionata = expander_colonne.selectbox("Seleziona una colonna", dataframe.columns.tolist())
-    nuova_colonna = dataframe[colonna_selezionata].max()
-    nome_nuova_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna", colonna_selezionata + "_max")
-    dataframe[nome_nuova_colonna] = nuova_colonna
-    #st.write(dataframe)
-
-if expander_colonne.button("Crea colonna massimo"):
-    dataframe = newdf
-    crea_colonna_massimo(dataframe)
+def create_max_column(df, column_name):
+    new_column_name = st.text_input('Inserisci il nome per la nuova colonna')
+    if new_column_name:
+        max_column = df[column_name].max()
+        df[new_column_name] = max_column
+        st.success(f'Colonna {new_column_name} creata con successo!')
+if expander_colonne.button('Crea nuova colonna'):
+    create_max_column(df, 'Nome Colonna')
+    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
