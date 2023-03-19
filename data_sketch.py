@@ -17,6 +17,7 @@ st.set_page_config(
 
 np.random.seed(123)
 dfprova = pd.DataFrame(np.random.randn(50, 5), columns=('col %d' % i for i in range(5)))
+newdf_mod= dfprova
 
 st.header("Data Sketch")
 
