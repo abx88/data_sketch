@@ -198,7 +198,7 @@ else:
 
             except Exception as e:
                 st.error("Si è verificato un errore durante l'esecuzione del codice:")
-                st.error(str(e))   mi occorre che quando la checkbox("modifica df con codice")
+                st.error(str(e))   
 
         
 
