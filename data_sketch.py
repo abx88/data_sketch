@@ -190,18 +190,18 @@ newdfvisual=newdf
 expander_colonne.write("aggiunta guidata colonne")
 colonne_da_aggiungere = []
 mapping_nuove_colonne = {}
-
+newdf_mod=newdf
 if expander_colonne.checkbox('Seleziona colonne per creare nuove colonne'):
-    colonne_da_aggiungere = expander_colonne.multiselect('Seleziona colonne da utilizzare', options=newdf.columns)
+    colonne_da_aggiungere = expander_colonne.multiselect('Seleziona colonne da utilizzare', options=newdf_mod.columns)
     for col in colonne_da_aggiungere:
         mapping_nuove_colonne[col] = expander_colonne.text_input(f'Inserisci il nome per la nuova colonna "{col}":')
 
 if expander_colonne.button('Crea nuove colonne'):
     for col, new_col_name in mapping_nuove_colonne.items():
-        max_values = newdf[col].max()
-        newdf[new_col_name] = max_values
-    expander_colonne.write('Colonnes create con successo!')
-    newdf_mod=newdf
+        max_values = newdf_mod[col].max()
+        newdf_mod[new_col_name] = max_values
+    expander_colonne.write('Colonne create con successo!')
+    
 
 expander_operazioni.write(newdf_mod)
 
