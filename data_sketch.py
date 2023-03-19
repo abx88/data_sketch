@@ -24,7 +24,8 @@ pagina = st.radio("selezionare operazione",('modifica ed esporta','visualizzazio
 col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
-expander_colonne = st.expander("aggiunta guidata colonne")
+expander_colonne = col1.expander("aggiunta guidata colonne")
+expander_operazioni = col2.expander("modifiche")
 expander_csvOriginale = col1.expander("dati csv originali")
 expander_csvModifica = col2.expander("dati csv modificati")
 expander_modificheCol.write("modifiche effettuate su colonne")    
@@ -138,25 +139,6 @@ if righe_da_filtrare:
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
         
-#aggiunta colonne
-expander_colonne.write("aggiunta guidata colonne")
-colonne_da_aggiungere = []
-mapping_nuove_colonne = {}
-
-if expander_colonne.checkbox('Seleziona colonne per creare nuove colonne'):
-    colonne_da_aggiungere = expander_colonne.multiselect('Seleziona colonne da utilizzare', options=newdf.columns)
-    for col in colonne_da_aggiungere:
-        mapping_nuove_colonne[col] = expander_colonne.text_input(f'Inserisci il nome per la nuova colonna "{col}":')
-
-if expander_colonne.button('Crea nuove colonne'):
-    for col, new_col_name in mapping_nuove_colonne.items():
-        max_values = newdf[col].max()
-        newdf[new_col_name] = max_values
-    expander_colonne.write('Colonnes create con successo!')
-
-
-
-    
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
 if pivot_df == True:
@@ -198,8 +180,32 @@ if trasponi_df == True:
     newdf = newdf.transpose()
         
 
+
 expander_csvModifica.write(newdf)       
 newdfvisual=newdf
+
+
+#aggiunta colonne
+expander_colonne.write("aggiunta guidata colonne")
+colonne_da_aggiungere = []
+mapping_nuove_colonne = {}
+
+if expander_colonne.checkbox('Seleziona colonne per creare nuove colonne'):
+    colonne_da_aggiungere = expander_colonne.multiselect('Seleziona colonne da utilizzare', options=newdf.columns)
+    for col in colonne_da_aggiungere:
+        mapping_nuove_colonne[col] = expander_colonne.text_input(f'Inserisci il nome per la nuova colonna "{col}":')
+
+if expander_colonne.button('Crea nuove colonne'):
+    for col, new_col_name in mapping_nuove_colonne.items():
+        max_values = newdf[col].max()
+        newdf[new_col_name] = max_values
+    expander_colonne.write('Colonnes create con successo!')
+    newdf_mod=newdf
+
+expander_modifiche.write(newdf_mod)
+
+
+
 
 
 if pagina == 'modifica ed esporta':
