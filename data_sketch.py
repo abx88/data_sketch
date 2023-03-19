@@ -27,8 +27,6 @@ expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
 expander_csvOriginale = col1.expander("dati csv originali")
 expander_csvModifica = col2.expander("dati csv modificati")
-expander_colonne = col1.expander("aggiunta guidata colonne")
-expander_operazioni = col2.expander("modifiche")
 expander_modificheCol.write("modifiche effettuate su colonne")    
 expander_modificheRighe.write("modifiche effettuate su righe")
 #expander_csvOriginale.write("file csv originale")
@@ -186,27 +184,6 @@ expander_csvModifica.write(newdf)
 newdfvisual=newdf
 
 
-#aggiunta colonne
-expander_colonne.write("aggiunta guidata colonne")
-colonne_da_aggiungere = []
-mapping_nuove_colonne = {}
-newdf_mod=newdf
-if expander_colonne.checkbox('Seleziona colonne per creare nuove colonne'):
-    colonne_da_aggiungere = expander_colonne.multiselect('Seleziona colonne da utilizzare', options=newdf_mod.columns)
-    for col in colonne_da_aggiungere:
-        mapping_nuove_colonne[col] = expander_colonne.text_input(f'Inserisci il nome per la nuova colonna "{col}":')
-
-if expander_colonne.button('Crea nuove colonne'):
-    for col, new_col_name in mapping_nuove_colonne.items():
-        max_values = newdf_mod[col].max()
-        newdf_mod[new_col_name] = max_values
-    expander_colonne.write('Colonne create con successo!')
-    
-
-expander_operazioni.write(newdf_mod)
-
-
-
 
 
 if pagina == 'modifica ed esporta':
@@ -280,73 +257,30 @@ else:
             col5,col6,col9= st.columns([2,2,2])
             colonna_confrontoY = col5.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
             colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
+            scatter = go.Figure()
 
-            somma_valori = col9.checkbox("raggruppa valori Y per x")
-            #newdfvisual[colonna_confrontoY] = pd.to_numeric(newdfvisual[colonna_confrontoY], errors='coerce')
-            #newdfvisual[colonna_confrontoX] = pd.to_numeric(newdfvisual[colonna_confrontoX], errors='coerce')
-            #st.write(newdfvisual)
-
-            if somma_valori == False:
-                scatter = go.Figure()
-
-                scatter.add_trace(go.Scatter(
-                    mode = "markers",
-                    y = newdfvisual[colonna_confrontoY],
-                    x = newdfvisual[colonna_confrontoX],
-                    name="scatter",
-                    connectgaps=False))
+            scatter.add_trace(go.Scatter(
+                mode = "markers",
+                y = newdfvisual[colonna_confrontoY],
+                x = newdfvisual[colonna_confrontoX],
+                name="scatter",
+                connectgaps=False))
 
 
-                scatter.update_layout(
-                    xaxis_title_text=colonna_confrontoX,
-                    yaxis_title_text=colonna_confrontoY,
-                    title={
-                        'text': "confronto variabili",
-                        'y':0.9,
-                        'x':0.5,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
+            scatter.update_layout(
+                xaxis_title_text=colonna_confrontoX,
+                yaxis_title_text=colonna_confrontoY,
+                title={
+                    'text': "confronto variabili",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'})
 
 
-                st.plotly_chart(scatter,use_container_width=False )
+            st.plotly_chart(scatter,use_container_width=False )
 
-            else:
-
-                #creo tabella pivot + grafico che raggruppa valori di y per valori x (solo se x è categorica)
-                pivotVariabile = pd.pivot_table(newdfvisual, 
-                                                values=colonna_confrontoY, 
-                                                index=colonna_confrontoX, 
-                                                aggfunc=np.sum)
-
-                filtroAggiuntivo = st.checkbox("Aggiungi filtro indice")
-                if filtroAggiuntivo ==True:
-                    #colonna_filtro = newdfvisual[colonna_confrontoX]
-                    valori = newdfvisual[colonna_confrontoX].unique().tolist()
-                    valori_filt = col6.multiselect('Seleziona valori:', valori)
-                    pivotVariabile = pivotVariabile.loc[valori_filt]
-                else:
-                    pivotVariabile = pivotVariabile
-
-                graficoBarre = go.Figure()
-
-                graficoBarre.add_trace(go.Bar(
-                    y = pivotVariabile[colonna_confrontoY],
-                    x = pivotVariabile.index,
-                    name="grafico a barre"))
-
-                graficoBarre.update_layout(
-                    xaxis_title_text=colonna_confrontoX,
-                    yaxis_title_text=colonna_confrontoY,
-                    title={
-                        'text': "raggruppamento Y per X",
-                        'y':0.9,
-                        'x':0.5,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
-                st.plotly_chart(graficoBarre,use_container_width=False )
-
-
-
+           
         with col4:
             col7,col8 = st.columns([2, 2])
             #dal df scelgo una variabile per confrontare la sua distribuzione 
