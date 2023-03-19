@@ -187,6 +187,7 @@ if st.button("Esegui"):
     try:
         # Esegui il codice Python all'interno della funzione exec
         exec(code, {'df': newdf})
+        newdf=newdf
     except Exception as e:
         st.error("Si è verificato un errore durante l'esecuzione del codice:")
         st.error(str(e))
