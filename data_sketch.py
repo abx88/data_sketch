@@ -65,7 +65,7 @@ if tabella_senza_intestazioni == True:
 aggiungi_colonne = st.sidebar.checkbox("aggiungi colonne")
 if aggiungi_colonne == True:
     expander_colonne.write("seleziona modalità aggiunta colonne") 
-    if expander_colonne.button("aggiungi colonna", on_click=True):
+    if expander_colonne.checkbox("aggiungi colonna"):
         colonna_max = expander_colonne.multiselect("Seleziona le colonne di cui trovare max", newdf.columns.tolist())
         nome_colonna = expander_colonne.text_input("Inserisci il nome della nuova colonna")
         if nome_colonna:
