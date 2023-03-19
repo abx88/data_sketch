@@ -183,7 +183,7 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
 
-    
+expander_csvModifica.write(newdf) 
     
 if st.sidebar.checkbox("modifica df con codice"):
     st.header("Esegui codice")
@@ -194,16 +194,20 @@ if st.sidebar.checkbox("modifica df con codice"):
         try:
             # Esegui il codice Python all'interno della funzione exec
             exec(code, {'df': newdf})
+            expander_csvModifica.write(newdf) 
+        
 
         except Exception as e:
             st.error("Si è verificato un errore durante l'esecuzione del codice:")
             st.error(str(e))   
-
-        
+            
+            
+            
 
 
 
 else:
+    newdfvisual=newdf
     if st.sidebar.checkbox("visualizza dati"):
         st.subheader("visualizza dati")
         tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
@@ -368,8 +372,8 @@ else:
                 
         
         
-expander_csvModifica.write(newdf) 
-newdfvisual=newdf
+
+
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
