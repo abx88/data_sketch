@@ -184,8 +184,7 @@ if trasponi_df == True:
     newdf = newdf.transpose()
         
 
-if st.sidebar.checkbox("modifica df con codice"):
-    st.sidebar.checkbox("elimina colonne", disabled=True)
+if st.sidebar.checkbox("modifica df con codice", key="checkbox_modifica_df"):
     st.header("Esegui codice")
 
     code = st.text_area("Inserisci del codice Python da eseguire:")
@@ -198,6 +197,19 @@ if st.sidebar.checkbox("modifica df con codice"):
         except Exception as e:
             st.error("Si è verificato un errore durante l'esecuzione del codice:")
             st.error(str(e))
+
+    # Disabilita tutti gli altri input sulla sidebar
+    st.sidebar.markdown("***")
+    st.sidebar.markdown("### Disabilitato")
+
+else:
+    # Abilita tutti gli altri input sulla sidebar
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### Abilitato")
+
+    # Inserisci gli altri input sulla sidebar
+    # ...
+
         
 expander_csvModifica.write(newdf) 
 newdfvisual=newdf
