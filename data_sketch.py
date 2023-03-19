@@ -76,7 +76,7 @@ if aggiungi_colonne == True:
     
     
 #verifica se ci sono colonne da elimianre
-elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
+elimina_colonne = st.sidebar.checkbox("elimina colonne")
 
 if elimina_colonne == True:
     # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
