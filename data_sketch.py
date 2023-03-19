@@ -183,6 +183,8 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
 
+    
+    
 if st.sidebar.checkbox("modifica df con codice"):
     st.header("Esegui codice")
 
@@ -199,13 +201,9 @@ if st.sidebar.checkbox("modifica df con codice"):
 
         
 
-        
-expander_csvModifica.write(newdf) 
-newdfvisual=newdf
 
 
-
-if st.sidebar.checkbox("modifica df con codice")==False:
+else:
     if st.sidebar.checkbox("visualizza dati"):
         st.subheader("visualizza dati")
         tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
@@ -368,6 +366,10 @@ if st.sidebar.checkbox("modifica df con codice")==False:
                             'yanchor': 'top'})
                     st.plotly_chart(distribuzione_perc, use_container_width=False)
                 
+        
+        
+expander_csvModifica.write(newdf) 
+newdfvisual=newdf
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
