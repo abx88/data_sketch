@@ -51,6 +51,19 @@ else:
 
 newdf= dfedit
 
+def load_data(df):
+    # Carica i dati in df
+    pass
+
+def modify_data(df):
+    # Modifica i dati in df
+    pass
+
+# Utilizza il dataframe newdf come parametro per le funzioni load_data e modify_data
+load_data(newdf)
+modify_data(newdf)
+
+
 #verifica se è necessario inserire delle intestazioni
 tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
@@ -187,7 +200,7 @@ if st.button("Esegui"):
     try:
         # Esegui il codice Python all'interno della funzione exec
         exec(code, {'df': newdf})
-        newdf=newdf
+       
     except Exception as e:
         st.error("Si è verificato un errore durante l'esecuzione del codice:")
         st.error(str(e))
