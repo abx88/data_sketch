@@ -137,6 +137,20 @@ if righe_da_filtrare:
 
         # elimina le righe che contengono i valori selezionati
         newdf = newdf.loc[newdf[scegli_colonna_valori_filtro].isin(valori_da_filtrare)]
+        
+#aggiunta colonne
+expander_colonne.write("aggiunta guidata colonne")
+def create_max_column(df):
+    expander_colonne.write('Seleziona la colonna:')
+    column = expander_colonne.selectbox('', options=df.columns)
+    new_col_name = expander_colonne.text_input('Inserisci il nome della nuova colonna:')
+    max_values = df[column].max()
+    df[new_col_name] = max_values
+    expander_colonne.write('Colonna creata con successo!')
+    
+if expander_colonne.button('Crea nuova colonna max'):
+    create_max_column(newdf)
+    expander_csvModifica.write(newdf)     
 
         
 pivot_df = st.sidebar.checkbox("raggruppa dati")
@@ -173,18 +187,6 @@ if pivot_df == True:
                                aggfunc=funzione,
                                dropna = True)
 
-        
-expander_colonne.write("aggiunta guidata colonne")
-def create_max_column(df):
-    expander_colonne.write('Seleziona la colonna:')
-    column = expander_colonne.selectbox('', options=df.columns)
-    new_col_name = expander_colonne.text_input('Inserisci il nome della nuova colonna:')
-    max_values = df[column].max()
-    df[new_col_name] = max_values
-    expander_colonne.write('Colonna creata con successo!')
-    
-if expander_colonne.button('Crea nuova colonna max'):
-    create_max_column(newdf)
         
 trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
