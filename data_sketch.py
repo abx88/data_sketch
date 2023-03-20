@@ -52,7 +52,6 @@ else:
 newdf= dfedit
 
 
-modalità_modifica = st.sidebar.radio("modalità modifica",'modifica predefinita', 'modifica con codice')
 
 
 #verifica se è necessario inserire delle intestazioni
