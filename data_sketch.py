@@ -23,6 +23,7 @@ newdf_mod= dfprova
 
 st.header("Data Sketch")
 
+uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 col1, col2 = st.columns([2, 2])
 expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
@@ -32,7 +33,6 @@ expander_modificheCol.write("modifiche effettuate su colonne")
 expander_modificheRighe.write("modifiche effettuate su righe")
 #expander_csvOriginale.write("file csv originale")
 #expander_csvModifica.write("file csv modificato")
-uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
 st.sidebar.header("Tool Modifica")
 # Definisci la lista di delimitatori supportati da Pandas
 delimiter_options = [',', '\t', '|', ';', ':']
