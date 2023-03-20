@@ -68,7 +68,7 @@ if tabella_senza_intestazioni == True:
 
 
 #verifica se ci sono colonne da elimianre
-elimina_colonne = st.sidebar.checkbox("elimina colonne")
+elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
 if elimina_colonne == True:
     # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
