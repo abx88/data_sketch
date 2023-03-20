@@ -117,7 +117,7 @@ righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
 
 if righe_da_eliminare:
     #lista colonne presenti in df
-    scegli_colonna_valori = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
+    scegli_colonna_valori = expander_modificheRighe.selectbox("Seleziona la colonna da cui eliminare", newdf.columns.tolist())
     # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
     if scegli_colonna_valori is not None:
         valori = newdf[scegli_colonna_valori].unique().tolist()
@@ -132,7 +132,7 @@ righe_da_filtrare = expander_modificheRighe.checkbox("righe da selezionare")
 
 if righe_da_filtrare:
     #lista colonne presenti in df
-    scegli_colonna_valori_filtro = expander_modificheRighe.selectbox("Seleziona la colonna", newdf.columns.tolist())
+    scegli_colonna_valori_filtro = expander_modificheRighe.selectbox("Seleziona la colonna da cui scegliere", newdf.columns.tolist())
     # crea una serie da una colonna del df, da questa crea una lista di valori univoci presenti nella serie
     if scegli_colonna_valori_filtro is not None:
         valori_filt = newdf[scegli_colonna_valori_filtro].unique().tolist()
