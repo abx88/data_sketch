@@ -382,10 +382,9 @@ if st.sidebar.checkbox("visualizza dati"):
 
     expander_dis5 = col3.expander("grafico 5")
     with expander_dis5:
-        col9,col10,col11= st.columns(3)
-        #colonna_X = col9.selectbox("Seleziona colonna asse X", newdfvisual.columns.tolist())
+        col9,col10,col11= st.columns([2,1])
         colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
-        colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
+        colonna_indice= col11.selectbox("Seleziona colonna discriminante", newdfvisual.columns.tolist())
         scatter2 = px.scatter(newdfvisual, x=newdfvisual.index, y=colonna_Y, color=colonna_indice)
         st.plotly_chart(scatter2, use_container_width=False)
                     
