@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 #from io import StringIO
 import plotly.graph_objects as go
+import plotly.express as px
 import scipy.stats as stats
 
 
@@ -385,7 +386,7 @@ else:
             colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
             colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
             df = newdfvisual
-            fig = px.scatter(df, x=colonna_X, y=colonna_Y, color="species")
+            fig = px.scatter(df, x=colonna_X, y=colonna_Y, color=colonna_indice)
             fig.show()
         
 
