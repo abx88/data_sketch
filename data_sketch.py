@@ -187,7 +187,7 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
 
-newdfvisual=newdf
+
 
     
 if st.sidebar.checkbox("modifica dati con codice"):
@@ -208,8 +208,8 @@ if st.sidebar.checkbox("modifica dati con codice"):
             
             
             
-
-
+newdfvisual=newdf
+expander_csvModifica.write(newdf) 
 
 #else:
     
@@ -386,12 +386,11 @@ if st.sidebar.checkbox("visualizza dati"):
         colonna_X = col9.selectbox("Seleziona colonna asse X", newdfvisual.columns.tolist())
         colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
         colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
-        df = newdfvisual
-        scatter2 = px.scatter(df, x=colonna_X, y=colonna_Y, color=colonna_indice)
+        scatter2 = px.scatter(newdfvisual, x=colonna_X, y=colonna_Y, color=colonna_indice)
         st.plotly_chart(scatter2, use_container_width=False)
                     
 
-expander_csvModifica.write(newdf) 
+
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
