@@ -386,9 +386,9 @@ else:
             colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
             colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
             df = newdfvisual
-            fig = px.scatter(df, x=colonna_X, y=colonna_Y, color=colonna_indice)
-            fig.show()
-        
+            scatter2 = px.scatter(df, x=colonna_X, y=colonna_Y, color=colonna_indice)
+            st.plotly_chart(scatter2, use_container_width=False)
+                    
 
 expander_csvModifica.write(newdf) 
                 
