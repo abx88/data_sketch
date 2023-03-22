@@ -187,6 +187,7 @@ trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
 if trasponi_df == True:
     newdf = newdf.transpose()
 
+newdfvisual=newdf
 
     
 if st.sidebar.checkbox("modifica dati con codice"):
@@ -211,7 +212,7 @@ if st.sidebar.checkbox("modifica dati con codice"):
 
 
 else:
-    newdfvisual=newdf
+    
     
     if st.sidebar.checkbox("visualizza dati"):
         st.subheader("visualizza dati")
