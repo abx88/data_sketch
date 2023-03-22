@@ -51,7 +51,10 @@ else:
 
 newdf= dfedit
 
-
+#pulizia spazi record df
+lista_colonne = newdf.columns.tolist()
+for colonna in lista_colonne:
+    df[colonna] = df[colonna].apply(lambda x: x.strip())
 
 
 #verifica se è necessario inserire delle intestazioni
