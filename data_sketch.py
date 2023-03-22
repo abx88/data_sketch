@@ -380,7 +380,7 @@ else:
                 
         expander_dis5 = col3.expander("grafico 5")
         with expander_dis5:
-            col9,col10,col11= st.columns([3,2])
+            col9,col10,col11= st.columns(3)
             colonna_X = col9.selectbox("Seleziona colonna asse X", newdfvisual.columns.tolist())
             colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
             colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
