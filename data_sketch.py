@@ -382,7 +382,7 @@ if st.sidebar.checkbox("visualizza dati"):
 
     expander_dis5 = col3.expander("grafico 5")
     with expander_dis5:
-        col9,col10= st.columns([2,1])
+        col9,col10= st.columns([2,2])
         colonna_Y = col9.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
         colonna_indice= col10.selectbox("Seleziona colonna discriminante", newdfvisual.columns.tolist())
         scatter2 = px.scatter(newdfvisual, x=newdfvisual.index, y=colonna_Y, color=colonna_indice)
