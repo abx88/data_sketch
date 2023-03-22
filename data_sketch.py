@@ -209,7 +209,6 @@ if st.sidebar.checkbox("modifica dati con codice"):
             
             
 newdfvisual=newdf
-expander_csvModifica.write(newdf) 
 
 #else:
     
@@ -390,6 +389,7 @@ if st.sidebar.checkbox("visualizza dati"):
                     
 
 
+expander_csvModifica.write(newdf) 
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
