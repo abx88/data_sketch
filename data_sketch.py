@@ -211,13 +211,16 @@ if st.sidebar.checkbox("modifica dati con codice"):
 
 else:
     newdfvisual=newdf
+    
     if st.sidebar.checkbox("visualizza dati"):
         st.subheader("visualizza dati")
         #tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
         col3, col4 = st.columns([2, 2])
 
         #if tipologia_dati == 'Time Series':
-        with col3:
+        expander_dis1 = col3.expander("disegno1")
+        with expander_dis1:
+           
             #visualizzazione variabile    
             colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdfvisual.columns.tolist())
             variabile = go.Figure()
