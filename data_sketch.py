@@ -91,7 +91,7 @@ if rinomina_colonne == True:
 
 #pulizia spazi record df
 pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
-if pulisci_colonne = True:
+if pulisci_colonne == True:
     colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
     for colonna in colonne_da_pulire:
         newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
