@@ -51,12 +51,6 @@ else:
 
 newdf= dfedit
 
-#pulizia spazi record df
-lista_colonne = newdf.columns.tolist()
-for colonna in lista_colonne:
-    newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
-
-
 #verifica se è necessario inserire delle intestazioni
 tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
@@ -95,7 +89,13 @@ if rinomina_colonne == True:
     # Rinomina le colonne selezionate con i nuovi nomi
     newdf =  newdf.rename(columns=mapping_nomi_colonne)
 
-
+#pulizia spazi record df
+pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
+if pulisci_colonne = True:
+    colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
+    for colonna in colonne_da_pulire:
+        newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
+    
 #verifica la necessità di una colonna indice    
 indice = st.sidebar.checkbox("colonna indice")
 
