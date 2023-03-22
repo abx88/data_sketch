@@ -218,7 +218,7 @@ else:
         col3, col4 = st.columns([2, 2])
 
         #if tipologia_dati == 'Time Series':
-        expander_dis1 = col3.expander("disegno1")
+        expander_dis1 = col3.expander("grafico 1")
         with expander_dis1:
            
             #visualizzazione variabile    
@@ -241,8 +241,9 @@ else:
                     'xanchor': 'center',
                     'yanchor': 'top'})
             st.plotly_chart(variabile,use_container_width=False )
-
-        with col4:
+        
+        expander_dis2 = col4.expander("grafico 2")
+        with expander_dis2:
             colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdfvisual.columns.tolist())
             variabile2 = go.Figure()
 
@@ -264,7 +265,8 @@ else:
             st.plotly_chart(variabile2,use_container_width=False )
 
     #else:
-        with col3:
+        expander_dis3 = col3.expander("grafico 3")
+        with expander_dis3:
             col5,col6,col9= st.columns([2,2,2])
             colonna_confrontoY = col5.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
             colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
@@ -291,8 +293,8 @@ else:
 
             st.plotly_chart(scatter,use_container_width=False )
 
-
-        with col4:
+        expander_dis4 = col4.expander("grafico 4")
+        with expander_dis4:
             col7,col8 = st.columns([2, 2])
             #dal df scelgo una variabile per confrontare la sua distribuzione 
             colonna_distribuzione = col7.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
@@ -376,7 +378,15 @@ else:
                         'yanchor': 'top'})
                 st.plotly_chart(distribuzione_perc, use_container_width=False)
                 
-        
+        expander_dis5 = col3.expander("grafico 5")
+        with expander_dis5:
+            col9,col10,col11= st.columns([3,3])
+            colonna_X = col9.selectbox("Seleziona colonna asse X", newdfvisual.columns.tolist())
+            colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
+            colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
+            df = newdfvisual()
+            fig = px.scatter(df, x=colonna_X, y=colonna_Y, color="species")
+            fig.show()
         
 
 expander_csvModifica.write(newdf) 
