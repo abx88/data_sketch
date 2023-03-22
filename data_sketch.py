@@ -384,7 +384,7 @@ else:
             colonna_X = col9.selectbox("Seleziona colonna asse X", newdfvisual.columns.tolist())
             colonna_Y = col10.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
             colonna_indice= col11.selectbox("Seleziona colonna tipo", newdfvisual.columns.tolist())
-            df = newdfvisual()
+            df = newdfvisual
             fig = px.scatter(df, x=colonna_X, y=colonna_Y, color="species")
             fig.show()
         
