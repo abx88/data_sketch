@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 #from io import StringIO
 import plotly.graph_objects as go
+import plotly.express as px
 import scipy.stats as stats
 
 
@@ -51,9 +52,6 @@ else:
 
 newdf= dfedit
 
-
-
-
 #verifica se è necessario inserire delle intestazioni
 tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
@@ -92,7 +90,13 @@ if rinomina_colonne == True:
     # Rinomina le colonne selezionate con i nuovi nomi
     newdf =  newdf.rename(columns=mapping_nomi_colonne)
 
-
+#pulizia spazi record df
+pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
+if pulisci_colonne == True:
+    colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
+    for colonna in colonne_da_pulire:
+        newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
+    
 #verifica la necessità di una colonna indice    
 indice = st.sidebar.checkbox("colonna indice")
 
@@ -184,6 +188,7 @@ if trasponi_df == True:
     newdf = newdf.transpose()
 
 
+
     
 if st.sidebar.checkbox("modifica dati con codice"):
     st.subheader("Esegui codice")
@@ -203,177 +208,189 @@ if st.sidebar.checkbox("modifica dati con codice"):
             
             
             
-
-
-
-else:
-    newdfvisual=newdf
-    if st.sidebar.checkbox("visualizza dati"):
-        st.subheader("visualizza dati")
-        #tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
-        col3, col4 = st.columns([2, 2])
-
-        #if tipologia_dati == 'Time Series':
-        with col3:
-            #visualizzazione variabile    
-            colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdfvisual.columns.tolist())
-            variabile = go.Figure()
-
-            variabile.add_trace(go.Scatter(
-                mode = "lines",
-                y = newdfvisual[colonna_da_visualizzare],
-                x = newdfvisual.index,
-                name="variabile",
-                connectgaps=False))
-
-            variabile.update_layout(
-                xaxis_title_text="data",
-                title={
-                    'text': colonna_da_visualizzare,
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'})
-            st.plotly_chart(variabile,use_container_width=False )
-
-        with col4:
-            colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdfvisual.columns.tolist())
-            variabile2 = go.Figure()
-
-            variabile2.add_trace(go.Scatter(
-                mode = "markers",
-                y = newdfvisual[colonna_da_visualizzare2],
-                x = newdfvisual.index,
-                name="variabile2",
-                connectgaps=False))
-
-            variabile2.update_layout(
-                xaxis_title_text="data",
-                title={
-                    'text': colonna_da_visualizzare2,
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'})
-            st.plotly_chart(variabile2,use_container_width=False )
-
-    #else:
-        with col3:
-            col5,col6,col9= st.columns([2,2,2])
-            colonna_confrontoY = col5.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
-            colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
-            scatter = go.Figure()
-
-            scatter.add_trace(go.Scatter(
-                mode = "markers",
-                y = newdfvisual[colonna_confrontoY],
-                x = newdfvisual[colonna_confrontoX],
-                name="scatter",
-                connectgaps=False))
-
-
-            scatter.update_layout(
-                xaxis_title_text=colonna_confrontoX,
-                yaxis_title_text=colonna_confrontoY,
-                title={
-                    'text': "confronto variabili",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'})
-
-
-            st.plotly_chart(scatter,use_container_width=False )
-
-
-        with col4:
-            col7,col8 = st.columns([2, 2])
-            #dal df scelgo una variabile per confrontare la sua distribuzione 
-            colonna_distribuzione = col7.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
-            # calcola la media e la deviazione standard della variabile di interesse
-            colonna_distribuzione_perc = col7.checkbox("distribuzione della variazione percentuale")
-            if colonna_distribuzione_perc == False:
-                newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
-                media = newdfvisual[colonna_distribuzione].mean()
-                dev_std = newdfvisual[colonna_distribuzione].std()    
-                # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
-                distribuzione = go.Figure()
-
-                # traccia 1: distribuzione dei dati
-                distribuzione.add_trace(go.Histogram(
-                    x=newdfvisual[colonna_distribuzione],
-                    histnorm='probability',
-                    name="distribuzione variabile"))
-
-                # traccia 2: distribuzione normale
-                x = np.linspace(newdfvisual[colonna_distribuzione].min(), newdfvisual[colonna_distribuzione].max(), 100)
-                pdf = stats.norm.pdf(x, media, dev_std)
-                distribuzione.add_trace(go.Scatter(
-                    x=x, 
-                    y=pdf, 
-                    mode='lines', 
-                    name='distribuzione normale',
-                    yaxis='y2'))
-
-                # aggiungi i titoli degli assi e il titolo della figura
-                distribuzione.update_layout(
-                    xaxis_title_text=colonna_distribuzione,
-                    yaxis_title_text='densità di probabilità',
-                    yaxis2=dict(overlaying='y',side='right'),
-                    title={
-                        'text': "Distribuzione dei dati e distribuzione normale",
-                        'y':0.9,
-                        'x':0.5,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
-
-                # visualizza la figura
-                st.plotly_chart(distribuzione, use_container_width=False)
-
-
-            else:
-                #creazione del df delle variazioni percentuali
-                newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
-                serie_perc = newdfvisual[colonna_distribuzione].pct_change()
-                media_perc = serie_perc.mean()
-                dev_std_perc = serie_perc.std()    
-
-                # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
-                distribuzione_perc = go.Figure()
-
-                # traccia 1: distribuzione dei dati
-                distribuzione_perc.add_trace(go.Histogram(
-                    x=serie_perc,
-                    histnorm='probability',
-                    name="distribuzione variabile"))
-
-                # traccia 2: distribuzione normale
-                x = np.linspace(serie_perc.min(), serie_perc.max(), 100)
-                pdf = stats.norm.pdf(x, media_perc, dev_std_perc)
-                distribuzione_perc.add_trace(go.Scatter(
-                    x=x, 
-                    y=pdf, 
-                    mode='lines', 
-                    name='distribuzione normale',
-                    yaxis='y2'))
-
-                # aggiungi i titoli degli assi e il titolo della figura
-                distribuzione_perc.update_layout(
-                    xaxis_title_text=colonna_distribuzione,
-                    yaxis_title_text='densità di probabilità',
-                    yaxis2=dict(overlaying='y',side='right'),
-                    title={
-                        'text': "Distribuzione dei dati e distribuzione normale",
-                        'y':0.9,
-                        'x':0.5,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
-                st.plotly_chart(distribuzione_perc, use_container_width=False)
-                
-        
-        
-
+newdfvisual=newdf
 expander_csvModifica.write(newdf) 
+
+#else:
+    
+    
+if st.sidebar.checkbox("visualizza dati"):
+    st.subheader("visualizza dati")
+    #tipologia_dati = st.radio("tipologia dati in esame",('Time Series','Cross Section (analisi correlazione)'))
+    col3, col4 = st.columns([2, 2])
+
+    #if tipologia_dati == 'Time Series':
+    expander_dis1 = col3.expander("grafico 1")
+    with expander_dis1:
+
+        #visualizzazione variabile    
+        colonna_da_visualizzare = st.selectbox("Seleziona la colonna da visualizzare", newdfvisual.columns.tolist())
+        variabile = go.Figure()
+
+        variabile.add_trace(go.Scatter(
+            mode = "lines",
+            y = newdfvisual[colonna_da_visualizzare],
+            x = newdfvisual.index,
+            name="variabile",
+            connectgaps=False))
+
+        variabile.update_layout(
+            xaxis_title_text="data",
+            title={
+                'text': colonna_da_visualizzare,
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'})
+        st.plotly_chart(variabile,use_container_width=False )
+
+    expander_dis2 = col4.expander("grafico 2")
+    with expander_dis2:
+        colonna_da_visualizzare2 = st.selectbox("Seleziona la colonna da visualizzare ", newdfvisual.columns.tolist())
+        variabile2 = go.Figure()
+
+        variabile2.add_trace(go.Scatter(
+            mode = "markers",
+            y = newdfvisual[colonna_da_visualizzare2],
+            x = newdfvisual.index,
+            name="variabile2",
+            connectgaps=False))
+
+        variabile2.update_layout(
+            xaxis_title_text="data",
+            title={
+                'text': colonna_da_visualizzare2,
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'})
+        st.plotly_chart(variabile2,use_container_width=False )
+
+#else:
+    expander_dis3 = col3.expander("grafico 3")
+    with expander_dis3:
+        col5,col6,col9= st.columns([2,2,2])
+        colonna_confrontoY = col5.selectbox("Seleziona asse Y", newdfvisual.columns.tolist())
+        colonna_confrontoX = col6.selectbox("Seleziona asse X", newdfvisual.columns.tolist())
+        scatter = go.Figure()
+
+        scatter.add_trace(go.Scatter(
+            mode = "markers",
+            y = newdfvisual[colonna_confrontoY],
+            x = newdfvisual[colonna_confrontoX],
+            name="scatter",
+            connectgaps=False))
+
+
+        scatter.update_layout(
+            xaxis_title_text=colonna_confrontoX,
+            yaxis_title_text=colonna_confrontoY,
+            title={
+                'text': "confronto variabili",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'})
+
+
+        st.plotly_chart(scatter,use_container_width=False )
+
+    expander_dis4 = col4.expander("grafico 4")
+    with expander_dis4:
+        col7,col8 = st.columns([2, 2])
+        #dal df scelgo una variabile per confrontare la sua distribuzione 
+        colonna_distribuzione = col7.selectbox("Seleziona colonna per vedere la sua distribuzione", newdfvisual.columns.tolist())
+        # calcola la media e la deviazione standard della variabile di interesse
+        colonna_distribuzione_perc = col7.checkbox("distribuzione della variazione percentuale")
+        if colonna_distribuzione_perc == False:
+            newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
+            media = newdfvisual[colonna_distribuzione].mean()
+            dev_std = newdfvisual[colonna_distribuzione].std()    
+            # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
+            distribuzione = go.Figure()
+
+            # traccia 1: distribuzione dei dati
+            distribuzione.add_trace(go.Histogram(
+                x=newdfvisual[colonna_distribuzione],
+                histnorm='probability',
+                name="distribuzione variabile"))
+
+            # traccia 2: distribuzione normale
+            x = np.linspace(newdfvisual[colonna_distribuzione].min(), newdfvisual[colonna_distribuzione].max(), 100)
+            pdf = stats.norm.pdf(x, media, dev_std)
+            distribuzione.add_trace(go.Scatter(
+                x=x, 
+                y=pdf, 
+                mode='lines', 
+                name='distribuzione normale',
+                yaxis='y2'))
+
+            # aggiungi i titoli degli assi e il titolo della figura
+            distribuzione.update_layout(
+                xaxis_title_text=colonna_distribuzione,
+                yaxis_title_text='densità di probabilità',
+                yaxis2=dict(overlaying='y',side='right'),
+                title={
+                    'text': "Distribuzione dei dati e distribuzione normale",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'})
+
+            # visualizza la figura
+            st.plotly_chart(distribuzione, use_container_width=False)
+
+
+        else:
+            #creazione del df delle variazioni percentuali
+            newdfvisual[colonna_distribuzione] = pd.to_numeric(newdfvisual[colonna_distribuzione], errors='coerce')
+            serie_perc = newdfvisual[colonna_distribuzione].pct_change()
+            media_perc = serie_perc.mean()
+            dev_std_perc = serie_perc.std()    
+
+            # crea una figura con due tracce: la distribuzione dei dati e la distribuzione normale
+            distribuzione_perc = go.Figure()
+
+            # traccia 1: distribuzione dei dati
+            distribuzione_perc.add_trace(go.Histogram(
+                x=serie_perc,
+                histnorm='probability',
+                name="distribuzione variabile"))
+
+            # traccia 2: distribuzione normale
+            x = np.linspace(serie_perc.min(), serie_perc.max(), 100)
+            pdf = stats.norm.pdf(x, media_perc, dev_std_perc)
+            distribuzione_perc.add_trace(go.Scatter(
+                x=x, 
+                y=pdf, 
+                mode='lines', 
+                name='distribuzione normale',
+                yaxis='y2'))
+
+            # aggiungi i titoli degli assi e il titolo della figura
+            distribuzione_perc.update_layout(
+                xaxis_title_text=colonna_distribuzione,
+                yaxis_title_text='densità di probabilità',
+                yaxis2=dict(overlaying='y',side='right'),
+                title={
+                    'text': "Distribuzione dei dati e distribuzione normale",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'})
+            st.plotly_chart(distribuzione_perc, use_container_width=False)
+
+    expander_dis5 = col3.expander("grafico 5")
+    with expander_dis5:
+        col9,col10= st.columns([2,2])
+        colonna_Y = col9.selectbox("Seleziona colonna asse Y", newdfvisual.columns.tolist())
+        colonna_indice= col10.selectbox("Seleziona colonna discriminante", newdfvisual.columns.tolist())
+        scatter2 = px.scatter(newdfvisual, x=newdfvisual.index, y=colonna_Y, color=colonna_indice)
+        st.plotly_chart(scatter2, use_container_width=False)
+                    
+
+
+
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
