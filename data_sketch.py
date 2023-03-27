@@ -193,7 +193,7 @@ if st.sidebar.checkbox("modifica dati con codice"):
     if st.button("Esegui"):
         try:
             # Esegui il codice Python all'interno della funzione exec
-            exec(code, {'df': newdf})
+            exec(code, {'df': newdf, 'pd': pd, 'np': np})
             
         
 
