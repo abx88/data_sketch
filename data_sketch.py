@@ -194,9 +194,13 @@ if mergedf == True:
     uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
     if uploaded_file1 is not None:
         dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
+        #selezione colonne da aggiungere ad df in esame
+        colonne_selezionate = st.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
+        # Copia le colonne selezionate nel DataFrame esistente
+        for colonna in colonne_selezionate:
+            newdf[colonna] = dfmerge[colonna]
         dfmerge
-    #expander_dfmerge
-
+           
 
 
 
