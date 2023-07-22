@@ -113,6 +113,7 @@ if indice == True:
         newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
         scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
         if scomponi_data ==True:
+            newdf['giorno'] = newdf.index.day
             newdf['giorno_W'] = newdf.index.dayofweek
             newdf['mese'] = newdf.index.month
             newdf['anno'] = newdf.index.year
