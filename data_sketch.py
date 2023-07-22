@@ -204,6 +204,7 @@ if rinomina_colonne == True:
 
     # Rinomina le colonne selezionate con i nuovi nomi
     newdf =  newdf.rename(columns=mapping_nomi_colonne)
+    expander_csvModifica.write(newdf) 
 
 #pulizia spazi record df
 pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
