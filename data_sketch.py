@@ -177,7 +177,7 @@ if mergedf == True:
         # Copia le colonne selezionate nel DataFrame esistente
         for colonna in colonne_selezionate:
             newdf[colonna] = dfmerge[colonna]
-        expander_dfmerge.datafreme(dfmerge)
+        expander_dfmerge.dataframe(dfmerge)
            
 
 #verifica se ci sono colonne da elimianre
