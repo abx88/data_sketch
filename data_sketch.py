@@ -65,7 +65,7 @@ if tabella_senza_intestazioni == True:
     newdf.index = newdf.index + 1
     newdf.sort_index(inplace=True)
 
-mergedf = st.sidebar.checkbox("inserire colonne da altri df")
+mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
 if mergedf == True:
     #expander_dfmerge = st.expander("merge colonne di altri df")
     #expander_dfmerge.write("aggiungi colonne da altri df")
