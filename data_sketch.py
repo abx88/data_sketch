@@ -242,6 +242,7 @@ if st.sidebar.checkbox("modifica dati con codice"):
             
 newdfvisual=newdf
 expander_csvModifica.write(newdf) 
+st.write(newdf)
 
 #else:
     
