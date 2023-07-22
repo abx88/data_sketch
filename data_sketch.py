@@ -32,6 +32,8 @@ expander_modificheCol = col1.expander("filtra/modifica colonne")
 expander_modificheRighe = col2.expander("filtra/modifica righe")
 expander_csvOriginale = col1.expander("dati csv originali")
 expander_csvModifica = col2.expander("dati csv modificati")
+expander_dfmerge = col1.expander("merge colonne di altri df")
+
 expander_modificheCol.write("modifiche effettuate su colonne")    
 expander_modificheRighe.write("modifiche effettuate su righe")
 expander_dfmerge.write("aggiungi colonne da altri df")
