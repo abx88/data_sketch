@@ -431,17 +431,19 @@ if st.sidebar.checkbox("visualizza dati"):
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
 dfdascaricare=newdf.rename(columns=mapping_nomi_colonne)
-@st.cache
-def convert_df(dfdascaricare):
-    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    return dfdascaricare.to_csv().encode('utf-8')
 
-csv = convert_df(dfdascaricare)
+#@st.cache
+def convert_df(newdf):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return newdf.to_csv().encode('utf-8')
+
+csv = convert_df(newdf)
 st.download_button(
     label="Download dataset modificato",
     data=csv,
     file_name=f"{nome_file}.csv",  # utilizzo della f-string per inserire il valore di nome_file come stringa
     mime='text/csv')    
+                     
                     
           
     
