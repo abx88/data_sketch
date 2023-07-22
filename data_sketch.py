@@ -193,7 +193,7 @@ if mergedf == True:
     uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
     if uploaded_file1 is not None:
         dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
-        indice_dfmerge = st.sidebar.checkbox("inserire colonne da altri df")
+        indice_dfmerge = st.sidebar.checkbox("selezionare colonna indice df merge")
         if indice_dfmerge == True:
             # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
             colonna_indice_dfmerge = st.selectbox("Seleziona la colonna da usare come indice in df merge", dfmerge.columns.tolist())
