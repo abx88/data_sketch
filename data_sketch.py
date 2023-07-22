@@ -193,6 +193,17 @@ if mergedf == True:
     uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
     if uploaded_file1 is not None:
         dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
+        if indice == True:
+            # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+            colonna_indice_dfmerge = st.selectbox("Seleziona la colonna da usare come indice in df merge", dfmerge.columns.tolist())
+            # Imposta la colonna selezionata come indice del DataFrame
+            dfmerge = dfmerge.set_index(colonna_indice)
+            # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
+            indice_datetime_dfmerge = st.checkbox("indice date_time per df merge")
+            if indice_datetime_dfmerge ==True:
+                dfmerge.index = pd.to_datetime(dfmerge.index)#occorre per convertire in datetime la data
+
+        
         #selezione colonne da aggiungere ad df in esame
         colonne_selezionate = st.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
         # Copia le colonne selezionate nel DataFrame esistente
