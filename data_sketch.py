@@ -190,8 +190,8 @@ if pivot_df == True:
                                dropna = True)
 
 mergedf = st.sidebar.checkbox("inserire colonne da altri df")
-if pivot_df == True:
-    uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare oclonne .csv/.txt")
+if mergedf == True:
+    uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
     if uploaded_file1 is not None:
         dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
         dfmerge
