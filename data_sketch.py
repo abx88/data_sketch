@@ -191,10 +191,10 @@ if pivot_df == True:
 
 mergedf = st.sidebar.checkbox("inserire colonne da altri df")
 if pivot_df == True:
-    uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
-    if uploaded_file is not None:
-        dfmerge = pd.read_csv(uploaded_file, delimiter = delimitatore)
-        
+    uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare oclonne .csv/.txt")
+    if uploaded_file1 is not None:
+        dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
+        dfmerge
     #expander_dfmerge
 
 
