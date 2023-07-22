@@ -198,7 +198,7 @@ if mergedf == True:
             # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
             colonna_indice_dfmerge = expander_dfmerge.selectbox("Seleziona la colonna da usare come indice in df merge", dfmerge.columns.tolist())
             # Imposta la colonna selezionata come indice del DataFrame
-            dfmerge = dfmerge.set_index(colonna_indice)
+            dfmerge = dfmerge.set_index(colonna_indice_dfmerge)
             # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
             indice_datetime_dfmerge = expander_dfmerge.checkbox("indice date_time per df merge")
             if indice_datetime_dfmerge ==True:
