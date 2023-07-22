@@ -430,7 +430,7 @@ if st.sidebar.checkbox("visualizza dati"):
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
-dfdascaricare=newdf.rename(columns=mapping_nomi_colonne)
+
 
 #@st.cache
 def convert_df(newdf):
