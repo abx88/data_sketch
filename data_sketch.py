@@ -117,18 +117,6 @@ if indice == True:
             newdf['mese'] = newdf.index.month
             newdf['anno'] = newdf.index.year
 
-#verifica la necessità modificare i valori di una colonna in valori float (numeri con virgola)    
-converti = st.sidebar.checkbox("converti in valori 'float' i valori della colonna")
-
-if converti == True:
-    expander_convertire = st.sidebar.expander("scegli colonne da convertire")
-    # Aggiungi l'elemento multiselectbox per selezionare la/le colonna/e da convertire
-    colonne_da_convertire = expander_convertire.multiselectbox("Seleziona le colonne da convertire", newdf.columns.tolist())
-    # converte i valori delle colonne selezionate in float
-    for colonna in colonne_da_convertire:
-        newdf[colonna] = newdf[colonna].str.replace('.', '')
-        newdf[colonna] = newdf[colonna].str.replace(',', '.')
-        newdf[colonna] = newdf[colonna].astype(float)
 
 righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
 
