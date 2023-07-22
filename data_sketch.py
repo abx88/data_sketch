@@ -67,8 +67,8 @@ if tabella_senza_intestazioni == True:
 
 
 
-#verifica se ci sono colonne da elimianre
-
+#verifica la necessità di una colonna indice    
+indice = st.sidebar.checkbox("colonna indice")
 
 if indice == True:
     expander_indice = st.sidebar.expander("scegli colonna indice")
@@ -180,6 +180,7 @@ if mergedf == True:
         dfmerge
            
 
+#verifica se ci sono colonne da elimianre
 elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
 if elimina_colonne == True:
@@ -211,8 +212,7 @@ if pulisci_colonne == True:
     for colonna in colonne_da_pulire:
         newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
     
-#verifica la necessità di una colonna indice    
-indice = st.sidebar.checkbox("colonna indice")
+
 
 
 trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
