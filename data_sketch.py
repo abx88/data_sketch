@@ -204,7 +204,7 @@ if rinomina_colonne == True:
 
     # Rinomina le colonne selezionate con i nuovi nomi
     newdf =  newdf.rename(columns=mapping_nomi_colonne)
-    expander_csvModifica.write(newdf) 
+   
 
 #pulizia spazi record df
 pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
@@ -428,13 +428,13 @@ if st.sidebar.checkbox("visualizza dati"):
                 
 st.subheader("esporta dataframe in csv")
 nome_file=st.text_input("inserisci il nome con cui vuoi salvare il file scaricato", "nuovo_dataset")
-
+dfdascaricare=newdf.rename(columns=mapping_nomi_colonne)
 @st.cache
-def convert_df(newdf):
+def convert_df(dfdascaricare):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    return newdf.to_csv().encode('utf-8')
+    return dfdascaricare.to_csv().encode('utf-8')
 
-csv = convert_df(newdf)
+csv = convert_df(dfdascaricare)
 st.download_button(
     label="Download dataset modificato",
     data=csv,
