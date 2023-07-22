@@ -65,6 +65,34 @@ if tabella_senza_intestazioni == True:
     newdf.index = newdf.index + 1
     newdf.sort_index(inplace=True)
 
+mergedf = st.sidebar.checkbox("inserire colonne da altri df")
+if mergedf == True:
+    #expander_dfmerge = st.expander("merge colonne di altri df")
+    #expander_dfmerge.write("aggiungi colonne da altri df")
+    uploaded_file1 = expander_modificheCol.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
+    if uploaded_file1 is not None:
+        dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
+        indice_dfmerge = expander_modificheCol.checkbox("selezionare colonna indice df merge")
+        if indice_dfmerge == True:
+            # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+            colonna_indice_dfmerge = expander_modificheCol.selectbox("Seleziona la colonna da usare come indice in df merge", dfmerge.columns.tolist())
+            # Imposta la colonna selezionata come indice del DataFrame
+            dfmerge = dfmerge.set_index(colonna_indice_dfmerge)
+            # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
+            indice_datetime_dfmerge = expander_modificheCol.checkbox("indice date_time per df merge")
+            if indice_datetime_dfmerge ==True:
+                dfmerge.index = pd.to_datetime(dfmerge.index)#occorre per convertire in datetime la data
+
+        #selezione eventuali colonne da aggiungere a df in esame
+        colonne_selezionate = expander_modificheCol.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
+        # Copia le colonne selezionate nel DataFrame esistente
+        for colonna in colonne_selezionate:
+            newdf[colonna] = dfmerge[colonna]
+        expander_dfmerge.dataframe(dfmerge)
+
+
+
+
 #verifica se ci sono colonne da elimianre
 elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
@@ -187,30 +215,7 @@ if pivot_df == True:
                                aggfunc=funzione,
                                dropna = True)
 
-mergedf = st.sidebar.checkbox("inserire colonne da altri df")
-if mergedf == True:
-    expander_dfmerge = st.expander("merge colonne di altri df")
-    expander_dfmerge.write("aggiungi colonne da altri df")
-    uploaded_file1 = expander_dfmerge.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
-    if uploaded_file1 is not None:
-        dfmerge = pd.read_csv(uploaded_file1, delimiter = delimitatore)
-        indice_dfmerge = expander_dfmerge.checkbox("selezionare colonna indice df merge")
-        if indice_dfmerge == True:
-            # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-            colonna_indice_dfmerge = expander_dfmerge.selectbox("Seleziona la colonna da usare come indice in df merge", dfmerge.columns.tolist())
-            # Imposta la colonna selezionata come indice del DataFrame
-            dfmerge = dfmerge.set_index(colonna_indice_dfmerge)
-            # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-            indice_datetime_dfmerge = expander_dfmerge.checkbox("indice date_time per df merge")
-            if indice_datetime_dfmerge ==True:
-                dfmerge.index = pd.to_datetime(dfmerge.index)#occorre per convertire in datetime la data
 
-        #selezione colonne da aggiungere ad df in esame
-        colonne_selezionate = expander_dfmerge.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
-        # Copia le colonne selezionate nel DataFrame esistente
-        for colonna in colonne_selezionate:
-            newdf[colonna] = dfmerge[colonna]
-        expander_dfmerge.dataframe(dfmerge)
            
 
 
