@@ -123,11 +123,11 @@ converti = st.sidebar.checkbox("converti in valori 'float' i valori della colonn
 if converti == True:
     expander_convertire = st.sidebar.expander("scegli colonne da convertire")
     # Aggiungi l'elemento multiselectbox per selezionare la/le colonna/e da convertire
-    colonne_da_convertire = expander_convertire.selectbox("Seleziona le colonne da convertire", newdf.columns.tolist())
+    colonne_da_convertire = expander_convertire.multiselectbox("Seleziona le colonne da convertire", newdf.columns.tolist())
     # converte i valori delle colonne selezionate in float
     for colonna in colonne_da_convertire:
-        newdf[colonna] = newdf[colonna].replace('.', '')
-        newdf[colonna] = newdf[colonna].replace(',', '.')
+        newdf[colonna] = newdf[colonna].str.replace('.', '')
+        newdf[colonna] = newdf[colonna].str.replace(',', '.')
         newdf[colonna] = newdf[colonna].astype(float)
 
 righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
