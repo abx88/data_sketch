@@ -34,6 +34,7 @@ expander_csvOriginale = col1.expander("dati csv originali")
 expander_csvModifica = col2.expander("dati csv modificati")
 expander_modificheCol.write("modifiche effettuate su colonne")    
 expander_modificheRighe.write("modifiche effettuate su righe")
+expander_dfmerge.write("aggiungi colonne da altri df")
 #expander_csvOriginale.write("file csv originale")
 #expander_csvModifica.write("file csv modificato")
 st.sidebar.header("Tool Modifica")
@@ -185,6 +186,16 @@ if pivot_df == True:
                                columns=colonna,
                                aggfunc=funzione,
                                dropna = True)
+
+mergedf = st.sidebar.checkbox("inserire colonne da altri df")
+if pivot_df == True:
+    uploaded_file = st.file_uploader("Selezionare un file .csv/.txt")
+    if uploaded_file is not None:
+        dfmerge = pd.read_csv(uploaded_file, delimiter = delimitatore)
+        
+    #expander_dfmerge
+
+
 
 
 trasponi_df = st.sidebar.checkbox("trasponi dataframe in modifica")
