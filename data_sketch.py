@@ -65,6 +65,39 @@ if tabella_senza_intestazioni == True:
     newdf.index = newdf.index + 1
     newdf.sort_index(inplace=True)
 
+#verifica se ci sono colonne da elimianre
+elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
+
+if elimina_colonne == True:
+    # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
+    colonne_da_eliminare = expander_modificheCol.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
+
+    # Elimina le colonne selezionate
+    newdf = newdf.drop(columns=colonne_da_eliminare)
+
+#verifica se ci sono colonne da rinominare
+rinomina_colonne = expander_modificheCol.checkbox("colonne da rinominare")
+if rinomina_colonne == True:
+    # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
+    colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
+
+    # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
+    mapping_nomi_colonne = {}
+    for colonna in colonne_da_rinominare:
+        nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
+        mapping_nomi_colonne[colonna] = nuovo_nome_colonna
+
+    # Rinomina le colonne selezionate con i nuovi nomi
+    newdf =  newdf.rename(columns=mapping_nomi_colonne)
+   
+
+#pulizia spazi record df
+pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
+if pulisci_colonne == True:
+    colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
+    for colonna in colonne_da_pulire:
+        newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
+
 
 
 #verifica la necessità di una colonna indice    
@@ -180,38 +213,7 @@ if mergedf == True:
         expander_dfmerge.dataframe(dfmerge)
            
 
-#verifica se ci sono colonne da elimianre
-elimina_colonne = expander_modificheCol.checkbox("elimina colonne")
 
-if elimina_colonne == True:
-    # Aggiungi l'elemento multiselect per selezionare le colonne da eliminare
-    colonne_da_eliminare = expander_modificheCol.multiselect("Seleziona le colonne da eliminare", newdf.columns.tolist())
-
-    # Elimina le colonne selezionate
-    newdf = newdf.drop(columns=colonne_da_eliminare)
-
-#verifica se ci sono colonne da rinominare
-rinomina_colonne = expander_modificheCol.checkbox("colonne da rinominare")
-if rinomina_colonne == True:
-    # Aggiungi l'elemento multiselect per selezionare le colonne da rinominare
-    colonne_da_rinominare = expander_modificheCol.multiselect("Seleziona le colonne da rinominare", newdf.columns.tolist())
-
-    # Crea un dizionario per mappare i vecchi nomi delle colonne ai nuovi nomi
-    mapping_nomi_colonne = {}
-    for colonna in colonne_da_rinominare:
-        nuovo_nome_colonna = expander_modificheCol.text_input(f"Inserisci il nuovo nome per la colonna '{colonna}'", colonna)
-        mapping_nomi_colonne[colonna] = nuovo_nome_colonna
-
-    # Rinomina le colonne selezionate con i nuovi nomi
-    newdf =  newdf.rename(columns=mapping_nomi_colonne)
-   
-
-#pulizia spazi record df
-pulisci_colonne = expander_modificheCol.checkbox("colonne da pulire")
-if pulisci_colonne == True:
-    colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
-    for colonna in colonne_da_pulire:
-        newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
     
 
 
@@ -243,7 +245,7 @@ if st.sidebar.checkbox("modifica dati con codice"):
             
 newdfvisual=newdf
 expander_csvModifica.write(newdf) 
-st.write(newdf)
+
 
 #else:
     
