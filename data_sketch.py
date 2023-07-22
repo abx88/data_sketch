@@ -126,9 +126,9 @@ if converti == True:
     colonne_da_convertire = expander_convertire.multiselectbox("Seleziona le colonne da convertire", newdf.columns.tolist())
     # converte i valori delle colonne selezionate in float
     for colonna in colonne_da_convertire:
-        newdf[colonna] = df[colonna].str.replace(".", "")
-        newdf[colonna] = df[colonna].str.replace(",", ".")
-        newdf[colonna] = df[colonna].astype(float)
+        newdf[colonna] = newdf[colonna].str.replace(".", "")
+        newdf[colonna] = newdf[colonna].str.replace(",", ".")
+        newdf[colonna] = newdf[colonna].astype(float)
 
 righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
 
