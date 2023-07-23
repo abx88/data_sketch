@@ -57,13 +57,17 @@ newdf= dfedit
 #verifica se è necessario inserire delle intestazioni
 tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
 
-if tabella_senza_intestazioni == True:
+def tabella_senza_intestazioni(df):
     # Rinomina le colonne con numeri in ordine crescente
     new_column_names = list(range(len(df.columns)))
-    newdf.loc[-1] = newdf.columns
-    newdf.columns = new_column_names
-    newdf.index = newdf.index + 1
-    newdf.sort_index(inplace=True)
+    df.loc[-1] = df.columns
+    df.columns = new_column_names
+    df.index = df.index + 1
+    df.sort_index(inplace=True)
+    return(df)
+if st.button("tabella senza intestazioni"):
+    newdf = tabella_senza_intestazioni(newdf)
+    
 
 #verifica la necessità di una colonna indice    
 indice = st.sidebar.checkbox("colonna indice")
