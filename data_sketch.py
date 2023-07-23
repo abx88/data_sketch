@@ -47,10 +47,10 @@ expander_csvModifica.subheader("dataset modificato")
 
 if uploaded_file is not None:
     a = pd.read_csv(uploaded_file, delimiter = delimitatore)
-    dfedit = expander_csvOriginale.data_editor(df, num_rows="dynamic")
+    dfedit = expander_csvOriginale.data_editor(a, num_rows="dynamic")
 else:
     a = dfprova
-    dfedit = expander_csvOriginale.data_editor(df, num_rows="dynamic")
+    dfedit = expander_csvOriginale.data_editor(a, num_rows="dynamic")
 
 newdf= dfedit
 
