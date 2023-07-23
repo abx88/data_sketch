@@ -232,7 +232,7 @@ if trasponi_df == True:
 if st.sidebar.checkbox("modifica dati con codice"):
     st.subheader("Esegui codice")
 
-    code = st.text_area("Inserisci del codice Python da eseguire: (ATTENZIONE! ESEGUENDO ULTERIORI MODIFICHE CON I COMANDI PREDEFINITI SI PERDONO LE MODIFICHE EFFETTUATE CON CODICE)", height=500 )
+    code = st.text_area("Inserisci del codice Python da eseguire: (ATTENZIONE! ESEGUENDO ULTERIORI MODIFICHE CON I COMANDI PREDEFINITI SI PERDONO LE MODIFICHE EFFETTUATE CON CODICE)", height=600 )
 
     if st.button("Esegui"):
         try:
