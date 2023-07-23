@@ -65,7 +65,7 @@ def tabella_senza_intestazioni(df):
     return(df)
 if st.sidebar.button("tabella senza intestazioni", key="tabella_senza_intestazioni", use_container_width=False):
     newdf = tabella_senza_intestazioni(newdf)
-    st.write(newdf)
+  
     
 
 #verifica la necessità di una colonna indice    
@@ -79,7 +79,7 @@ def indice(df):
     return(df)
 if st.sidebar.button("indice", on_click=None, use_container_width=False):
     newdf = indice(newdf)
-    st.write(newdf)
+    
 
 def indice_datetime(df):
     # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
@@ -91,7 +91,7 @@ def indice_datetime(df):
     return(df)
 if st.sidebar.button("indice date-time", on_click=None, use_container_width=False):
     newdf = indice_datetime(newdf)
-    st.write(newdf)
+    
 
 
 mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
