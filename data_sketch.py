@@ -106,11 +106,11 @@ if mergedf == True:
                 dfmerge.index = pd.to_datetime(dfmerge.index)#occorre per convertire in datetime la data
 
         #selezione eventuali colonne da aggiungere a df in esame
-        colonne_selezionate = expander_modificheCol.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
+        colonne_selezionate = expander_dfmerge.multiselect("Seleziona le colonne da aggiungere a df in modifca", dfmerge.columns.tolist())
         # Copia le colonne selezionate nel DataFrame esistente
         for colonna in colonne_selezionate:
             newdf[colonna] = dfmerge[colonna]
-        expander_modificheCol.dataframe(dfmerge)
+        expander_dfmerge.dataframe(dfmerge)
 
 
 
