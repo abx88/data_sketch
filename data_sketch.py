@@ -65,6 +65,28 @@ if tabella_senza_intestazioni == True:
     newdf.index = newdf.index + 1
     newdf.sort_index(inplace=True)
 
+#verifica la necessità di una colonna indice    
+indice = st.sidebar.checkbox("colonna indice")
+
+if indice == True:
+    expander_indice = st.sidebar.expander("scegli colonna indice")
+    # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+    colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+    # Imposta la colonna selezionata come indice del DataFrame
+    newdf = newdf.set_index(colonna_indice)
+
+    # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
+    indice_datetime = expander_indice.checkbox("indice date_time")
+    if indice_datetime ==True:
+        newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+        scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
+        if scomponi_data ==True:
+            newdf['giorno'] = newdf.index.day
+            newdf['giorno_W'] = newdf.index.dayofweek
+            newdf['mese'] = newdf.index.month
+            newdf['anno'] = newdf.index.year
+
+
 mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
 if mergedf == True:
     #expander_dfmerge = st.expander("merge colonne di altri df")
@@ -125,29 +147,6 @@ if pulisci_colonne == True:
     colonne_da_pulire = expander_modificheCol.multiselect("Seleziona le colonne da pulire", newdf.columns.tolist())
     for colonna in colonne_da_pulire:
         newdf[colonna] = newdf[colonna].apply(lambda x: x.strip())
-
-
-
-#verifica la necessità di una colonna indice    
-indice = st.sidebar.checkbox("colonna indice")
-
-if indice == True:
-    expander_indice = st.sidebar.expander("scegli colonna indice")
-    # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-    colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
-    # Imposta la colonna selezionata come indice del DataFrame
-    newdf = newdf.set_index(colonna_indice)
-
-    # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-    indice_datetime = expander_indice.checkbox("indice date_time")
-    if indice_datetime ==True:
-        newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-        scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
-        if scomponi_data ==True:
-            newdf['giorno'] = newdf.index.day
-            newdf['giorno_W'] = newdf.index.dayofweek
-            newdf['mese'] = newdf.index.month
-            newdf['anno'] = newdf.index.year
 
 
 righe_da_eliminare = expander_modificheRighe.checkbox("righe da eliminare")
