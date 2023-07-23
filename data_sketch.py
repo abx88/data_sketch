@@ -76,7 +76,7 @@ def indice(df):
     # Imposta la colonna selezionata come indice del DataFrame
     df = df.set_index(colonna_indice)
     return(df)
-if if st.sidebar.button("indice", on_click=True, use_container_width=False):
+if st.sidebar.button("indice", on_click=True, use_container_width=False):
     newdf = indice(newdf)
 
 def indice_datetime(df):
