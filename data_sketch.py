@@ -75,16 +75,18 @@ colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come i
 def indice(df):
     # Imposta la colonna selezionata come indice del DataFrame
     df = df.set_index(colonna_indice)
+    return(df)
 if st.sidebar.button("indice"):
     newdf = indice(newdf)
 
-def indice_datetime(df)
+def indice_datetime(df):
     # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
     df.index = pd.to_datetime(df.index)#occorre per convertire in datetime la data
     df['giorno'] = df.index.day
     df['giorno_W'] = df.index.dayofweek
     df['mese'] = df.index.month
     df['anno'] = df.index.year
+    return(df)
 if st.sidebar.button("indice datetime"):
     newdf = indice_datetime(newdf)
 
