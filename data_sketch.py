@@ -87,7 +87,7 @@ def indice_datetime(df):
     df['mese'] = df.index.month
     df['anno'] = df.index.year
     return(df)
-if if st.sidebar.button("indice date-time", on_click=True, use_container_width=False):
+if st.sidebar.button("indice date-time", on_click=True, use_container_width=False):
     newdf = indice_datetime(newdf)
 
 mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
