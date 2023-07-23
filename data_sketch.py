@@ -89,7 +89,7 @@ if indice == True:
 
 mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
 if mergedf == True:
-    expander_dfmerge = expander_modificheCol.expander("merge colonne di altri df")
+    expander_dfmerge = st.expander("merge colonne di altri df")
     expander_dfmerge.write("aggiungi colonne da altri df")
     uploaded_file1 = expander_modificheCol.file_uploader("Selezionare un df da cui prelevare colonne .csv/.txt")
     if uploaded_file1 is not None:
