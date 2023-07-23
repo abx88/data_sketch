@@ -80,11 +80,11 @@ if st.sidebar.button("indice"):
 
 def indice_datetime(df)
     # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-    newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-    newdf['giorno'] = newdf.index.day
-    newdf['giorno_W'] = newdf.index.dayofweek
-    newdf['mese'] = newdf.index.month
-    newdf['anno'] = newdf.index.year
+    df.index = pd.to_datetime(df.index)#occorre per convertire in datetime la data
+    df['giorno'] = df.index.day
+    df['giorno_W'] = df.index.dayofweek
+    df['mese'] = df.index.month
+    df['anno'] = df.index.year
 if st.sidebar.button("indice datetime"):
     newdf = indice_datetime(newdf)
 
