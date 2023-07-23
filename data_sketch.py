@@ -63,7 +63,7 @@ def tabella_senza_intestazioni(df):
     df.index = df.index + 1
     df.sort_index(inplace=True)
     return(df)
-if st.sidebar.button("tabella senza intestazioni", on_click=True, use_container_width=False):
+if st.sidebar.button("tabella senza intestazioni", on_click=None, use_container_width=False):
     newdf = tabella_senza_intestazioni(newdf)
     
 
