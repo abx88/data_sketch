@@ -55,8 +55,6 @@ else:
 newdf= dfedit
 
 #verifica se è necessario inserire delle intestazioni
-tabella_senza_intestazioni = st.sidebar.checkbox("tabella senza intestazioni")
-
 def tabella_senza_intestazioni(df):
     # Rinomina le colonne con numeri in ordine crescente
     new_column_names = list(range(len(df.columns)))
@@ -65,31 +63,30 @@ def tabella_senza_intestazioni(df):
     df.index = df.index + 1
     df.sort_index(inplace=True)
     return(df)
-if st.button("tabella senza intestazioni"):
+if st.sidebar.button("tabella senza intestazioni"):
     newdf = tabella_senza_intestazioni(newdf)
     
 
 #verifica la necessità di una colonna indice    
-indice = st.sidebar.checkbox("colonna indice")
+expander_indice = st.sidebar.expander("scegli colonna indice")
+# Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
+colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
 
-if indice == True:
-    expander_indice = st.sidebar.expander("scegli colonna indice")
-    # Aggiungi l'elemento selectbox per selezionare la colonna da usare come indice
-    colonna_indice = expander_indice.selectbox("Seleziona la colonna da usare come indice", newdf.columns.tolist())
+def indice(df):
     # Imposta la colonna selezionata come indice del DataFrame
-    newdf = newdf.set_index(colonna_indice)
+    df = df.set_index(colonna_indice)
+if st.sidebar.button("indice"):
+    newdf = indice(newdf)
 
+def indice_datetime(df)
     # imposta se indice è in formato date_time (time series) oppure no (scatter dati) 
-    indice_datetime = expander_indice.checkbox("indice date_time")
-    if indice_datetime ==True:
-        newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
-        scomponi_data = expander_indice.checkbox("estrai giorno, mese, anno") 
-        if scomponi_data ==True:
-            newdf['giorno'] = newdf.index.day
-            newdf['giorno_W'] = newdf.index.dayofweek
-            newdf['mese'] = newdf.index.month
-            newdf['anno'] = newdf.index.year
-
+    newdf.index = pd.to_datetime(newdf.index)#occorre per convertire in datetime la data
+    newdf['giorno'] = newdf.index.day
+    newdf['giorno_W'] = newdf.index.dayofweek
+    newdf['mese'] = newdf.index.month
+    newdf['anno'] = newdf.index.year
+if st.sidebar.button("indice datetime"):
+    newdf = indice_datetime(newdf)
 
 mergedf = expander_modificheCol.checkbox("inserire colonne da altri df")
 if mergedf == True:
